@@ -60,7 +60,7 @@ export default async function LocaleLayout({
           <main id="main-content" className="page-main">
             {children}
           </main>
-          <SiteFooter locale={locale} dict={dict} settings={settings} />
+          <SiteFooter locale={locale} settings={settings} />
         </div>
       </body>
     </html>

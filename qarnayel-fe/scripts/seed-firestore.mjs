@@ -11,11 +11,11 @@
  * Run it once per environment. Delete serviceAccountKey.json afterwards.
  */
 
-import { readFileSync } from 'node:fs';
-import { resolve, dirname } from 'node:path';
-import { fileURLToPath } from 'node:url';
-import { initializeApp, cert } from 'firebase-admin/app';
+import { cert, initializeApp } from 'firebase-admin/app';
 import { getFirestore, Timestamp } from 'firebase-admin/firestore';
+import { readFileSync } from 'node:fs';
+import { dirname, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const keyPath = resolve(__dirname, 'serviceAccountKey.json');
@@ -26,8 +26,8 @@ try {
 } catch {
   console.error(
     '\n❌  Could not read scripts/serviceAccountKey.json\n' +
-    '    Download it from Firebase Console → Project settings → Service accounts\n' +
-    '    and save it as scripts/serviceAccountKey.json\n',
+      '    Download it from Firebase Console → Project settings → Service accounts\n' +
+      '    and save it as scripts/serviceAccountKey.json\n',
   );
   process.exit(1);
 }
@@ -98,11 +98,13 @@ async function seedPageContent() {
     seo: {
       ar: {
         title: 'عن قرنايل — تعرّف على تاريخ وطبيعة البلدة',
-        description: 'اكتشف تاريخ قرنايل، موقعها الجغرافي، طبيعتها، وما يميزها عن سائر بلدات المتن.',
+        description:
+          'اكتشف تاريخ قرنايل، موقعها الجغرافي، طبيعتها، وما يميزها عن سائر بلدات المتن.',
       },
       en: {
         title: 'About Qarnayel — History and Nature of the Village',
-        description: 'Learn about the history, geography, nature, and unique character of Qarnayel in the Upper Metn.',
+        description:
+          'Learn about the history, geography, nature, and unique character of Qarnayel in the Upper Metn.',
       },
     },
     updatedAt: isoNow,
@@ -123,7 +125,8 @@ async function seedPageContent() {
       },
       en: {
         title: 'Contact Us — Qarnayel',
-        description: 'Get in touch with the Qarnayel website team for any enquiry or suggestion.',
+        description:
+          'Get in touch with the Qarnayel website team for any enquiry or suggestion.',
       },
     },
     updatedAt: isoNow,
@@ -146,7 +149,10 @@ async function seedPlaces() {
       status: 'published',
       featured: true,
       title: { ar: 'جبل كنيسة', en: 'Jabal Kneisseh' },
-      subtitle: { ar: 'أعلى قمة في قرنايل', en: 'The highest peak in Qarnayel' },
+      subtitle: {
+        ar: 'أعلى قمة في قرنايل',
+        en: 'The highest peak in Qarnayel',
+      },
       shortDescription: {
         ar: 'قمة جبلية خضراء تتيح مشياً طبيعياً وإطلالات بانورامية على البحر والجبل.',
         en: 'A lush mountain peak offering hiking trails and panoramic views of the sea and mountains.',
@@ -156,8 +162,16 @@ async function seedPlaces() {
         en: 'Jabal Kneisseh is the highest point in Qarnayel, rising above 1,600 m. Hikers and nature lovers visit for its verdant trails and breathtaking panoramic views stretching to the Mediterranean and the Lebanese mountain range.',
       },
       seo: {
-        ar: { title: 'جبل كنيسة — قرنايل', description: 'استكشف جبل كنيسة، أعلى قمة في قرنايل مع مسارات للمشي وإطلالات بانورامية.' },
-        en: { title: 'Jabal Kneisseh — Qarnayel', description: 'Explore Jabal Kneisseh, the highest peak in Qarnayel with hiking trails and panoramic views.' },
+        ar: {
+          title: 'جبل كنيسة — قرنايل',
+          description:
+            'استكشف جبل كنيسة، أعلى قمة في قرنايل مع مسارات للمشي وإطلالات بانورامية.',
+        },
+        en: {
+          title: 'Jabal Kneisseh — Qarnayel',
+          description:
+            'Explore Jabal Kneisseh, the highest peak in Qarnayel with hiking trails and panoramic views.',
+        },
       },
       contact: {},
       location: {
@@ -180,7 +194,10 @@ async function seedPlaces() {
       status: 'published',
       featured: false,
       title: { ar: 'بحيرة قرعون', en: 'Lake Qaraoun' },
-      subtitle: { ar: 'أكبر بحيرة اصطناعية في لبنان', en: 'The largest artificial lake in Lebanon' },
+      subtitle: {
+        ar: 'أكبر بحيرة اصطناعية في لبنان',
+        en: 'The largest artificial lake in Lebanon',
+      },
       shortDescription: {
         ar: 'بحيرة مائية أخّاذة في البقاع تُشكّل وجهة سياحية مميزة.',
         en: 'A stunning reservoir in the Bekaa Valley, a remarkable tourist destination.',
@@ -190,8 +207,15 @@ async function seedPlaces() {
         en: 'Lake Qaraoun is the largest artificial reservoir in Lebanon, located in the Bekaa Valley and covering 11 square kilometres. It is a scenic destination combining nature and history.',
       },
       seo: {
-        ar: { title: 'بحيرة قرعون — وجهة سياحية لبنانية', description: 'زُر بحيرة قرعون، أكبر بحيرة اصطناعية في لبنان.' },
-        en: { title: 'Lake Qaraoun — Lebanese Tourist Destination', description: 'Visit Lake Qaraoun, the largest artificial lake in Lebanon.' },
+        ar: {
+          title: 'بحيرة قرعون — وجهة سياحية لبنانية',
+          description: 'زُر بحيرة قرعون، أكبر بحيرة اصطناعية في لبنان.',
+        },
+        en: {
+          title: 'Lake Qaraoun — Lebanese Tourist Destination',
+          description:
+            'Visit Lake Qaraoun, the largest artificial lake in Lebanon.',
+        },
       },
       contact: {},
       location: {
@@ -231,7 +255,10 @@ async function seedHistory() {
       period: { ar: 'الألفية الأولى قبل الميلاد', en: '1st millennium BCE' },
       sources: [
         {
-          label: { ar: 'الأثار الفينيقية في لبنان — جامعة الأميركية في بيروت', en: 'Phoenician Archaeology in Lebanon — AUB' },
+          label: {
+            ar: 'الأثار الفينيقية في لبنان — جامعة الأميركية في بيروت',
+            en: 'Phoenician Archaeology in Lebanon — AUB',
+          },
           url: null,
         },
       ],
@@ -246,10 +273,16 @@ async function seedHistory() {
         ar: 'في العهد الروماني، شهدت المنطقة تطوراً ملحوظاً في البنية التحتية. أُنشئت طرق رومانية تربط الجبل بالساحل، وتشير المخطوطات التاريخية إلى وجود معابد ومواقع دينية في المنطقة.',
         en: 'During the Roman period, the region saw significant infrastructure development. Roman roads were built connecting the mountain to the coast, and historical manuscripts indicate the presence of temples and religious sites in the area.',
       },
-      period: { ar: 'القرن الأول — القرن الرابع الميلادي', en: '1st – 4th century CE' },
+      period: {
+        ar: 'القرن الأول — القرن الرابع الميلادي',
+        en: '1st – 4th century CE',
+      },
       sources: [
         {
-          label: { ar: 'التاريخ الروماني في لبنان — دار المشرق', en: 'Roman History in Lebanon — Dar el-Machreq' },
+          label: {
+            ar: 'التاريخ الروماني في لبنان — دار المشرق',
+            en: 'Roman History in Lebanon — Dar el-Machreq',
+          },
           url: null,
         },
       ],
@@ -277,7 +310,9 @@ async function main() {
     await seedHistory();
 
     console.log('\n✅ Seeding complete.\n');
-    console.log('⚠️  Remember to delete scripts/serviceAccountKey.json when done.\n');
+    console.log(
+      '⚠️  Remember to delete scripts/serviceAccountKey.json when done.\n',
+    );
   } catch (err) {
     console.error('\n❌ Seeding failed:', err);
     process.exit(1);

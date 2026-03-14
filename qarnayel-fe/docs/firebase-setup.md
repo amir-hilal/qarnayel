@@ -40,16 +40,16 @@ Open `.env.local` and paste each value into the matching variable. See [environm
 ## Step 3: Enable Firestore
 
 1. **Firestore Database** → **Create database**
-2. Choose **Production mode** (rules are set in Step 5)
-3. Region: `europe-west1` (closest to Lebanon)
+2. Region: `me-central1` (Middle East — Doha)
+3. Started in **test mode** — replace rules with the production rules in Step 5 before going live
 
 ---
 
 ## Step 4: Enable Storage
 
 1. **Storage** → **Get started**
-2. Choose **Production mode**
-3. Use the same region as Firestore
+2. Region: `me-central1` (same as Firestore)
+3. Started in **test mode** — replace rules with the production rules in Step 6 before going live
 
 ---
 

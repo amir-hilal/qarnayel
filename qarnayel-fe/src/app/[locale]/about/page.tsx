@@ -18,10 +18,10 @@ export async function generateMetadata({ params }: AboutPageProps): Promise<Meta
   if (!isValidLocale(locale)) return {};
   const dict = await getDictionary(locale);
   return buildMetadata({
-    title: dict.about.title,
+    title: dict.about.pageTitle,
     description: dict.about.metaDescription,
     locale,
-    pathname: `/${locale}/about`,
+    path: `/${locale}/about`,
   });
 }
 

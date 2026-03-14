@@ -1,7 +1,7 @@
-import Link from 'next/link';
-import { DEFAULT_LOCALE } from '@/lib/i18n/locales';
-import { getDictionary } from '@/lib/i18n';
 import { ROUTES } from '@/config/constants';
+import { getDictionary } from '@/lib/i18n';
+import { DEFAULT_LOCALE } from '@/lib/i18n/locales';
+import Link from 'next/link';
 
 // ---------------------------------------------------------------------------
 // Root not-found — fallback when no locale segment is matched
@@ -27,10 +27,10 @@ export default async function NotFound(): Promise<React.ReactElement> {
         >
           <h1 style={{ fontSize: '5rem', fontWeight: 700, margin: 0 }}>404</h1>
           <p style={{ fontSize: '1.25rem', margin: '1rem 0 2rem' }}>
-            {dict.common.pageNotFound}
+            {dict.common.notFound}
           </p>
           <Link
-            href={ROUTES.home(DEFAULT_LOCALE)}
+            href={ROUTES.HOME(DEFAULT_LOCALE)}
             style={{
               padding: '0.75rem 1.5rem',
               backgroundColor: '#1a6b3a',

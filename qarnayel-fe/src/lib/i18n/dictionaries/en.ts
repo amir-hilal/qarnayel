@@ -17,6 +17,9 @@ export const en: Dictionary = {
     heroImageAlt: 'Aerial view of Qarnayel village',
     featuredPlacesTitle: 'Featured Places',
     exploreMorePlaces: 'Explore More Places',
+    metaDescription:
+      'Discover Qarnayel, a Lebanese village in the heart of the Metn known for its breathtaking nature and rich history.',
+    aboutHeading: 'About Qarnayel',
   },
   cta: {
     explorePlaces: 'Explore Places',
@@ -24,6 +27,7 @@ export const en: Dictionary = {
   },
   places: {
     pageTitle: 'Places',
+    metaDescription: 'Explore the places of Qarnayel — restaurants, landmarks, forests, lakes, and local services.',
     filterByCategory: 'Filter by category',
     filterByType: 'Filter by type',
     allCategories: 'All categories',
@@ -38,6 +42,7 @@ export const en: Dictionary = {
     loadingPlaces: 'Loading places...',
     errorLoading: 'Could not load places. Please try again later.',
     notFound: 'Place not found.',
+    backToPlaces: 'Back to Places',
   },
   categories: {
     forest: 'Forest',
@@ -55,17 +60,24 @@ export const en: Dictionary = {
   },
   history: {
     pageTitle: 'History of Qarnayel',
+    metaDescription: 'Explore the history of Qarnayel across the ages, from Phoenician civilisation to the modern era.',
     sources: 'Sources',
     loadingHistory: 'Loading...',
     noHistory: 'No history entries available yet.',
   },
   about: {
     pageTitle: 'About Qarnayel',
+    metaDescription: 'Learn about the history, nature, and character of Qarnayel in the heart of Mount Lebanon.',
   },
   contact: {
     pageTitle: 'Contact Us',
+    metaDescription: 'Get in touch with the Qarnayel website team for any enquiry or suggestion.',
+    emailLabel: 'Email',
+    phoneLabel: 'Phone',
+    socialLabel: 'Social media',
   },
   common: {
+    siteName: 'Qarnayel',
     loading: 'Loading...',
     error: 'Something went wrong. Please try again.',
     notFound: 'Page not found',

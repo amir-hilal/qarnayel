@@ -1,7 +1,7 @@
-import type { Place } from '@/features/places/types';
-import { PlaceCard } from './PlaceCard';
-import { EmptyState } from '@/features/shared/components/EmptyState';
 import { ROUTES } from '@/config/constants';
+import type { Place } from '@/features/places/types';
+import { EmptyState } from '@/features/shared/components/EmptyState';
+import { PlaceCard } from './PlaceCard';
 
 type PlaceListProps = {
   places: Place[];
@@ -25,12 +25,12 @@ export function PlaceList({
 
   return (
     <ul className="place-list" role="list">
-      {places.map(place => (
+      {places.map((place) => (
         <li key={place.id} className="place-list__item">
           <PlaceCard
             place={place}
             categoryLabel={categoryLabels[place.category] ?? place.category}
-            href={ROUTES.placeDetail(locale, place.slug)}
+            href={ROUTES.PLACE_DETAIL(locale, place.slug)}
             locale={locale}
           />
         </li>

@@ -1,5 +1,5 @@
+import { localizedSeoSchema, localizedTextSchema } from '@/lib/validation';
 import { z } from 'zod';
-import { localizedTextSchema, localizedSeoSchema } from '@/lib/validation';
 
 export const pageContentSchema = z.object({
   id: z.string().min(1),
@@ -18,12 +18,21 @@ export const siteSettingsSchema = z.object({
   ctaExplorePlaces: localizedTextSchema,
   ctaDiscoverHistory: localizedTextSchema,
   townIntroduction: localizedTextSchema,
-  contactEmail: z.string().email().optional(),
-  contactPhone: z.string().optional(),
+  contactEmail: z.preprocess(
+    (v) => v ?? undefined,
+    z.string().email().optional(),
+  ),
+  contactPhone: z.preprocess((v) => v ?? undefined, z.string().optional()),
   socialLinks: z
     .object({
-      facebook: z.string().url().optional(),
-      instagram: z.string().url().optional(),
+      facebook: z.preprocess(
+        (v) => v ?? undefined,
+        z.string().url().optional(),
+      ),
+      instagram: z.preprocess(
+        (v) => v ?? undefined,
+        z.string().url().optional(),
+      ),
     })
     .optional(),
 });

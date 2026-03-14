@@ -3,19 +3,23 @@ import { SkeletonLoader } from '@/features/shared/components/SkeletonLoader';
 export default function HomeLoading(): React.ReactElement {
   return (
     <div>
-      <SkeletonLoader height="60vh" />
+      <SkeletonLoader lines={4} label="Loading hero..." />
       <div style={{ padding: '3rem 1.5rem' }}>
-        <SkeletonLoader height="2rem" width="40%" style={{ margin: '0 auto 2rem' }} />
-        <SkeletonLoader height="1rem" width="60%" style={{ margin: '0 auto 3rem' }} />
+        <SkeletonLoader lines={2} label="Loading intro..." />
         <div
           style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fill, minmax(18rem, 1fr))',
             gap: '1.5rem',
+            marginTop: '2rem',
           }}
         >
           {Array.from({ length: 3 }).map((_, i) => (
-            <SkeletonLoader key={i} height="20rem" />
+            <SkeletonLoader
+              key={i}
+              lines={5}
+              label={`Loading place ${i + 1}...`}
+            />
           ))}
         </div>
       </div>

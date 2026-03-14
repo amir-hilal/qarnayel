@@ -21,10 +21,10 @@ export async function generateMetadata({ params }: ContactPageProps): Promise<Me
   if (!isValidLocale(locale)) return {};
   const dict = await getDictionary(locale);
   return buildMetadata({
-    title: dict.contact.title,
+    title: dict.contact.pageTitle,
     description: dict.contact.metaDescription,
     locale,
-    pathname: `/${locale}/contact`,
+    path: `/${locale}/contact`,
   });
 }
 
