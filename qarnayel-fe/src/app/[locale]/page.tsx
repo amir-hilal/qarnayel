@@ -51,6 +51,7 @@ export default async function HomePage({
       <HeroSection
         heroTitle={vm.heroTitle}
         heroSubtitle={vm.heroSubtitle}
+        heroImageUrl='/images/hero.png'
         ctaExplorePlaces={{
           label: dict.cta.explorePlaces,
           href: ROUTES.PLACES(locale),

@@ -6,6 +6,7 @@ type HeroSectionProps = {
   ctaExplorePlaces: HomeViewModel['ctaExplorePlaces'];
   ctaDiscoverHistory: HomeViewModel['ctaDiscoverHistory'];
   heroImageAlt: string;
+  heroImageUrl?: string;
 };
 
 // ---------------------------------------------------------------------------
@@ -17,15 +18,21 @@ export function HeroSection({
   ctaExplorePlaces,
   ctaDiscoverHistory,
   heroImageAlt,
+  heroImageUrl,
 }: HeroSectionProps): React.ReactElement {
   return (
-    <section className="hero-section" aria-label={heroTitle}>
-      {/* Background image is set via CSS on .hero-section */}
-      <div className="hero-section__overlay" aria-hidden="true" />
-      <div className="hero-section__content">
-        <h1 className="hero-section__title">{heroTitle}</h1>
-        <p className="hero-section__subtitle">{heroSubtitle}</p>
-        <div className="hero-section__ctas">
+    <section
+      className="hero"
+      aria-label={heroTitle}
+      style={
+        heroImageUrl ? { backgroundImage: `url(${heroImageUrl})` } : undefined
+      }
+    >
+      <div className="hero__overlay" aria-hidden="true" />
+      <div className="hero__content">
+        <h1 className="hero__title">{heroTitle}</h1>
+        <p className="hero__subtitle">{heroSubtitle}</p>
+        <div className="hero__ctas">
           <a href={ctaExplorePlaces.href} className="btn btn--primary">
             {ctaExplorePlaces.label}
           </a>
@@ -34,7 +41,6 @@ export function HeroSection({
           </a>
         </div>
       </div>
-      {/* Visually hidden text for the background image alt */}
       <span className="sr-only">{heroImageAlt}</span>
     </section>
   );

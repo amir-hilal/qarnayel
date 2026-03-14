@@ -53,6 +53,18 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale} dir={getDir(locale)}>
+      <head>
+        {/* eslint-disable-next-line @next/next/no-sync-scripts */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `try{var t=localStorage.getItem('theme');if(!t)t=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.setAttribute('data-theme',t);}catch(e){}`,
+          }}
+        />
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=dark_mode,language,light_mode"
+        />
+      </head>
       <body>
         <div className="page-layout">
           <SiteHeader locale={locale} dict={dict} />

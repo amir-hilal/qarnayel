@@ -14,11 +14,11 @@
    -------------------------------------------------------------------------- */
 :root {
   /* Colors */
-  --color-primary: #1a6b3a;
-  --color-primary-dark: #134f2b;
-  --color-primary-light: #e8f5ee;
-  --color-secondary: #c89b3c;
-  --color-secondary-dark: #9e7a2c;
+  --color-primary: #6a863f;
+  --color-primary-dark: #506830;
+  --color-primary-light: #e8f3dc;
+  --color-secondary: #3e603e;
+  --color-secondary-dark: #2d4a2d;
   --color-surface: #ffffff;
   --color-surface-alt: #f7f7f5;
   --color-border: #e2e2df;
@@ -82,6 +82,23 @@
   --z-header: 100;
   --z-modal: 200;
   --z-toast: 300;
+}
+
+/* --------------------------------------------------------------------------
+   Dark theme overrides
+   -------------------------------------------------------------------------- */
+[data-theme="dark"] {
+  --color-primary-light: #1a2210;
+  --color-surface: #000000;
+  --color-surface-alt: #0f0f0f;
+  --color-border: #242424;
+  --color-text: #ffffff;
+  --color-text-muted: #9aa09a;
+  --color-error: #e05252;
+  --color-error-bg: #2a1515;
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.5);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.6);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.7);
 }
 
 /* --------------------------------------------------------------------------
@@ -370,9 +387,18 @@ h1, h2, h3, h4, h5, h6 {
   position: relative;
   padding-block: var(--space-24);
   background-color: var(--color-primary);
+  background-size: cover;
+  background-position: center;
   color: var(--color-text-inverse);
   overflow: hidden;
   text-align: center;
+}
+
+.hero__overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.45);
+  z-index: 0;
 }
 
 .hero__content {
@@ -587,6 +613,7 @@ h1, h2, h3, h4, h5, h6 {
   border-radius: var(--radius-sm);
   border: var(--border-width) solid var(--color-border);
   background-color: var(--color-surface);
+  color: var(--color-text);
   font-size: var(--font-size-base);
   cursor: pointer;
 }
@@ -822,32 +849,76 @@ h1, h2, h3, h4, h5, h6 {
    -------------------------------------------------------------------------- */
 .locale-switcher {
   display: flex;
-  gap: var(--space-2);
+  gap: var(--space-1);
   align-items: center;
 }
 
-.locale-switcher__option {
+.locale-switcher__icon {
+  font-size: 1.1rem;
+  color: var(--color-text-muted);
+  user-select: none;
+}
+
+.locale-switcher__item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.locale-switcher__sep {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+  user-select: none;
+}
+
+.locale-switcher__btn {
   font-size: var(--font-size-sm);
   font-weight: 600;
   padding-block: var(--space-1);
   padding-inline: var(--space-2);
   border-radius: var(--radius-sm);
-  border: var(--border-width) solid transparent;
-  cursor: pointer;
-  transition: background-color var(--transition-fast), color var(--transition-fast);
+  border: none;
   background: none;
   color: var(--color-text-muted);
+  cursor: pointer;
+  transition: color var(--transition-fast);
 }
 
-.locale-switcher__option:hover {
-  background-color: var(--color-primary-light);
+.locale-switcher__btn:hover:not(:disabled) {
   color: var(--color-primary);
 }
 
-.locale-switcher__option[aria-pressed="true"],
-.locale-switcher__option--active {
-  background-color: var(--color-primary);
-  color: var(--color-text-inverse);
+.locale-switcher__btn--active,
+.locale-switcher__btn:disabled {
+  color: var(--color-text);
+  cursor: default;
+}
+
+/* --------------------------------------------------------------------------
+   Theme switcher
+   -------------------------------------------------------------------------- */
+.theme-switcher__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: var(--radius-sm);
+  border: none;
+  background: none;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  transition: color var(--transition-fast), background-color var(--transition-fast);
+}
+
+.theme-switcher__btn:hover {
+  color: var(--color-primary);
+  background-color: var(--color-primary-light);
+}
+
+.theme-switcher__placeholder {
+  width: 2rem;
+  height: 2rem;
 }
 
 /* --------------------------------------------------------------------------
