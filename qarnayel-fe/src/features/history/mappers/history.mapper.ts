@@ -1,6 +1,6 @@
 import { historyEntrySchema } from '@/features/history/schemas/history.schema';
-import { coerceTimestampToString } from '@/lib/validation';
 import type { HistoryEntry } from '@/features/history/types';
+import { coerceTimestampToString } from '@/lib/validation';
 
 // ---------------------------------------------------------------------------
 // toHistoryEntry — converts raw Firestore document to a typed HistoryEntry
@@ -27,5 +27,13 @@ export function toHistoryEntry(
     return null;
   }
 
-  return result.data;
+  const { period, ...rest } = result.data;
+  return {
+    ...rest,
+    sources: result.data.sources.map(({ url, ...src }) => ({
+      ...src,
+      ...(url !== undefined ? { url } : {}),
+    })),
+    ...(period !== undefined ? { period } : {}),
+  };
 }

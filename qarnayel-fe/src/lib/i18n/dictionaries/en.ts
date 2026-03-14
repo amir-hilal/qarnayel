@@ -27,7 +27,8 @@ export const en: Dictionary = {
   },
   places: {
     pageTitle: 'Places',
-    metaDescription: 'Explore the places of Qarnayel — restaurants, landmarks, forests, lakes, and local services.',
+    metaDescription:
+      'Explore the places of Qarnayel — restaurants, landmarks, forests, lakes, and local services.',
     filterByCategory: 'Filter by category',
     filterByType: 'Filter by type',
     allCategories: 'All categories',
@@ -37,6 +38,8 @@ export const en: Dictionary = {
     viewOnMap: 'View on Map',
     contactGuide: 'Contact a Guide',
     contactPlace: 'Contact this Place',
+    visitLabel: 'Visit',
+    websiteLabel: 'Website',
     resources: 'Resources & References',
     images: 'Photos',
     loadingPlaces: 'Loading places...',
@@ -60,18 +63,21 @@ export const en: Dictionary = {
   },
   history: {
     pageTitle: 'History of Qarnayel',
-    metaDescription: 'Explore the history of Qarnayel across the ages, from Phoenician civilisation to the modern era.',
+    metaDescription:
+      'Explore the history of Qarnayel across the ages, from Phoenician civilisation to the modern era.',
     sources: 'Sources',
     loadingHistory: 'Loading...',
     noHistory: 'No history entries available yet.',
   },
   about: {
     pageTitle: 'About Qarnayel',
-    metaDescription: 'Learn about the history, nature, and character of Qarnayel in the heart of Mount Lebanon.',
+    metaDescription:
+      'Learn about the history, nature, and character of Qarnayel in the heart of Mount Lebanon.',
   },
   contact: {
     pageTitle: 'Contact Us',
-    metaDescription: 'Get in touch with the Qarnayel website team for any enquiry or suggestion.',
+    metaDescription:
+      'Get in touch with the Qarnayel website team for any enquiry or suggestion.',
     emailLabel: 'Email',
     phoneLabel: 'Phone',
     socialLabel: 'Social media',

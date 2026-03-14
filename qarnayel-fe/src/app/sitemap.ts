@@ -12,36 +12,36 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const staticRoutes: MetadataRoute.Sitemap = LOCALES.flatMap((locale) => [
     {
-      url: `${SITE_URL}${ROUTES.home(locale)}`,
+      url: `${SITE_URL}${ROUTES.HOME(locale)}`,
       lastModified: new Date(),
       changeFrequency: 'weekly' as const,
       priority: 1.0,
       alternates: {
         languages: Object.fromEntries(
-          LOCALES.map((l) => [l, `${SITE_URL}${ROUTES.home(l)}`]),
+          LOCALES.map((l) => [l, `${SITE_URL}${ROUTES.HOME(l)}`]),
         ),
       },
     },
     {
-      url: `${SITE_URL}${ROUTES.places(locale)}`,
+      url: `${SITE_URL}${ROUTES.PLACES(locale)}`,
       lastModified: new Date(),
       changeFrequency: 'daily' as const,
       priority: 0.9,
     },
     {
-      url: `${SITE_URL}${ROUTES.history(locale)}`,
+      url: `${SITE_URL}${ROUTES.HISTORY(locale)}`,
       lastModified: new Date(),
       changeFrequency: 'monthly' as const,
       priority: 0.8,
     },
     {
-      url: `${SITE_URL}${ROUTES.about(locale)}`,
+      url: `${SITE_URL}${ROUTES.ABOUT(locale)}`,
       lastModified: new Date(),
       changeFrequency: 'monthly' as const,
       priority: 0.6,
     },
     {
-      url: `${SITE_URL}${ROUTES.contact(locale)}`,
+      url: `${SITE_URL}${ROUTES.CONTACT(locale)}`,
       lastModified: new Date(),
       changeFrequency: 'monthly' as const,
       priority: 0.5,
@@ -50,13 +50,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const placeRoutes: MetadataRoute.Sitemap = LOCALES.flatMap((locale) =>
     slugs.map((slug) => ({
-      url: `${SITE_URL}${ROUTES.placeDetail(locale, slug)}`,
+      url: `${SITE_URL}${ROUTES.PLACE_DETAIL(locale, slug)}`,
       lastModified: new Date(),
       changeFrequency: 'weekly' as const,
       priority: 0.7,
       alternates: {
         languages: Object.fromEntries(
-          LOCALES.map((l) => [l, `${SITE_URL}${ROUTES.placeDetail(l, slug)}`]),
+          LOCALES.map((l) => [l, `${SITE_URL}${ROUTES.PLACE_DETAIL(l, slug)}`]),
         ),
       },
     })),

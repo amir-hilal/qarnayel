@@ -13,7 +13,11 @@ export default function PlacesLoading(): React.ReactElement {
         }}
       >
         {Array.from({ length: 6 }).map((_, i) => (
-          <SkeletonLoader key={i} lines={5} label={`Loading place ${i + 1}...`} />
+          <SkeletonLoader
+            key={i}
+            lines={5}
+            label={`Loading place ${i + 1}...`}
+          />
         ))}
       </div>
     </div>

@@ -8,7 +8,11 @@ export default function PlaceDetailLoading(): React.ReactElement {
         <SkeletonLoader lines={2} label="Loading title..." />
         <div style={{ marginTop: 'var(--space-8)' }}>
           {Array.from({ length: 5 }).map((_, i) => (
-            <SkeletonLoader key={i} lines={4} label={`Loading section ${i + 1}...`} />
+            <SkeletonLoader
+              key={i}
+              lines={4}
+              label={`Loading section ${i + 1}...`}
+            />
           ))}
         </div>
       </div>

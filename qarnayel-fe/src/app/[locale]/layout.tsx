@@ -1,18 +1,17 @@
-import type { Metadata } from 'next';
-import { notFound } from 'next/navigation';
-import { isValidLocale } from '@/lib/i18n/locales';
+import { fetchSiteSettings } from '@/features/pages/repositories/pages.repository';
+import { SiteFooter } from '@/features/shared/components/SiteFooter';
+import { SiteHeader } from '@/features/shared/components/SiteHeader';
 import { getDictionary } from '@/lib/i18n';
 import { getDir } from '@/lib/i18n/helpers';
-import { SiteHeader } from '@/features/shared/components/SiteHeader';
-import { SiteFooter } from '@/features/shared/components/SiteFooter';
-import { fetchSiteSettings } from '@/features/pages/repositories/pages.repository';
-import { LOCALES } from '@/lib/i18n/locales';
+import { isValidLocale, LOCALES } from '@/lib/i18n/locales';
+import type { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 
 // ---------------------------------------------------------------------------
 // Locale layout — sets html lang/dir, renders header + footer shell
 // ---------------------------------------------------------------------------
 export async function generateStaticParams(): Promise<{ locale: string }[]> {
-  return LOCALES.map(locale => ({ locale }));
+  return LOCALES.map((locale) => ({ locale }));
 }
 
 type LocaleLayoutProps = {

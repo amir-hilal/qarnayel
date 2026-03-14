@@ -1,14 +1,14 @@
-import { notFound } from 'next/navigation';
-import type { Metadata } from 'next';
-import { isValidLocale } from '@/lib/i18n/locales';
+import { PlaceDetail } from '@/features/places/components/PlaceDetail';
+import {
+  fetchAllPublishedSlugs,
+  fetchPlaceBySlug,
+} from '@/features/places/repositories/places.repository';
 import { getDictionary } from '@/lib/i18n';
+import { isValidLocale } from '@/lib/i18n/locales';
 import { buildMetadata } from '@/lib/seo/metadata';
 import { buildPlaceJsonLd } from '@/lib/seo/structured-data';
-import {
-  fetchPlaceBySlug,
-  fetchAllPublishedSlugs,
-} from '@/features/places/repositories/places.repository';
-import { PlaceDetail } from '@/features/places/components/PlaceDetail';
+import type { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 
 export const revalidate = 3600;
 
@@ -16,14 +16,18 @@ type PlaceDetailPageProps = {
   params: Promise<{ locale: string; slug: string }>;
 };
 
-export async function generateStaticParams(): Promise<{ locale: string; slug: string }[]> {
+export async function generateStaticParams(): Promise<
+  { locale: string; slug: string }[]
+> {
   const slugs = await fetchAllPublishedSlugs();
-  return ['ar', 'en'].flatMap(locale =>
-    slugs.map(slug => ({ locale, slug }))
+  return ['ar', 'en'].flatMap((locale) =>
+    slugs.map((slug) => ({ locale, slug })),
   );
 }
 
-export async function generateMetadata({ params }: PlaceDetailPageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: PlaceDetailPageProps): Promise<Metadata> {
   const { locale, slug } = await params;
   if (!isValidLocale(locale)) return {};
   const place = await fetchPlaceBySlug(slug);
@@ -33,7 +37,7 @@ export async function generateMetadata({ params }: PlaceDetailPageProps): Promis
     title: place.title[l] ?? place.title.ar,
     description: place.shortDescription[l] ?? place.shortDescription.ar ?? '',
     locale,
-    pathname: `/${locale}/places/${slug}`,
+    path: `/${locale}/places/${slug}`,
   });
 }
 
@@ -50,7 +54,6 @@ export default async function PlaceDetailPage({
 
   if (!place) notFound();
 
-  const l = locale as 'ar' | 'en';
   const jsonLd = buildPlaceJsonLd(place, locale);
 
   return (
@@ -63,11 +66,11 @@ export default async function PlaceDetailPage({
         place={place}
         locale={locale}
         dict={{
-          contactLabel: dict.places.contactLabel,
+          contactLabel: dict.places.contactPlace,
           visitLabel: dict.places.visitLabel,
           websiteLabel: dict.places.websiteLabel,
-          resourcesHeading: dict.places.resourcesHeading,
-          mapLinkLabel: dict.places.mapLinkLabel,
+          resourcesHeading: dict.places.resources,
+          mapLinkLabel: dict.places.viewOnMap,
           categoryLabel: dict.categories[place.category],
         }}
       />

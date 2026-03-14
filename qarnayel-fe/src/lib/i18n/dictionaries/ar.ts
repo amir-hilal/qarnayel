@@ -25,7 +25,8 @@ export const ar = {
   },
   places: {
     pageTitle: 'الأماكن',
-    metaDescription: 'استكشف أماكن قرنايل من مطاعم ومعالم وغابات وبحيرات وخدمات.',
+    metaDescription:
+      'استكشف أماكن قرنايل من مطاعم ومعالم وغابات وبحيرات وخدمات.',
     filterByCategory: 'تصفية حسب الفئة',
     filterByType: 'تصفية حسب النوع',
     allCategories: 'جميع الفئات',
@@ -35,6 +36,8 @@ export const ar = {
     viewOnMap: 'عرض على الخريطة',
     contactGuide: 'تواصل مع مرشد',
     contactPlace: 'تواصل مع المكان',
+    visitLabel: 'زيارة',
+    websiteLabel: 'الموقع الإلكتروني',
     resources: 'المصادر والمراجع',
     images: 'صور',
     loadingPlaces: 'جاري تحميل الأماكن...',
@@ -58,14 +61,16 @@ export const ar = {
   },
   history: {
     pageTitle: 'تاريخ قرنايل',
-    metaDescription: 'استكشف تاريخ قرنايل عبر العصور من الحضارات الفينيقية إلى الحقبة الحديثة.',
+    metaDescription:
+      'استكشف تاريخ قرنايل عبر العصور من الحضارات الفينيقية إلى الحقبة الحديثة.',
     sources: 'المصادر',
     loadingHistory: 'جاري التحميل...',
     noHistory: 'لا تتوفر مدخلات تاريخية حالياً.',
   },
   about: {
     pageTitle: 'عن قرنايل',
-    metaDescription: 'تعرّف على تاريخ قرنايل وطبيعتها وموقعها في قلب جبل لبنان.',
+    metaDescription:
+      'تعرّف على تاريخ قرنايل وطبيعتها وموقعها في قلب جبل لبنان.',
   },
   contact: {
     pageTitle: 'تواصل معنا',
