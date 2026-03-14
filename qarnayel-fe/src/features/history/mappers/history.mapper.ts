@@ -21,7 +21,7 @@ export function toHistoryEntry(
     if (process.env.NODE_ENV === 'development') {
       console.error(
         `[history.mapper] Failed to parse history entry "${id}":`,
-        result.error.flatten(),
+        JSON.stringify(result.error.flatten(), null, 2),
       );
     }
     return null;

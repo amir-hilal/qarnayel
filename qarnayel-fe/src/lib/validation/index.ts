@@ -50,13 +50,11 @@ export const placeResourceSchema = z.object({
 // HistorySource
 export const historySourceSchema = z.object({
   label: localizedTextSchema,
-  url: z.string().url().optional(),
+  url: z.preprocess((v) => v ?? undefined, z.string().url().optional()),
 });
 
 // Firestore Timestamp to ISO string coercion helper
-export function coerceTimestampToString(
-  value: unknown,
-): string {
+export function coerceTimestampToString(value: unknown): string {
   if (typeof value === 'string') return value;
   if (
     value !== null &&
