@@ -12,7 +12,7 @@
  */
 
 import { cert, initializeApp } from 'firebase-admin/app';
-import { getFirestore, Timestamp } from 'firebase-admin/firestore';
+import { getFirestore } from 'firebase-admin/firestore';
 import { readFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -291,7 +291,13 @@ async function main() {
   console.log('🌱 Clearing existing data...');
 
   try {
-    for (const col of ['siteSettings', 'pageContent', 'places', 'history', 'media']) {
+    for (const col of [
+      'siteSettings',
+      'pageContent',
+      'places',
+      'history',
+      'media',
+    ]) {
       process.stdout.write(`  Clearing ${col}… `);
       await clearCollection(col);
     }
