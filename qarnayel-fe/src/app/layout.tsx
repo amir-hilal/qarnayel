@@ -13,16 +13,15 @@ export const metadata: Metadata = {
 };
 
 // ---------------------------------------------------------------------------
-// Root layout — sets minimal shell; locale-specific layout is in [locale]/layout.tsx
+// Root layout — intentionally minimal.
+// All routes are under [locale]/, which provides the <html>/<body> shell with
+// the correct lang/dir attributes. Root-level fallbacks (error, not-found)
+// render their own standalone document shells.
 // ---------------------------------------------------------------------------
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }): React.ReactElement {
-  return (
-    <html suppressHydrationWarning>
-      <body>{children}</body>
-    </html>
-  );
+  return <>{children}</>;
 }
