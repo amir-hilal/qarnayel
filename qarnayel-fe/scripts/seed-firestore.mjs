@@ -81,8 +81,14 @@ async function seedSiteSettings() {
       en: 'Breathtaking nature, rich history, and unforgettable moments',
     },
     ctas: [
-      { label: { ar: 'استكشف الأماكن', en: 'Explore Places' }, href: '/places' },
-      { label: { ar: 'اكتشف التاريخ', en: 'Discover History' }, href: '/history' },
+      {
+        label: { ar: 'استكشف الأماكن', en: 'Explore Places' },
+        href: '/places',
+      },
+      {
+        label: { ar: 'اكتشف التاريخ', en: 'Discover History' },
+        href: '/history',
+      },
     ],
     townIntroduction: {
       ar: 'قرنايل بلدة لبنانية تقع في قضاء المتن الأعلى على ارتفاع يتجاوز 1400 متر، تتميز بمناخها المعتدل وطبيعتها الخضراء وتاريخها العريق.',

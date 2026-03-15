@@ -179,7 +179,7 @@ type HistoryEntry = {
   title: LocalizedText;
   content: LocalizedText;
   periodStart?: string; // e.g. "1st millennium BCE"
-  periodEnd?: string;   // e.g. "4th century CE" (if range)
+  periodEnd?: string; // e.g. "4th century CE" (if range)
   sources: HistorySource[];
   status: PublishStatus;
   updatedAt: string;

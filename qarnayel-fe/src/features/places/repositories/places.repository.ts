@@ -1,17 +1,8 @@
-import {
-  query,
-  where,
-  getDocs,
-  getDoc,
-  doc,
-  orderBy,
-  limit,
-} from 'firebase/firestore';
-import { placesCollection } from '@/lib/firebase/collections';
-import { db } from '@/lib/firebase/client';
-import { COLLECTIONS, PUBLISH_STATUS } from '@/config/constants';
+import { PUBLISH_STATUS } from '@/config/constants';
 import { toPlace } from '@/features/places/mappers/place.mapper';
 import type { Place, PlaceCategory, PlaceType } from '@/features/places/types';
+import { placesCollection } from '@/lib/firebase/collections';
+import { getDocs, limit, query, where } from 'firebase/firestore';
 
 // ---------------------------------------------------------------------------
 // fetchPublishedPlaces — returns all published places, with optional filters

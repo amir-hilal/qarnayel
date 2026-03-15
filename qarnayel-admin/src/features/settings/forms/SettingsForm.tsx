@@ -63,7 +63,11 @@ export function SettingsForm({ initialData }: SettingsFormProps) {
     defaultValues,
   });
 
-  const { fields: ctaFields, append: appendCta, remove: removeCta } = useFieldArray({
+  const {
+    fields: ctaFields,
+    append: appendCta,
+    remove: removeCta,
+  } = useFieldArray({
     control,
     name: 'ctas',
   });

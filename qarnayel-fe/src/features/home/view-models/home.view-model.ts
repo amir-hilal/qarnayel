@@ -1,8 +1,8 @@
-import type { Place, SiteSettings } from '@/types';
-import type { Locale } from '@/lib/i18n/locales';
-import { localise } from '@/lib/i18n/helpers';
 import { ROUTES } from '@/config/constants';
 import { getPrimaryImageUrl } from '@/features/places/utils';
+import { localise } from '@/lib/i18n/helpers';
+import type { Locale } from '@/lib/i18n/locales';
+import type { Place, SiteSettings } from '@/types';
 
 // ---------------------------------------------------------------------------
 // HomeViewModel — prepared data for the homepage
@@ -38,7 +38,7 @@ export function buildHomeViewModel(
       href: cta.href.startsWith('/') ? `/${locale}${cta.href}` : cta.href,
     })),
     townIntroduction: localise(settings.townIntroduction, locale),
-    featuredPlaces: featuredPlaces.map(place => ({
+    featuredPlaces: featuredPlaces.map((place) => ({
       id: place.id,
       slug: place.slug,
       title: localise(place.title, locale),

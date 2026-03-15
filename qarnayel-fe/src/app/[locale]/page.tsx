@@ -51,7 +51,7 @@ export default async function HomePage({
       <HeroSection
         heroTitle={vm.heroTitle}
         heroSubtitle={vm.heroSubtitle}
-        heroImageUrl='/images/hero.png'
+        heroImageUrl="/images/hero.png"
         ctas={vm.ctas}
         heroImageAlt={dict.home.heroImageAlt}
       />
