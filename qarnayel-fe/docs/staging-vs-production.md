@@ -2,15 +2,14 @@
 
 ## Principle
 
-Staging and production are **completely separate environments**. They use:
+Staging and production share a **single Firebase project**. Isolation between environments is achieved via:
 
-- Separate Firebase projects
-- Separate Firestore databases
-- Separate Storage buckets
+- A separate Firestore **named database** for staging (within the same project)
 - Separate domain/URLs
 - Separate Vercel deployments
+- `NEXT_PUBLIC_APP_ENV` flag to distinguish runtime behaviour
 
-Data from staging never reaches production and vice versa.
+The same Firebase credentials (API key, project ID, etc.) are used across all environments.
 
 ---
 
@@ -18,12 +17,13 @@ Data from staging never reaches production and vice versa.
 
 | Aspect | Staging | Production |
 |---|---|---|
-| Firebase project | `qarnayel-staging` | `qarnayel-production` |
-| Firestore data | Test content | Live published content |
-| Storage bucket | `qarnayel-staging.appspot.com` | `qarnayel-production.appspot.com` |
+| Firebase project | `qarnayel` (shared) | `qarnayel` (shared) |
+| Firestore database | `staging` (named database) | `(default)` |
+| Storage bucket | `qarnayel.appspot.com` (shared) | `qarnayel.appspot.com` (shared) |
 | Domain | `staging.qarnayel.lb` or Vercel preview URL | `qarnayel.lb` |
 | `NEXT_PUBLIC_APP_ENV` | `staging` | `production` |
 | `NEXT_PUBLIC_SITE_URL` | `https://staging.qarnayel.lb` | `https://qarnayel.lb` |
+| `NEXT_PUBLIC_FIRESTORE_DATABASE_ID` | `staging` | *(not set — uses default)* |
 | Branch | `staging` | `main` |
 | Vercel scope | Preview | Production |
 
@@ -38,15 +38,16 @@ Data from staging never reaches production and vice versa.
 
 ---
 
-## Firebase project separation checklist
+## Firebase setup checklist
 
-- [ ] Two Firebase projects created (`qarnayel-staging`, `qarnayel-production`)
-- [ ] Each project has its own web app registered
-- [ ] Firestore enabled in both (separate databases)
-- [ ] Storage enabled in both (separate buckets)
-- [ ] Security rules deployed to both
-- [ ] Firestore indexes created in both
-- [ ] Correct env vars set for each environment in Vercel
+- [ ] One Firebase project created (e.g. `qarnayel`)
+- [ ] Web app registered in the project
+- [ ] Firestore default database enabled (`me-central1`)
+- [ ] Firestore named database `staging` created (when staging environment is needed)
+- [ ] Storage enabled (single bucket, shared)
+- [ ] Security rules deployed
+- [ ] Firestore indexes created
+- [ ] Correct `NEXT_PUBLIC_APP_ENV` and `NEXT_PUBLIC_FIRESTORE_DATABASE_ID` set per environment in Vercel
 
 ---
 
@@ -64,17 +65,17 @@ Before deploying to production:
 
 ## Content promotion
 
-Content is managed through the admin dashboard. To promote content from staging to production:
+Content is managed through the admin dashboard. Staging uses a separate Firestore database (`staging`) within the same project:
 
-1. The admin dashboard for production (separate admin deployment) manages production content
-2. There is no automatic sync between staging and production Firestore
-3. Content must be entered/approved in the production admin separately
+1. The admin dashboard targets the `staging` database for test content
+2. Production content is managed separately in the default database
+3. There is no automatic sync between the two databases — content must be entered/approved in the production admin separately
 
 ---
 
 ## Canary and preview deployments
 
-Every pull request on Vercel gets a unique preview URL. These preview deployments use the **staging** Firebase project by default. This is set via Vercel's "Preview" environment scope.
+Every pull request on Vercel gets a unique preview URL. These preview deployments use `NEXT_PUBLIC_APP_ENV=staging` and `NEXT_PUBLIC_FIRESTORE_DATABASE_ID=staging`, pointing at the staging Firestore database within the shared project. This is set via Vercel's "Preview" environment scope.
 
 ---
 

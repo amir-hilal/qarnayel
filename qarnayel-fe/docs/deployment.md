@@ -2,7 +2,7 @@
 
 ## Overview
 
-The public website is deployed on **Vercel**. There are two deployments: **staging** and **production**, each connected to a separate Firebase project and domain.
+The public website is deployed on **Vercel**. There are two deployments: **staging** and **production**, both connected to the **same Firebase project** but targeting different Firestore databases (`staging` named database vs the default).
 
 ---
 
@@ -27,42 +27,46 @@ Alternative hosts (Netlify, AWS, self-hosted) are viable but require additional 
 
 ## Branch-to-environment mapping
 
-| Branch | Vercel environment | Firebase project |
-|---|---|---|
-| `main` | Production | `qarnayel-production` |
-| `staging` | Preview / Staging | `qarnayel-staging` |
-| `feature/*` | Preview | `qarnayel-staging` |
+| Branch | Vercel environment | Firebase project | Firestore database |
+|---|---|---|---|
+| `main` | Production | `qarnayel` (shared) | `(default)` |
+| `staging` | Preview / Staging | `qarnayel` (shared) | `staging` |
+| `feature/*` | Preview | `qarnayel` (shared) | `staging` |
 
 Set up **branch-specific environment variables** in Vercel:
 
 1. Go to **Project Settings** → **Environment Variables**
 2. Add each variable, choosing which environments it applies to
-3. Production variables use the production Firebase config
-4. Staging/Preview variables use the staging Firebase config
+3. Firebase credentials (`NEXT_PUBLIC_FIREBASE_*`) are the same across all environments
+4. Only `NEXT_PUBLIC_APP_ENV`, `NEXT_PUBLIC_SITE_URL`, and `NEXT_PUBLIC_FIRESTORE_DATABASE_ID` differ
 
 ---
 
 ## Environment variables on Vercel
 
-Set all variables from `.env.example` in Vercel's UI:
+Set all variables from `.env.example` in Vercel's UI.
+
+Firebase credentials are identical across scopes — only app-level variables differ:
 
 **Production scope:**
 ```
-NEXT_PUBLIC_FIREBASE_API_KEY=<production value>
-NEXT_PUBLIC_FIREBASE_PROJECT_ID=qarnayel-production
-NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=qarnayel-production.appspot.com
+NEXT_PUBLIC_FIREBASE_API_KEY=<shared value>
+NEXT_PUBLIC_FIREBASE_PROJECT_ID=qarnayel
+NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=qarnayel.appspot.com
 NEXT_PUBLIC_SITE_URL=https://qarnayel.lb
 NEXT_PUBLIC_APP_ENV=production
+# NEXT_PUBLIC_FIRESTORE_DATABASE_ID not set (uses default database)
 ...
 ```
 
 **Preview/Staging scope:**
 ```
-NEXT_PUBLIC_FIREBASE_API_KEY=<staging value>
-NEXT_PUBLIC_FIREBASE_PROJECT_ID=qarnayel-staging
-NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=qarnayel-staging.appspot.com
+NEXT_PUBLIC_FIREBASE_API_KEY=<shared value>
+NEXT_PUBLIC_FIREBASE_PROJECT_ID=qarnayel
+NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=qarnayel.appspot.com
 NEXT_PUBLIC_SITE_URL=https://staging.qarnayel.lb
 NEXT_PUBLIC_APP_ENV=staging
+NEXT_PUBLIC_FIRESTORE_DATABASE_ID=staging
 ...
 ```
 

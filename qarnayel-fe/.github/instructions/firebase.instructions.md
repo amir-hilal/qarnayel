@@ -25,15 +25,16 @@ src/lib/i18n/
 src/config/
 ```
 
-## Environments — staging vs production
+## Environments — single Firebase project
 
-Use **separate Firebase projects** for staging and production.
-Each environment has its own set of Firebase config env vars.
+There is **one Firebase project** shared across all environments. All environments use the same Firebase credentials.
 
-Staging vars are prefixed or loaded via `.env.staging`.
-Production vars are loaded via `.env.production`.
+Environment isolation is achieved via:
 
-Never mix project credentials between environments.
+- A separate Firestore **named database** (`staging`) for non-production environments
+- `NEXT_PUBLIC_APP_ENV` to distinguish runtime behaviour (`development`, `staging`, `production`)
+- `NEXT_PUBLIC_FIRESTORE_DATABASE_ID` set to `staging` in preview/staging deployments; unset in production (uses the default database)
+
 Never commit actual credentials — use `.env.example` as the template.
 
 ## Firebase client initialization

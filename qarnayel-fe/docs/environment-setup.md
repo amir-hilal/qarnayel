@@ -23,8 +23,9 @@ This project uses environment variables for all configuration that varies betwee
    ```bash
    cp .env.example .env.local
    ```
-2. Fill in the values from your **staging** Firebase project (use staging for local development)
-3. Never commit `.env.local`
+2. Fill in the values from the **single Firebase project** — the same credentials are used for all environments
+3. Set `NEXT_PUBLIC_APP_ENV=development` and optionally `NEXT_PUBLIC_FIRESTORE_DATABASE_ID=staging` to point at the staging database during local development
+4. Never commit `.env.local`
 
 ---
 
@@ -79,12 +80,13 @@ const envSchema = z.object({
 
 ## Staging vs production
 
-Use separate `.env` files for each environment:
+All environments share the same Firebase project and credentials. The only differences per environment are:
 
-- When deploying to **Vercel staging** → set the staging Firebase config in Vercel's staging environment variables
-- When deploying to **Vercel production** → set the production Firebase config in Vercel's production environment variables
+- `NEXT_PUBLIC_APP_ENV` — `development`, `staging`, or `production`
+- `NEXT_PUBLIC_SITE_URL` — the canonical URL for that environment
+- `NEXT_PUBLIC_FIRESTORE_DATABASE_ID` — set to `staging` for the staging environment; leave unset for production (uses the default database)
 
-See [staging-vs-production.md](./staging-vs-production.md) for deployment configuration details.
+See [staging-vs-production.md](./staging-vs-production.md) for full details.
 
 ---
 
