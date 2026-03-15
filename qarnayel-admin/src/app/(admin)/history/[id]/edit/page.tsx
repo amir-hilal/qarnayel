@@ -1,27 +1,32 @@
+'use client';
+
+import { useState, useEffect } from 'react';
+import { useParams } from 'next/navigation';
 import { ADMIN_ROUTES } from '@/config/routes';
 import { EditHistoryEntryForm } from '@/features/history/forms/EditHistoryEntryForm';
 import { fetchHistoryEntryById } from '@/features/history/repositories/history.repository';
-import type { Metadata } from 'next';
+import type { HistoryEntry } from '@/types';
 import Link from 'next/link';
-import { notFound } from 'next/navigation';
 
-interface Props {
-  params: Promise<{ id: string }>;
-}
+export default function EditHistoryPage() {
+  const params = useParams<{ id: string }>();
+  const [entry, setEntry] = useState<HistoryEntry | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [notFound, setNotFound] = useState(false);
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { id } = await params;
-  const entry = await fetchHistoryEntryById(id);
-  return { title: entry ? `Edit: ${entry.title.en}` : 'Edit History Entry' };
-}
+  useEffect(() => {
+    if (!params.id) return;
+    fetchHistoryEntryById(params.id)
+      .then((result) => {
+        if (!result) setNotFound(true);
+        else setEntry(result);
+      })
+      .finally(() => setLoading(false));
+  }, [params.id]);
 
-export const dynamic = 'force-dynamic';
-
-export default async function EditHistoryPage({ params }: Props) {
-  const { id } = await params;
-  const entry = await fetchHistoryEntryById(id);
-
-  if (!entry) notFound();
+  if (loading) return <div className="admin-page-loading">Loading…</div>;
+  if (notFound) return <div className="admin-page-loading">Entry not found.</div>;
+  if (!entry) return null;
 
   return (
     <>

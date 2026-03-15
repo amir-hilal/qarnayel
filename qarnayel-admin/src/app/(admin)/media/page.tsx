@@ -1,9 +1,9 @@
+'use client';
+
+import { useState, useEffect } from 'react';
 import { fetchAllMediaAssets } from '@/features/media/repositories/media.repository';
 import { EmptyState } from '@/features/shared/components/EmptyState';
-import type { Metadata } from 'next';
-
-export const metadata: Metadata = { title: 'Media' };
-export const dynamic = 'force-dynamic';
+import type { MediaAsset } from '@/types';
 
 function formatBytes(bytes: number): string {
   if (bytes < 1024) return `${bytes} B`;
@@ -11,8 +11,13 @@ function formatBytes(bytes: number): string {
   return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
 }
 
-export default async function MediaPage() {
-  const assets = await fetchAllMediaAssets();
+export default function MediaPage() {
+  const [assets, setAssets] = useState<MediaAsset[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchAllMediaAssets().then(setAssets).finally(() => setLoading(false));
+  }, []);
 
   return (
     <>
@@ -20,13 +25,15 @@ export default async function MediaPage() {
         <div className="admin-page-header__text">
           <h1 className="admin-page-header__title">Media</h1>
           <p className="admin-page-header__subtitle">
-            {assets.length} asset{assets.length !== 1 ? 's' : ''} in library
+            {loading ? 'Loading…' : `${assets.length} asset${assets.length !== 1 ? 's' : ''} in library`}
           </p>
         </div>
       </div>
 
       <div className="admin-card">
-        {assets.length === 0 ? (
+        {loading ? (
+          <div className="admin-page-loading">Loading…</div>
+        ) : assets.length === 0 ? (
           <EmptyState
             title="No media assets yet"
             description="Uploaded images and files will appear here."

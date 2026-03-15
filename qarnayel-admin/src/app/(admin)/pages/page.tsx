@@ -1,14 +1,19 @@
+'use client';
+
+import { useState, useEffect } from 'react';
 import { ADMIN_ROUTES } from '@/config/routes';
 import { fetchAllPageContent } from '@/features/pages/repositories/pages.repository';
 import { StatusBadge } from '@/features/shared/components/StatusBadge';
-import type { Metadata } from 'next';
+import type { PageContent } from '@/types';
 import Link from 'next/link';
 
-export const metadata: Metadata = { title: 'Pages' };
-export const dynamic = 'force-dynamic';
+export default function PagesListPage() {
+  const [pages, setPages] = useState<PageContent[]>([]);
+  const [loading, setLoading] = useState(true);
 
-export default async function PagesListPage() {
-  const pages = await fetchAllPageContent();
+  useEffect(() => {
+    fetchAllPageContent().then(setPages).finally(() => setLoading(false));
+  }, []);
 
   return (
     <>
@@ -22,6 +27,9 @@ export default async function PagesListPage() {
       </div>
 
       <div className="admin-card">
+        {loading ? (
+          <div className="admin-page-loading">Loading…</div>
+        ) : (
         <div className="admin-table-wrapper">
           <table className="admin-table">
             <thead>
@@ -66,6 +74,7 @@ export default async function PagesListPage() {
             </tbody>
           </table>
         </div>
+        )}
       </div>
     </>
   );

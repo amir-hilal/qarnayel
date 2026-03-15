@@ -1,27 +1,32 @@
+'use client';
+
+import { useState, useEffect } from 'react';
+import { useParams } from 'next/navigation';
 import { ADMIN_ROUTES } from '@/config/routes';
 import { EditPageContentForm } from '@/features/pages/forms/EditPageContentForm';
 import { fetchPageContentBySlug } from '@/features/pages/repositories/pages.repository';
-import type { Metadata } from 'next';
+import type { PageContent } from '@/types';
 import Link from 'next/link';
-import { notFound } from 'next/navigation';
 
-interface Props {
-  params: Promise<{ slug: string }>;
-}
+export default function EditPageContentPage() {
+  const params = useParams<{ slug: string }>();
+  const [page, setPage] = useState<PageContent | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [notFound, setNotFound] = useState(false);
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { slug } = await params;
-  const page = await fetchPageContentBySlug(slug);
-  return { title: page ? `Edit Page: ${slug}` : 'Edit Page' };
-}
+  useEffect(() => {
+    if (!params.slug) return;
+    fetchPageContentBySlug(params.slug)
+      .then((result) => {
+        if (!result) setNotFound(true);
+        else setPage(result);
+      })
+      .finally(() => setLoading(false));
+  }, [params.slug]);
 
-export const dynamic = 'force-dynamic';
-
-export default async function EditPageContentPage({ params }: Props) {
-  const { slug } = await params;
-  const page = await fetchPageContentBySlug(slug);
-
-  if (!page) notFound();
+  if (loading) return <div className="admin-page-loading">Loading…</div>;
+  if (notFound) return <div className="admin-page-loading">Page not found.</div>;
+  if (!page) return null;
 
   return (
     <>
@@ -35,7 +40,7 @@ export default async function EditPageContentPage({ params }: Props) {
                 fontSize: 'var(--font-size-sm)',
               }}
             >
-              {slug}
+              {params.slug}
             </code>
           </p>
         </div>

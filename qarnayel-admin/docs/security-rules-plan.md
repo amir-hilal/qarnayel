@@ -1,4 +1,87 @@
-# Security Rules Plan
+# Security Rules
+
+## Deployed Firestore rules
+
+These rules are live on the Firebase project. They apply to the `(default)` database and must also be applied to the `staging` named database once it is created.
+
+```
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isPublished() {
+      return resource.data.status == 'published';
+    }
+
+    match /places/{id} {
+      allow read: if isPublished() || isAuthenticated();
+      allow write: if isAuthenticated();
+    }
+
+    match /history/{id} {
+      allow read: if isPublished() || isAuthenticated();
+      allow write: if isAuthenticated();
+    }
+
+    match /pageContent/{id} {
+      allow read: if true;
+      allow write: if isAuthenticated();
+    }
+
+    match /siteSettings/{id} {
+      allow read: if true;
+      allow write: if isAuthenticated();
+    }
+
+    match /media/{id} {
+      allow read: if true;
+      allow write: if isAuthenticated();
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
+```
+
+### What these rules enforce
+
+- **Public website** — unauthenticated clients only see `published` documents. Drafts and archived documents are never exposed.
+- **Admin dashboard** — any authenticated Firebase Auth user has full read/write access.
+- **Catch-all** — any unlisted collection is fully denied.
+
+## Deployed Storage rules
+
+```
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /{allPaths=**} {
+      allow read: if true;
+      allow write: if request.auth != null
+                   && request.resource.size < 10 * 1024 * 1024
+                   && request.resource.contentType.matches('image/.*');
+    }
+  }
+}
+```
+
+## Named database (staging)
+
+When the `staging` named database is created, apply the same Firestore rules to it via **Firebase Console → Firestore → Databases → staging → Rules**.
+
+## TODO
+
+- [ ] Implement custom claims role-checking (`isAdmin()` → check `request.auth.token.role`)
+- [ ] Upgrade `isAuthenticated()` → `isAdmin()` once custom claims are set
+- [ ] Apply identical rules to the `staging` named database
+- [ ] Test all read paths with unauthenticated simulation in Rules Playground
+- [ ] Test all write paths with authenticated + unauthenticated simulation
 
 ## Firestore security rules
 

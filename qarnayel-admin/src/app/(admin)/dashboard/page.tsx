@@ -1,16 +1,20 @@
+'use client';
+
+import { useState, useEffect } from 'react';
 import { ADMIN_ROUTES } from '@/config/routes';
 import { fetchAllPlaces } from '@/features/places/repositories/places.repository';
 import { EmptyState } from '@/features/shared/components/EmptyState';
 import { StatusBadge } from '@/features/shared/components/StatusBadge';
-import type { Metadata } from 'next';
+import type { Place } from '@/types';
 import Link from 'next/link';
 
-export const metadata: Metadata = { title: 'Dashboard' };
+export default function DashboardPage() {
+  const [places, setPlaces] = useState<Place[]>([]);
+  const [loading, setLoading] = useState(true);
 
-export const dynamic = 'force-dynamic';
-
-export default async function DashboardPage() {
-  const places = await fetchAllPlaces();
+  useEffect(() => {
+    fetchAllPlaces().then(setPlaces).finally(() => setLoading(false));
+  }, []);
 
   const published = places.filter((p) => p.status === 'published').length;
   const drafts = places.filter((p) => p.status === 'draft').length;
@@ -38,19 +42,19 @@ export default async function DashboardPage() {
       >
         <div className="stat-card">
           <p className="stat-card__label">Total Places</p>
-          <p className="stat-card__value">{places.length}</p>
+          <p className="stat-card__value">{loading ? '…' : places.length}</p>
         </div>
         <div className="stat-card">
           <p className="stat-card__label">Published</p>
-          <p className="stat-card__value">{published}</p>
+          <p className="stat-card__value">{loading ? '…' : published}</p>
         </div>
         <div className="stat-card">
           <p className="stat-card__label">Drafts</p>
-          <p className="stat-card__value">{drafts}</p>
+          <p className="stat-card__value">{loading ? '…' : drafts}</p>
         </div>
         <div className="stat-card">
           <p className="stat-card__label">Archived</p>
-          <p className="stat-card__value">{archived}</p>
+          <p className="stat-card__value">{loading ? '…' : archived}</p>
         </div>
       </div>
 
@@ -63,7 +67,9 @@ export default async function DashboardPage() {
           </Link>
         </div>
 
-        {places.length === 0 ? (
+        {loading ? (
+          <div className="admin-page-loading">Loading…</div>
+        ) : places.length === 0 ? (
           <EmptyState
             title="No places yet"
             description="Create your first place to get started."

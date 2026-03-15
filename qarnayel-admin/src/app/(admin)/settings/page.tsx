@@ -1,12 +1,17 @@
+'use client';
+
+import { useState, useEffect } from 'react';
 import { SettingsForm } from '@/features/settings/forms/SettingsForm';
 import { fetchSiteSettings } from '@/features/settings/repositories/settings.repository';
-import type { Metadata } from 'next';
+import type { SiteSettings } from '@/types';
 
-export const metadata: Metadata = { title: 'Settings' };
-export const dynamic = 'force-dynamic';
+export default function SettingsPage() {
+  const [settings, setSettings] = useState<SiteSettings | null>(null);
+  const [loading, setLoading] = useState(true);
 
-export default async function SettingsPage() {
-  const settings = await fetchSiteSettings();
+  useEffect(() => {
+    fetchSiteSettings().then(setSettings).finally(() => setLoading(false));
+  }, []);
 
   return (
     <>
@@ -19,7 +24,11 @@ export default async function SettingsPage() {
         </div>
       </div>
 
-      <SettingsForm initialData={settings} />
+      {loading ? (
+        <div className="admin-page-loading">Loading…</div>
+      ) : (
+        <SettingsForm initialData={settings} />
+      )}
     </>
   );
 }

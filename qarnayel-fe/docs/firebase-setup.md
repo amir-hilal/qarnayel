@@ -55,31 +55,44 @@ Open `.env.local` and paste each value into the matching variable. See [environm
 
 ## Step 5: Set Firestore security rules
 
-The public website is **read-only**. Apply these rules in the Firebase Console under **Firestore → Rules**:
+These rules support **both** the public website (read-only, published content) and the admin dashboard (authenticated full access). Apply them in the Firebase Console under **Firestore → Rules**:
 
 ```
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
 
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isPublished() {
+      return resource.data.status == 'published';
+    }
+
     match /places/{id} {
-      allow read: if resource.data.status == 'published';
-      allow write: if false;
+      allow read: if isPublished() || isAuthenticated();
+      allow write: if isAuthenticated();
     }
 
     match /history/{id} {
-      allow read: if resource.data.status == 'published';
-      allow write: if false;
+      allow read: if isPublished() || isAuthenticated();
+      allow write: if isAuthenticated();
     }
 
     match /pageContent/{id} {
       allow read: if true;
-      allow write: if false;
+      allow write: if isAuthenticated();
     }
 
     match /siteSettings/{id} {
       allow read: if true;
-      allow write: if false;
+      allow write: if isAuthenticated();
+    }
+
+    match /media/{id} {
+      allow read: if true;
+      allow write: if isAuthenticated();
     }
 
     match /{document=**} {
@@ -88,6 +101,9 @@ service cloud.firestore {
   }
 }
 ```
+
+> **Public website** — only sees `published` content. Drafts and archived documents are never exposed to unauthenticated clients.
+> **Admin dashboard** — authenticated Firebase Auth users have full read/write access.
 
 ---
 
@@ -99,12 +115,11 @@ In **Storage → Rules**:
 rules_version = '2';
 service firebase.storage {
   match /b/{bucket}/o {
-    match /places/{allPaths=**} {
-      allow read: if true;
-      allow write: if false;
-    }
     match /{allPaths=**} {
-      allow read, write: if false;
+      allow read: if true;                        // public read for download URLs
+      allow write: if request.auth != null        // authenticated admin writes only
+                   && request.resource.size < 10 * 1024 * 1024
+                   && request.resource.contentType.matches('image/.*');
     }
   }
 }

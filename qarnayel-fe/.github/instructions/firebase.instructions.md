@@ -147,28 +147,48 @@ export function toPlace(
 
 ## Read-only access
 
-The public website has **read-only** access to Firestore.
-Firestore security rules must enforce this:
+The public website has **read-only** access to Firestore. The deployed rules enforce this while also allowing the admin dashboard (authenticated users) full access:
 
 ```
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
+
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isPublished() {
+      return resource.data.status == 'published';
+    }
+
     match /places/{id} {
-      allow read: if resource.data.status == 'published';
-      allow write: if false;
+      allow read: if isPublished() || isAuthenticated();
+      allow write: if isAuthenticated();
     }
+
     match /history/{id} {
-      allow read: if resource.data.status == 'published';
-      allow write: if false;
+      allow read: if isPublished() || isAuthenticated();
+      allow write: if isAuthenticated();
     }
+
     match /pageContent/{id} {
       allow read: if true;
-      allow write: if false;
+      allow write: if isAuthenticated();
     }
+
     match /siteSettings/{id} {
       allow read: if true;
-      allow write: if false;
+      allow write: if isAuthenticated();
+    }
+
+    match /media/{id} {
+      allow read: if true;
+      allow write: if isAuthenticated();
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
     }
   }
 }

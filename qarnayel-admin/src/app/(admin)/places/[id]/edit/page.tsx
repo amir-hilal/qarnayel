@@ -1,27 +1,32 @@
+'use client';
+
+import { useState, useEffect } from 'react';
+import { useParams } from 'next/navigation';
 import { ADMIN_ROUTES } from '@/config/routes';
 import { EditPlaceForm } from '@/features/places/forms/EditPlaceForm';
 import { fetchPlaceById } from '@/features/places/repositories/places.repository';
-import type { Metadata } from 'next';
+import type { Place } from '@/types';
 import Link from 'next/link';
-import { notFound } from 'next/navigation';
 
-interface Props {
-  params: Promise<{ id: string }>;
-}
+export default function EditPlacePage() {
+  const params = useParams<{ id: string }>();
+  const [place, setPlace] = useState<Place | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [notFound, setNotFound] = useState(false);
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { id } = await params;
-  const place = await fetchPlaceById(id);
-  return { title: place ? `Edit: ${place.title.en}` : 'Edit Place' };
-}
+  useEffect(() => {
+    if (!params.id) return;
+    fetchPlaceById(params.id)
+      .then((result) => {
+        if (!result) setNotFound(true);
+        else setPlace(result);
+      })
+      .finally(() => setLoading(false));
+  }, [params.id]);
 
-export const dynamic = 'force-dynamic';
-
-export default async function EditPlacePage({ params }: Props) {
-  const { id } = await params;
-  const place = await fetchPlaceById(id);
-
-  if (!place) notFound();
+  if (loading) return <div className="admin-page-loading">Loading…</div>;
+  if (notFound) return <div className="admin-page-loading">Place not found.</div>;
+  if (!place) return null;
 
   return (
     <>
