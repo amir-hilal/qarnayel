@@ -38,12 +38,27 @@ const db = getFirestore();
 // ---------------------------------------------------------------------------
 // Helpers
 // ---------------------------------------------------------------------------
-const now = Timestamp.now();
 const isoNow = new Date().toISOString();
 
 async function upsert(collection, id, data) {
   await db.collection(collection).doc(id).set(data, { merge: false });
   console.log(`  ✓ ${collection}/${id}`);
+}
+
+async function clearCollection(collectionName) {
+  const snapshot = await db.collection(collectionName).get();
+  if (snapshot.empty) return;
+  // Firestore batch limit is 500 ops
+  const chunks = [];
+  for (let i = 0; i < snapshot.docs.length; i += 500) {
+    chunks.push(snapshot.docs.slice(i, i + 500));
+  }
+  for (const chunk of chunks) {
+    const batch = db.batch();
+    chunk.forEach((doc) => batch.delete(doc.ref));
+    await batch.commit();
+  }
+  console.log(`  🗑  Deleted ${snapshot.size} docs from ${collectionName}`);
 }
 
 // ---------------------------------------------------------------------------
@@ -57,25 +72,11 @@ async function seedSiteSettings() {
       ar: 'قرية في قلب جبل لبنان',
       en: 'A village in the heart of Mount Lebanon',
     },
-    heroTitle: {
-      ar: 'اكتشف قرنايل',
-      en: 'Discover Qarnayel',
-    },
-    heroSubtitle: {
-      ar: 'طبيعة خلّابة، تاريخ عريق، وأجواء لا تُنسى',
-      en: 'Breathtaking nature, rich history, and unforgettable moments',
-    },
-    ctaExplorePlaces: { ar: 'استكشف الأماكن', en: 'Explore Places' },
-    ctaDiscoverHistory: { ar: 'اكتشف التاريخ', en: 'Discover History' },
-    townIntroduction: {
-      ar: 'قرنايل بلدة لبنانية تقع في قضاء المتن الأعلى على ارتفاع يتجاوز 1400 متر، تتميز بمناخها المعتدل وطبيعتها الخضراء وتاريخها العريق.',
-      en: 'Qarnayel is a Lebanese village in the Metn district, sitting above 1,400 m elevation. It is known for its mild climate, lush scenery, and deep historical roots.',
-    },
     contactEmail: 'info@qarnayel.lb',
-    contactPhone: null,
     socialLinks: {
       facebook: null,
       instagram: null,
+      youtube: null,
     },
     updatedAt: isoNow,
   });
@@ -90,6 +91,7 @@ async function seedPageContent() {
   await upsert('pageContent', 'about', {
     id: 'about',
     slug: 'about',
+    status: 'published',
     title: { ar: 'عن قرنايل', en: 'About Qarnayel' },
     body: {
       ar: 'قرنايل بلدة لبنانية عريقة تقع في المتن الأعلى، تتميز بمناخها الجبلي المعتدل وطبيعتها الخضراء المورقة.\n\nتضم البلدة مواقع أثرية وطبيعية تعكس تاريخاً ممتداً عبر العصور، إذ شهدت توطّن الحضارات الفينيقية والرومانية والبيزنطية.',
@@ -113,6 +115,7 @@ async function seedPageContent() {
   await upsert('pageContent', 'contact', {
     id: 'contact',
     slug: 'contact',
+    status: 'published',
     title: { ar: 'تواصل معنا', en: 'Contact Us' },
     body: {
       ar: 'يسعدنا تلقّي استفساراتكم وملاحظاتكم. يمكنكم التواصل معنا عبر البريد الإلكتروني أو وسائل التواصل الاجتماعي.',
@@ -248,45 +251,29 @@ async function seedHistory() {
       id: 'history-1',
       order: 1,
       title: { ar: 'الحقبة الفينيقية', en: 'The Phoenician Era' },
-      body: {
+      content: {
         ar: 'تعود أولى آثار التوطّن البشري في قرنايل إلى الحضارة الفينيقية، إذ أفادت الشواهد الأثرية بوجود مستوطنات تعود إلى الألفية الأولى قبل الميلاد. استغلّ الفينيقيون الموقع الجبلي لمراقبة الطرق التجارية ولاستخراج خشب الأرز.',
         en: 'The earliest traces of human settlement in Qarnayel date to the Phoenician civilisation. Archaeological evidence points to settlements from the first millennium BCE. The Phoenicians used the mountain location to monitor trade routes and harvest cedar timber.',
       },
-      period: { ar: 'الألفية الأولى قبل الميلاد', en: '1st millennium BCE' },
-      sources: [
-        {
-          label: {
-            ar: 'الأثار الفينيقية في لبنان — جامعة الأميركية في بيروت',
-            en: 'Phoenician Archaeology in Lebanon — AUB',
-          },
-          url: null,
-        },
-      ],
+      periodStart: '1st millennium BCE',
+      sources: [],
       status: 'published',
+      createdAt: isoNow,
       updatedAt: isoNow,
     },
     {
       id: 'history-2',
       order: 2,
       title: { ar: 'الحقبة الرومانية', en: 'The Roman Era' },
-      body: {
+      content: {
         ar: 'في العهد الروماني، شهدت المنطقة تطوراً ملحوظاً في البنية التحتية. أُنشئت طرق رومانية تربط الجبل بالساحل، وتشير المخطوطات التاريخية إلى وجود معابد ومواقع دينية في المنطقة.',
         en: 'During the Roman period, the region saw significant infrastructure development. Roman roads were built connecting the mountain to the coast, and historical manuscripts indicate the presence of temples and religious sites in the area.',
       },
-      period: {
-        ar: 'القرن الأول — القرن الرابع الميلادي',
-        en: '1st – 4th century CE',
-      },
-      sources: [
-        {
-          label: {
-            ar: 'التاريخ الروماني في لبنان — دار المشرق',
-            en: 'Roman History in Lebanon — Dar el-Machreq',
-          },
-          url: null,
-        },
-      ],
+      periodStart: '1st century CE',
+      periodEnd: '4th century CE',
+      sources: [],
       status: 'published',
+      createdAt: isoNow,
       updatedAt: isoNow,
     },
   ];
@@ -301,9 +288,15 @@ async function seedHistory() {
 // Main
 // ---------------------------------------------------------------------------
 async function main() {
-  console.log('🌱 Seeding Firestore...');
+  console.log('🌱 Clearing existing data...');
 
   try {
+    for (const col of ['siteSettings', 'pageContent', 'places', 'history', 'media']) {
+      process.stdout.write(`  Clearing ${col}… `);
+      await clearCollection(col);
+    }
+
+    console.log('\n🌱 Seeding Firestore...');
     await seedSiteSettings();
     await seedPageContent();
     await seedPlaces();
