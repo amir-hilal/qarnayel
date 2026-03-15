@@ -1,0 +1,759 @@
+/* =============================================================================
+   admin.css — Qarnayel Admin
+   Admin shell layout: sidebar, header, content area, navigation, and
+   admin-specific component styles.
+   Plain CSS only — no Tailwind, no utility classes.
+   ============================================================================= */
+
+/* =============================================================================
+   1. Admin Shell Layout
+   ============================================================================= */
+
+.admin-shell {
+  display: grid;
+  grid-template-columns: var(--sidebar-width) 1fr;
+  grid-template-rows: var(--header-height) 1fr;
+  grid-template-areas:
+    'sidebar header'
+    'sidebar content';
+  min-height: 100dvh;
+  background-color: var(--color-surface);
+}
+
+/* Collapsed sidebar (mobile / narrow) */
+.admin-shell--sidebar-collapsed {
+  grid-template-columns: 0 1fr;
+}
+
+@media (max-width: 768px) {
+  .admin-shell {
+    grid-template-columns: 1fr;
+    grid-template-rows: var(--header-height) 1fr;
+    grid-template-areas:
+      'header'
+      'content';
+  }
+}
+
+/* =============================================================================
+   2. Admin Sidebar
+   ============================================================================= */
+
+.admin-sidebar {
+  grid-area: sidebar;
+  position: sticky;
+  top: 0;
+  height: 100dvh;
+  width: var(--sidebar-width);
+  background-color: var(--color-sidebar-bg);
+  color: var(--color-sidebar-text);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: var(--z-sticky);
+  transition: width var(--transition-normal);
+}
+
+@media (max-width: 768px) {
+  .admin-sidebar {
+    position: fixed;
+    inset-block: 0;
+    inset-inline-start: 0;
+    transform: translateX(-100%);
+    transition: transform var(--transition-normal);
+    z-index: var(--z-overlay);
+  }
+
+  .admin-sidebar--open {
+    transform: translateX(0);
+  }
+
+  [dir='rtl'] .admin-sidebar {
+    inset-inline-start: auto;
+    inset-inline-end: 0;
+    transform: translateX(100%);
+  }
+
+  [dir='rtl'] .admin-sidebar--open {
+    transform: translateX(0);
+  }
+}
+
+.admin-sidebar__brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-4);
+  border-block-end: 1px solid rgba(255, 255, 255, 0.08);
+  min-height: var(--header-height);
+  text-decoration: none;
+  color: var(--color-sidebar-text-active);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-base);
+}
+
+.admin-sidebar__brand-logo {
+  width: 1.75rem;
+  height: 1.75rem;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.admin-sidebar__brand-text {
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.admin-sidebar__nav {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--space-3) 0;
+}
+
+.admin-sidebar__nav::-webkit-scrollbar {
+  width: 4px;
+}
+
+.admin-sidebar__nav::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.admin-sidebar__nav::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius-full);
+}
+
+.admin-sidebar__section {
+  margin-block-end: var(--space-4);
+}
+
+.admin-sidebar__section-label {
+  padding: var(--space-2) var(--space-4);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.admin-sidebar__footer {
+  padding: var(--space-4);
+  border-block-start: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* =============================================================================
+   3. Admin Navigation Links
+   ============================================================================= */
+
+.admin-nav-link {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-2) var(--space-4);
+  color: var(--color-sidebar-text);
+  text-decoration: none;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  border-radius: 0;
+  transition: background-color var(--transition-fast),
+    color var(--transition-fast);
+  line-height: 1.4;
+}
+
+.admin-nav-link:hover {
+  background-color: var(--color-sidebar-hover-bg);
+  color: var(--color-sidebar-text-active);
+  text-decoration: none;
+}
+
+.admin-nav-link--active {
+  background-color: var(--color-sidebar-active-bg);
+  color: var(--color-sidebar-text-active);
+  border-inline-start: 3px solid var(--color-primary);
+}
+
+.admin-nav-link__icon {
+  width: 1.125rem;
+  height: 1.125rem;
+  flex-shrink: 0;
+  opacity: 0.75;
+}
+
+.admin-nav-link--active .admin-nav-link__icon {
+  opacity: 1;
+}
+
+/* =============================================================================
+   4. Admin Header
+   ============================================================================= */
+
+.admin-header {
+  grid-area: header;
+  position: sticky;
+  top: 0;
+  height: var(--header-height);
+  background-color: var(--color-header-bg);
+  border-block-end: 1px solid var(--color-header-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-inline: var(--space-6);
+  gap: var(--space-4);
+  z-index: var(--z-sticky);
+  box-shadow: var(--shadow-sm);
+}
+
+.admin-header__left {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-width: 0;
+}
+
+.admin-header__right {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-shrink: 0;
+}
+
+.admin-header__page-title {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.admin-header__menu-toggle {
+  display: none;
+  padding: var(--space-2);
+  border-radius: var(--radius-md);
+  color: var(--color-text-muted);
+  transition: background-color var(--transition-fast);
+}
+
+.admin-header__menu-toggle:hover {
+  background-color: var(--color-surface);
+  color: var(--color-text);
+}
+
+@media (max-width: 768px) {
+  .admin-header__menu-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+/* =============================================================================
+   5. Admin Content Area
+   ============================================================================= */
+
+.admin-content {
+  grid-area: content;
+  padding: var(--space-6);
+  overflow-y: auto;
+  min-width: 0;
+}
+
+.admin-content__inner {
+  max-width: var(--content-max-width);
+  margin-inline: auto;
+}
+
+/* =============================================================================
+   6. Admin Page Header (within content)
+   ============================================================================= */
+
+.admin-page-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-4);
+  margin-block-end: var(--space-6);
+  flex-wrap: wrap;
+}
+
+.admin-page-header__text {
+  min-width: 0;
+}
+
+.admin-page-header__title {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text);
+  margin-block-end: var(--space-1);
+}
+
+.admin-page-header__subtitle {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}
+
+.admin-page-header__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-shrink: 0;
+}
+
+/* =============================================================================
+   7. Admin Card (content container)
+   ============================================================================= */
+
+.admin-card {
+  background-color: var(--color-background);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+
+.admin-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-4) var(--space-6);
+  border-block-end: 1px solid var(--color-border);
+  gap: var(--space-4);
+}
+
+.admin-card__title {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text);
+}
+
+.admin-card__body {
+  padding: var(--space-6);
+}
+
+.admin-card__footer {
+  padding: var(--space-4) var(--space-6);
+  border-block-start: 1px solid var(--color-border);
+  background-color: var(--color-surface);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--space-3);
+}
+
+/* =============================================================================
+   8. Admin Data Table
+   ============================================================================= */
+
+.admin-table-wrapper {
+  overflow-x: auto;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--font-size-sm);
+}
+
+.admin-table thead {
+  background-color: var(--color-surface);
+}
+
+.admin-table th {
+  padding: var(--space-3) var(--space-4);
+  text-align: start;
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-text-muted);
+  border-block-end: 1px solid var(--color-border);
+  white-space: nowrap;
+}
+
+.admin-table td {
+  padding: var(--space-3) var(--space-4);
+  border-block-end: 1px solid var(--color-border);
+  color: var(--color-text);
+  vertical-align: middle;
+}
+
+.admin-table tbody tr:last-child td {
+  border-block-end: none;
+}
+
+.admin-table tbody tr:hover td {
+  background-color: var(--color-surface);
+}
+
+.admin-table__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  justify-content: flex-end;
+}
+
+/* =============================================================================
+   9. Form Section Layout
+   ============================================================================= */
+
+.form-section {
+  margin-block-end: var(--space-8);
+}
+
+.form-section__title {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text);
+  padding-block-end: var(--space-3);
+  border-block-end: 1px solid var(--color-border);
+  margin-block-end: var(--space-4);
+}
+
+.form-section__description {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  margin-block-end: var(--space-4);
+}
+
+.form-section__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-4);
+}
+
+@media (max-width: 600px) {
+  .form-section__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.form-section__grid--3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+@media (max-width: 900px) {
+  .form-section__grid--3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .form-section__grid--3 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =============================================================================
+   10. Bilingual Section (side-by-side AR / EN)
+   ============================================================================= */
+
+.bilingual-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
+}
+
+@media (max-width: 768px) {
+  .bilingual-section {
+    grid-template-columns: 1fr;
+  }
+}
+
+.bilingual-section__locale-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-block-end: var(--space-3);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-muted);
+}
+
+.bilingual-section__locale-label {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.15em 0.5em;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.bilingual-section__column--arabic .form-field__input,
+.bilingual-section__column--arabic .form-field__textarea {
+  direction: rtl;
+  font-family: var(--font-arabic);
+}
+
+/* =============================================================================
+   11. Form Actions Bar (sticky bottom of form)
+   ============================================================================= */
+
+.form-actions {
+  position: sticky;
+  inset-block-end: 0;
+  background-color: var(--color-background);
+  border-block-start: 1px solid var(--color-border);
+  padding: var(--space-4) var(--space-6);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  z-index: var(--z-sticky);
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.06);
+  flex-wrap: wrap;
+}
+
+.form-actions__left {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.form-actions__right {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+/* =============================================================================
+   12. Dashboard Stats Card
+   ============================================================================= */
+
+.stat-card {
+  background-color: var(--color-background);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+  box-shadow: var(--shadow-sm);
+}
+
+.stat-card__label {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-text-muted);
+  margin-block-end: var(--space-2);
+}
+
+.stat-card__value {
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text);
+  line-height: 1;
+}
+
+.stat-card__delta {
+  font-size: var(--font-size-xs);
+  margin-block-start: var(--space-1);
+  color: var(--color-text-muted);
+}
+
+/* =============================================================================
+   13. Empty State
+   ============================================================================= */
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+  padding: var(--space-16) var(--space-8);
+  text-align: center;
+}
+
+.empty-state__icon {
+  width: 3rem;
+  height: 3rem;
+  color: var(--color-border-strong);
+}
+
+.empty-state__title {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text);
+}
+
+.empty-state__description {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  max-width: 32rem;
+}
+
+/* =============================================================================
+   14. Toast Notification
+   ============================================================================= */
+
+.toast-container {
+  position: fixed;
+  inset-block-end: var(--space-6);
+  inset-inline-end: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  z-index: var(--z-toast);
+  pointer-events: none;
+}
+
+.toast {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  min-width: 18rem;
+  max-width: 28rem;
+  pointer-events: auto;
+  animation: toast-in var(--transition-normal) ease both;
+  border: 1px solid transparent;
+  background-color: var(--color-background);
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.toast--success {
+  background-color: var(--color-success-bg);
+  border-color: var(--color-success-border);
+  color: var(--color-success);
+}
+
+.toast--error {
+  background-color: var(--color-error-bg);
+  border-color: var(--color-error-border);
+  color: var(--color-error);
+}
+
+.toast--warning {
+  background-color: var(--color-warning-bg);
+  border-color: var(--color-warning-border);
+  color: var(--color-warning);
+}
+
+.toast--info {
+  background-color: var(--color-info-bg);
+  border-color: var(--color-info-border);
+  color: var(--color-info);
+}
+
+.toast__message {
+  flex: 1;
+  font-size: var(--font-size-sm);
+}
+
+.toast__close {
+  flex-shrink: 0;
+  width: 1.25rem;
+  height: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.6;
+  border-radius: var(--radius-sm);
+  transition: opacity var(--transition-fast);
+}
+
+.toast__close:hover {
+  opacity: 1;
+}
+
+/* =============================================================================
+   15. Confirm Dialog (Modal)
+   ============================================================================= */
+
+.dialog-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: var(--color-overlay);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-4);
+  z-index: var(--z-modal);
+  animation: overlay-in var(--transition-fast) ease;
+}
+
+@keyframes overlay-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.dialog {
+  background-color: var(--color-background);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-xl);
+  width: 100%;
+  max-width: 28rem;
+  animation: dialog-in var(--transition-normal) ease both;
+  overflow: hidden;
+}
+
+@keyframes dialog-in {
+  from {
+    opacity: 0;
+    transform: translateY(-1rem) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.dialog__header {
+  padding: var(--space-5) var(--space-6) var(--space-4);
+}
+
+.dialog__title {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text);
+}
+
+.dialog__body {
+  padding: 0 var(--space-6) var(--space-4);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}
+
+.dialog__footer {
+  padding: var(--space-4) var(--space-6);
+  border-block-start: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--space-2);
+}
+
+/* =============================================================================
+   16. Mobile sidebar overlay
+   ============================================================================= */
+
+.admin-sidebar-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background-color: var(--color-overlay);
+  z-index: calc(var(--z-overlay) - 1);
+}
+
+@media (max-width: 768px) {
+  .admin-sidebar-overlay--visible {
+    display: block;
+  }
+}

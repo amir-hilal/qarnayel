@@ -1,5 +1,6 @@
 import { env } from '@/lib/env';
 import { getApps, initializeApp, type FirebaseApp } from 'firebase/app';
+import { connectAuthEmulator, getAuth, type Auth } from 'firebase/auth';
 import {
   connectFirestoreEmulator,
   getFirestore,
@@ -11,9 +12,10 @@ import {
   type FirebaseStorage,
 } from 'firebase/storage';
 
-// ---------------------------------------------------------------------------
+// =============================================================================
 // Firebase app singleton — safe for client and server side usage in Next.js
-// ---------------------------------------------------------------------------
+// Named-database aware: reads NEXT_PUBLIC_FIRESTORE_DATABASE_ID from env.
+// =============================================================================
 
 function createFirebaseApp(): FirebaseApp {
   const firebaseConfig = {
@@ -50,15 +52,19 @@ export const db: Firestore = databaseId
 export const storage: FirebaseStorage = getStorage(app);
 
 // ---------------------------------------------------------------------------
+// Auth
+// ---------------------------------------------------------------------------
+export const auth: Auth = getAuth(app);
+
+// ---------------------------------------------------------------------------
 // Connect to emulators in development when flag is set
-// This block only runs once due to the singleton pattern above
 // ---------------------------------------------------------------------------
 if (env.NEXT_PUBLIC_USE_FIREBASE_EMULATOR && typeof window !== 'undefined') {
-  // Guards against hot-reload re-connecting
   const win = window as typeof window & { __emulatorConnected?: boolean };
   if (!win.__emulatorConnected) {
     connectFirestoreEmulator(db, 'localhost', 8080);
     connectStorageEmulator(storage, 'localhost', 9199);
+    connectAuthEmulator(auth, 'http://localhost:9099');
     win.__emulatorConnected = true;
     if (process.env.NODE_ENV === 'development') {
       console.info('[firebase/client] Connected to Firebase emulators');
