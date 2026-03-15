@@ -71,10 +71,7 @@ export default function HistoryPage() {
                     <td dir="rtl" lang="ar">
                       {entry.title.ar}
                     </td>
-                    <td>
-                      {entry.periodStart}
-                      {entry.periodEnd ? ` – ${entry.periodEnd}` : ''}
-                    </td>
+                    <td>{entry.period ?? '—'}</td>
                     <td>
                       <StatusBadge status={entry.status} />
                     </td>

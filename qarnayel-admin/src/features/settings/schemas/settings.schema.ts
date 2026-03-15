@@ -5,10 +5,19 @@ import { z } from 'zod';
 // Site settings zod schema
 // =============================================================================
 
+const ctaItemSchema = z.object({
+  label: localizedTextSchema,
+  href: z.string().min(1),
+});
+
 export const siteSettingsSchema = z.object({
   id: z.string().min(1),
   siteName: localizedTextSchema,
-  tagline: localizedTextSchema.optional(),
+  tagline: localizedTextSchema,
+  heroTitle: localizedTextSchema,
+  heroSubtitle: localizedTextSchema,
+  ctas: z.array(ctaItemSchema).default([]),
+  townIntroduction: localizedTextSchema,
   contactEmail: z.string().email().optional().or(z.literal('')),
   contactPhone: z.string().optional(),
   socialLinks: z

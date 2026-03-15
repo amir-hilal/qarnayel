@@ -10,8 +10,7 @@ import { getPrimaryImageUrl } from '@/features/places/utils';
 export type HomeViewModel = {
   heroTitle: string;
   heroSubtitle: string;
-  ctaExplorePlaces: { label: string; href: string };
-  ctaDiscoverHistory: { label: string; href: string };
+  ctas: Array<{ label: string; href: string }>;
   townIntroduction: string;
   featuredPlaces: FeaturedPlaceViewModel[];
 };
@@ -34,14 +33,10 @@ export function buildHomeViewModel(
   return {
     heroTitle: localise(settings.heroTitle, locale),
     heroSubtitle: localise(settings.heroSubtitle, locale),
-    ctaExplorePlaces: {
-      label: localise(settings.ctaExplorePlaces, locale),
-      href: ROUTES.PLACES(locale),
-    },
-    ctaDiscoverHistory: {
-      label: localise(settings.ctaDiscoverHistory, locale),
-      href: ROUTES.HISTORY(locale),
-    },
+    ctas: settings.ctas.map((cta) => ({
+      label: localise(cta.label, locale),
+      href: cta.href.startsWith('/') ? `/${locale}${cta.href}` : cta.href,
+    })),
     townIntroduction: localise(settings.townIntroduction, locale),
     featuredPlaces: featuredPlaces.map(place => ({
       id: place.id,

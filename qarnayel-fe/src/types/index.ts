@@ -113,8 +113,8 @@ export type HistoryEntry = {
   id: string;
   order: number;
   title: LocalizedText;
-  body: LocalizedText;
-  period?: LocalizedText;
+  content: LocalizedText;
+  period?: string;
   sources: HistorySource[];
   status: PublishStatus;
   updatedAt: string;
@@ -153,8 +153,7 @@ export type SiteSettings = {
   tagline: LocalizedText;
   heroTitle: LocalizedText;
   heroSubtitle: LocalizedText;
-  ctaExplorePlaces: LocalizedText;
-  ctaDiscoverHistory: LocalizedText;
+  ctas: CTA[];
   townIntroduction: LocalizedText;
   contactEmail?: string;
   contactPhone?: string;

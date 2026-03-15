@@ -72,7 +72,24 @@ async function seedSiteSettings() {
       ar: 'قرية في قلب جبل لبنان',
       en: 'A village in the heart of Mount Lebanon',
     },
+    heroTitle: {
+      ar: 'اكتشف قرنايل',
+      en: 'Discover Qarnayel',
+    },
+    heroSubtitle: {
+      ar: 'طبيعة خلّابة، تاريخ عريق، وأجواء لا تُنسى',
+      en: 'Breathtaking nature, rich history, and unforgettable moments',
+    },
+    ctas: [
+      { label: { ar: 'استكشف الأماكن', en: 'Explore Places' }, href: '/places' },
+      { label: { ar: 'اكتشف التاريخ', en: 'Discover History' }, href: '/history' },
+    ],
+    townIntroduction: {
+      ar: 'قرنايل بلدة لبنانية تقع في قضاء المتن الأعلى على ارتفاع يتجاوز 1400 متر، تتميز بمناخها المعتدل وطبيعتها الخضراء وتاريخها العريق.',
+      en: 'Qarnayel is a Lebanese village in the Metn district, sitting above 1,400 m elevation. It is known for its mild climate, lush scenery, and deep historical roots.',
+    },
     contactEmail: 'info@qarnayel.lb',
+    contactPhone: null,
     socialLinks: {
       facebook: null,
       instagram: null,
@@ -255,7 +272,7 @@ async function seedHistory() {
         ar: 'تعود أولى آثار التوطّن البشري في قرنايل إلى الحضارة الفينيقية، إذ أفادت الشواهد الأثرية بوجود مستوطنات تعود إلى الألفية الأولى قبل الميلاد. استغلّ الفينيقيون الموقع الجبلي لمراقبة الطرق التجارية ولاستخراج خشب الأرز.',
         en: 'The earliest traces of human settlement in Qarnayel date to the Phoenician civilisation. Archaeological evidence points to settlements from the first millennium BCE. The Phoenicians used the mountain location to monitor trade routes and harvest cedar timber.',
       },
-      periodStart: '1st millennium BCE',
+      period: '1st millennium BCE',
       sources: [],
       status: 'published',
       createdAt: isoNow,
@@ -269,8 +286,7 @@ async function seedHistory() {
         ar: 'في العهد الروماني، شهدت المنطقة تطوراً ملحوظاً في البنية التحتية. أُنشئت طرق رومانية تربط الجبل بالساحل، وتشير المخطوطات التاريخية إلى وجود معابد ومواقع دينية في المنطقة.',
         en: 'During the Roman period, the region saw significant infrastructure development. Roman roads were built connecting the mountain to the coast, and historical manuscripts indicate the presence of temples and religious sites in the area.',
       },
-      periodStart: '1st century CE',
-      periodEnd: '4th century CE',
+      period: '1st – 4th century CE',
       sources: [],
       status: 'published',
       createdAt: isoNow,

@@ -25,8 +25,7 @@ const DEFAULT_VALUES: HistoryEntryFormValues = {
   title: { ar: '', en: '' },
   summary: { ar: '', en: '' },
   content: { ar: '', en: '' },
-  periodStart: '',
-  periodEnd: '',
+  period: '',
   sources: [],
   order: 0,
   seo: {
@@ -87,33 +86,14 @@ export function NewHistoryEntryForm() {
           >
             <div className="form-section__grid">
               <div className="form-field">
-                <label
-                  htmlFor="periodStart"
-                  className="form-field__label form-field__label--required"
-                >
-                  Period start
+                <label htmlFor="period" className="form-field__label">
+                  Period
                 </label>
                 <input
-                  id="periodStart"
-                  {...register('periodStart')}
-                  className={`form-field__input${errors.periodStart ? ' form-field__input--error' : ''}`}
-                  placeholder="e.g. 1920"
-                />
-                {errors.periodStart && (
-                  <p className="form-field__error">
-                    {errors.periodStart.message}
-                  </p>
-                )}
-              </div>
-              <div className="form-field">
-                <label htmlFor="periodEnd" className="form-field__label">
-                  Period end
-                </label>
-                <input
-                  id="periodEnd"
-                  {...register('periodEnd')}
+                  id="period"
+                  {...register('period')}
                   className="form-field__input"
-                  placeholder="e.g. 1943 (leave blank if ongoing)"
+                  placeholder="e.g. 1st century CE – 4th century CE"
                 />
               </div>
               <div className="form-field">

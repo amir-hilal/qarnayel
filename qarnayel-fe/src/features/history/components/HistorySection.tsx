@@ -18,8 +18,8 @@ export function HistorySection({
   const l = locale as 'ar' | 'en';
 
   const title = entry.title[l] ?? entry.title.ar;
-  const body = entry.body[l] ?? entry.body.ar;
-  const period = entry.period?.[l] ?? entry.period?.ar;
+  const body = entry.content[l] ?? entry.content.ar;
+  const period = entry.period;
 
   return (
     <section className="history-section">

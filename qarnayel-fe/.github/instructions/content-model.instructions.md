@@ -177,8 +177,9 @@ type HistoryEntry = {
   id: string;
   order: number;
   title: LocalizedText;
-  body: LocalizedText;
-  period?: LocalizedText; // e.g. "Ottoman era", "Byzantine period"
+  content: LocalizedText;
+  periodStart?: string; // e.g. "1st millennium BCE"
+  periodEnd?: string;   // e.g. "4th century CE" (if range)
   sources: HistorySource[];
   status: PublishStatus;
   updatedAt: string;

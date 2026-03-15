@@ -52,14 +52,7 @@ export default async function HomePage({
         heroTitle={vm.heroTitle}
         heroSubtitle={vm.heroSubtitle}
         heroImageUrl='/images/hero.png'
-        ctaExplorePlaces={{
-          label: dict.cta.explorePlaces,
-          href: ROUTES.PLACES(locale),
-        }}
-        ctaDiscoverHistory={{
-          label: dict.cta.discoverHistory,
-          href: ROUTES.HISTORY(locale),
-        }}
+        ctas={vm.ctas}
         heroImageAlt={dict.home.heroImageAlt}
       />
 

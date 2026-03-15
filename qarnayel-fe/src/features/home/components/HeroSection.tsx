@@ -3,8 +3,7 @@ import type { HomeViewModel } from '@/features/home/view-models/home.view-model'
 type HeroSectionProps = {
   heroTitle: string;
   heroSubtitle: string;
-  ctaExplorePlaces: HomeViewModel['ctaExplorePlaces'];
-  ctaDiscoverHistory: HomeViewModel['ctaDiscoverHistory'];
+  ctas: HomeViewModel['ctas'];
   heroImageAlt: string;
   heroImageUrl?: string;
 };
@@ -15,8 +14,7 @@ type HeroSectionProps = {
 export function HeroSection({
   heroTitle,
   heroSubtitle,
-  ctaExplorePlaces,
-  ctaDiscoverHistory,
+  ctas,
   heroImageAlt,
   heroImageUrl,
 }: HeroSectionProps): React.ReactElement {
@@ -33,12 +31,15 @@ export function HeroSection({
         <h1 className="hero__title">{heroTitle}</h1>
         <p className="hero__subtitle">{heroSubtitle}</p>
         <div className="hero__ctas">
-          <a href={ctaExplorePlaces.href} className="btn btn--primary">
-            {ctaExplorePlaces.label}
-          </a>
-          <a href={ctaDiscoverHistory.href} className="btn btn--secondary">
-            {ctaDiscoverHistory.label}
-          </a>
+          {ctas.map((cta, i) => (
+            <a
+              key={cta.href}
+              href={cta.href}
+              className={i === 0 ? 'btn btn--primary' : 'btn btn--secondary'}
+            >
+              {cta.label}
+            </a>
+          ))}
         </div>
       </div>
       <span className="sr-only">{heroImageAlt}</span>

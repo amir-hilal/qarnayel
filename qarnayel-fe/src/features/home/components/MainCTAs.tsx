@@ -1,31 +1,26 @@
 import Link from 'next/link';
 
 type MainCTAsProps = {
-  explorePlacesLabel: string;
-  explorePlacesHref: string;
-  discoverHistoryLabel: string;
-  discoverHistoryHref: string;
+  ctas: Array<{ label: string; href: string }>;
 };
 
 // ---------------------------------------------------------------------------
-// MainCTAs — standalone pair of primary/secondary CTA buttons
-// Used on pages that need a CTA block independent of the hero section
+// MainCTAs — dynamic list of CTA buttons
+// First button gets primary style; subsequent ones get secondary
 // ---------------------------------------------------------------------------
-export function MainCTAs({
-  explorePlacesLabel,
-  explorePlacesHref,
-  discoverHistoryLabel,
-  discoverHistoryHref,
-}: MainCTAsProps): React.ReactElement {
+export function MainCTAs({ ctas }: MainCTAsProps): React.ReactElement {
   return (
     <section className="main-ctas">
       <div className="main-ctas__inner">
-        <Link href={explorePlacesHref} className="btn btn--primary">
-          {explorePlacesLabel}
-        </Link>
-        <Link href={discoverHistoryHref} className="btn btn--secondary">
-          {discoverHistoryLabel}
-        </Link>
+        {ctas.map((cta, i) => (
+          <Link
+            key={cta.href}
+            href={cta.href}
+            className={i === 0 ? 'btn btn--primary' : 'btn btn--secondary'}
+          >
+            {cta.label}
+          </Link>
+        ))}
       </div>
     </section>
   );

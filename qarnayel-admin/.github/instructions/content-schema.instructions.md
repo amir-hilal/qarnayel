@@ -145,11 +145,14 @@ type MediaAsset = {
 type HistoryEntry = {
   id: string;
   title: LocalizedText;
-  body: LocalizedText;
-  period?: string;
+  summary?: LocalizedText;
+  content: LocalizedText;
+  periodStart: string;
+  periodEnd?: string;
   sources: PlaceResource[];
   status: PublishStatus;
   order: number;
+  seo?: LocalizedSeo;
   createdAt: string;
   updatedAt: string;
 };
@@ -161,9 +164,9 @@ type HistoryEntry = {
 type PageContent = {
   id: string;
   slug: string;
+  status: PublishStatus;
   title: LocalizedText;
   body: LocalizedText;
-  sections?: PageSection[];
   seo: LocalizedSeo;
   updatedAt: string;
 };
@@ -174,12 +177,20 @@ type PageContent = {
 ```ts
 type SiteSettings = {
   id: string;
-  cta: {
-    explorePlaces: LocalizedText;
-    discoverHistory: LocalizedText;
-  };
+  siteName: LocalizedText;
+  tagline: LocalizedText;
+  heroTitle: LocalizedText;
+  heroSubtitle: LocalizedText;
+  ctaExplorePlaces: LocalizedText;
+  ctaDiscoverHistory: LocalizedText;
+  townIntroduction: LocalizedText;
   contactEmail?: string;
   contactPhone?: string;
+  socialLinks?: {
+    facebook?: string;
+    instagram?: string;
+    youtube?: string;
+  };
   updatedAt: string;
 };
 ```

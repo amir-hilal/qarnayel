@@ -108,8 +108,7 @@ export type HistoryEntry = {
   title: LocalizedText;
   summary?: LocalizedText;
   content: LocalizedText;
-  periodStart: string;
-  periodEnd?: string;
+  period?: string;
   sources: PlaceResource[];
   status: PublishStatus;
   order: number;
@@ -157,13 +156,26 @@ export type MediaAsset = {
 };
 
 // ---------------------------------------------------------------------------
+// Home CTA
+// ---------------------------------------------------------------------------
+
+export type HomeCTA = {
+  label: LocalizedText;
+  href: string;
+};
+
+// ---------------------------------------------------------------------------
 // Site settings domain
 // ---------------------------------------------------------------------------
 
 export type SiteSettings = {
   id: string;
   siteName: LocalizedText;
-  tagline?: LocalizedText;
+  tagline: LocalizedText;
+  heroTitle: LocalizedText;
+  heroSubtitle: LocalizedText;
+  ctas: HomeCTA[];
+  townIntroduction: LocalizedText;
   contactEmail?: string;
   contactPhone?: string;
   socialLinks?: {

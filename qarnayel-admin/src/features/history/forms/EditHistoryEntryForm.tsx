@@ -44,8 +44,7 @@ export function EditHistoryEntryForm({ entry }: EditHistoryEntryFormProps) {
     title: entry.title,
     summary: entry.summary ?? { ar: '', en: '' },
     content: entry.content,
-    periodStart: entry.periodStart,
-    periodEnd: entry.periodEnd ?? '',
+    period: entry.period ?? '',
     sources: entry.sources ?? [],
     order: entry.order,
     seo: entry.seo ?? {
@@ -115,30 +114,12 @@ export function EditHistoryEntryForm({ entry }: EditHistoryEntryFormProps) {
             <FormSection title="Period">
               <div className="form-section__grid">
                 <div className="form-field">
-                  <label
-                    htmlFor="periodStart"
-                    className="form-field__label form-field__label--required"
-                  >
-                    Period start
+                  <label htmlFor="period" className="form-field__label">
+                    Period
                   </label>
                   <input
-                    id="periodStart"
-                    {...register('periodStart')}
-                    className="form-field__input"
-                  />
-                  {errors.periodStart && (
-                    <p className="form-field__error">
-                      {errors.periodStart.message}
-                    </p>
-                  )}
-                </div>
-                <div className="form-field">
-                  <label htmlFor="periodEnd" className="form-field__label">
-                    Period end
-                  </label>
-                  <input
-                    id="periodEnd"
-                    {...register('periodEnd')}
+                    id="period"
+                    {...register('period')}
                     className="form-field__input"
                   />
                 </div>

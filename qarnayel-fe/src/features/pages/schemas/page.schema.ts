@@ -10,13 +10,17 @@ export const pageContentSchema = z.object({
   updatedAt: z.string(),
 });
 
+const ctaItemSchema = z.object({
+  label: localizedTextSchema,
+  href: z.string().min(1),
+});
+
 export const siteSettingsSchema = z.object({
   siteName: localizedTextSchema,
   tagline: localizedTextSchema,
   heroTitle: localizedTextSchema,
   heroSubtitle: localizedTextSchema,
-  ctaExplorePlaces: localizedTextSchema,
-  ctaDiscoverHistory: localizedTextSchema,
+  ctas: z.array(ctaItemSchema).default([]),
   townIntroduction: localizedTextSchema,
   contactEmail: z.preprocess(
     (v) => v ?? undefined,
