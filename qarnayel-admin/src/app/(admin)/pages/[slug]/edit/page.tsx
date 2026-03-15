@@ -1,12 +1,12 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { useParams } from 'next/navigation';
 import { ADMIN_ROUTES } from '@/config/routes';
 import { EditPageContentForm } from '@/features/pages/forms/EditPageContentForm';
 import { fetchPageContentBySlug } from '@/features/pages/repositories/pages.repository';
 import type { PageContent } from '@/types';
 import Link from 'next/link';
+import { useParams } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
 export default function EditPageContentPage() {
   const params = useParams<{ slug: string }>();
@@ -25,7 +25,8 @@ export default function EditPageContentPage() {
   }, [params.slug]);
 
   if (loading) return <div className="admin-page-loading">Loading…</div>;
-  if (notFound) return <div className="admin-page-loading">Page not found.</div>;
+  if (notFound)
+    return <div className="admin-page-loading">Page not found.</div>;
   if (!page) return null;
 
   return (

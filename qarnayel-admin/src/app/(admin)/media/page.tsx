@@ -1,9 +1,9 @@
 'use client';
 
-import { useState, useEffect } from 'react';
 import { fetchAllMediaAssets } from '@/features/media/repositories/media.repository';
 import { EmptyState } from '@/features/shared/components/EmptyState';
 import type { MediaAsset } from '@/types';
+import { useEffect, useState } from 'react';
 
 function formatBytes(bytes: number): string {
   if (bytes < 1024) return `${bytes} B`;
@@ -16,7 +16,9 @@ export default function MediaPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetchAllMediaAssets().then(setAssets).finally(() => setLoading(false));
+    fetchAllMediaAssets()
+      .then(setAssets)
+      .finally(() => setLoading(false));
   }, []);
 
   return (
@@ -25,7 +27,9 @@ export default function MediaPage() {
         <div className="admin-page-header__text">
           <h1 className="admin-page-header__title">Media</h1>
           <p className="admin-page-header__subtitle">
-            {loading ? 'Loading…' : `${assets.length} asset${assets.length !== 1 ? 's' : ''} in library`}
+            {loading
+              ? 'Loading…'
+              : `${assets.length} asset${assets.length !== 1 ? 's' : ''} in library`}
           </p>
         </div>
       </div>

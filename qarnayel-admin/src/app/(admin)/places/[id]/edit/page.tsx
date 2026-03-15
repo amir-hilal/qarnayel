@@ -1,12 +1,12 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { useParams } from 'next/navigation';
 import { ADMIN_ROUTES } from '@/config/routes';
 import { EditPlaceForm } from '@/features/places/forms/EditPlaceForm';
 import { fetchPlaceById } from '@/features/places/repositories/places.repository';
 import type { Place } from '@/types';
 import Link from 'next/link';
+import { useParams } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
 export default function EditPlacePage() {
   const params = useParams<{ id: string }>();
@@ -25,7 +25,8 @@ export default function EditPlacePage() {
   }, [params.id]);
 
   if (loading) return <div className="admin-page-loading">Loading…</div>;
-  if (notFound) return <div className="admin-page-loading">Place not found.</div>;
+  if (notFound)
+    return <div className="admin-page-loading">Place not found.</div>;
   if (!place) return null;
 
   return (

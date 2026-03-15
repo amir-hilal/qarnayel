@@ -1,19 +1,21 @@
 'use client';
 
-import { useState, useEffect } from 'react';
 import { ADMIN_ROUTES } from '@/config/routes';
 import { fetchAllPlaces } from '@/features/places/repositories/places.repository';
 import { EmptyState } from '@/features/shared/components/EmptyState';
 import { StatusBadge } from '@/features/shared/components/StatusBadge';
 import type { Place } from '@/types';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 
 export default function DashboardPage() {
   const [places, setPlaces] = useState<Place[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetchAllPlaces().then(setPlaces).finally(() => setLoading(false));
+    fetchAllPlaces()
+      .then(setPlaces)
+      .finally(() => setLoading(false));
   }, []);
 
   const published = places.filter((p) => p.status === 'published').length;

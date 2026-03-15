@@ -1,19 +1,21 @@
 'use client';
 
-import { useState, useEffect } from 'react';
 import { ADMIN_ROUTES } from '@/config/routes';
 import { fetchAllHistoryEntries } from '@/features/history/repositories/history.repository';
 import { EmptyState } from '@/features/shared/components/EmptyState';
 import { StatusBadge } from '@/features/shared/components/StatusBadge';
 import type { HistoryEntry } from '@/types';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 
 export default function HistoryPage() {
   const [entries, setEntries] = useState<HistoryEntry[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetchAllHistoryEntries().then(setEntries).finally(() => setLoading(false));
+    fetchAllHistoryEntries()
+      .then(setEntries)
+      .finally(() => setLoading(false));
   }, []);
 
   return (
@@ -22,7 +24,9 @@ export default function HistoryPage() {
         <div className="admin-page-header__text">
           <h1 className="admin-page-header__title">History</h1>
           <p className="admin-page-header__subtitle">
-            {loading ? 'Loading…' : `${entries.length} entr${entries.length !== 1 ? 'ies' : 'y'} total`}
+            {loading
+              ? 'Loading…'
+              : `${entries.length} entr${entries.length !== 1 ? 'ies' : 'y'} total`}
           </p>
         </div>
         <div className="admin-page-header__actions">

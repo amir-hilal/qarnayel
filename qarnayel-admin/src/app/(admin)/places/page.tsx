@@ -1,19 +1,21 @@
 'use client';
 
-import { useState, useEffect } from 'react';
 import { ADMIN_ROUTES } from '@/config/routes';
 import { fetchAllPlaces } from '@/features/places/repositories/places.repository';
 import { EmptyState } from '@/features/shared/components/EmptyState';
 import { StatusBadge } from '@/features/shared/components/StatusBadge';
 import type { Place } from '@/types';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 
 export default function PlacesPage() {
   const [places, setPlaces] = useState<Place[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetchAllPlaces().then(setPlaces).finally(() => setLoading(false));
+    fetchAllPlaces()
+      .then(setPlaces)
+      .finally(() => setLoading(false));
   }, []);
 
   return (
@@ -22,7 +24,9 @@ export default function PlacesPage() {
         <div className="admin-page-header__text">
           <h1 className="admin-page-header__title">Places</h1>
           <p className="admin-page-header__subtitle">
-            {loading ? 'Loading…' : `${places.length} place${places.length !== 1 ? 's' : ''} total`}
+            {loading
+              ? 'Loading…'
+              : `${places.length} place${places.length !== 1 ? 's' : ''} total`}
           </p>
         </div>
         <div className="admin-page-header__actions">

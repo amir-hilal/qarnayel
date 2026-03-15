@@ -1,12 +1,12 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { useParams } from 'next/navigation';
 import { ADMIN_ROUTES } from '@/config/routes';
 import { EditHistoryEntryForm } from '@/features/history/forms/EditHistoryEntryForm';
 import { fetchHistoryEntryById } from '@/features/history/repositories/history.repository';
 import type { HistoryEntry } from '@/types';
 import Link from 'next/link';
+import { useParams } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
 export default function EditHistoryPage() {
   const params = useParams<{ id: string }>();
@@ -25,7 +25,8 @@ export default function EditHistoryPage() {
   }, [params.id]);
 
   if (loading) return <div className="admin-page-loading">Loading…</div>;
-  if (notFound) return <div className="admin-page-loading">Entry not found.</div>;
+  if (notFound)
+    return <div className="admin-page-loading">Entry not found.</div>;
   if (!entry) return null;
 
   return (
