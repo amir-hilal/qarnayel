@@ -1,4 +1,4 @@
-import { SkeletonLoader } from '@/features/shared/components/SkeletonLoader';
+import { SkeletonLoader } from '@/features/shared/components/SkeletonLoader/SkeletonLoader';
 
 export default function HistoryLoading(): React.ReactElement {
   return (

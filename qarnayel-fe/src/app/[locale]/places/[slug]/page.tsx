@@ -1,4 +1,4 @@
-import { PlaceDetail } from '@/features/places/components/PlaceDetail';
+import { PlaceDetail } from '@/features/places/components/PlaceDetail/PlaceDetail';
 import {
   fetchAllPublishedSlugs,
   fetchPlaceBySlug,

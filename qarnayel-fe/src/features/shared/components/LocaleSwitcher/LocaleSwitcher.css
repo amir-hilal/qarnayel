@@ -1,0 +1,50 @@
+/* ==========================================================================
+   LocaleSwitcher
+   ========================================================================== */
+
+.locale-switcher {
+  display: flex;
+  gap: var(--space-1);
+  align-items: center;
+}
+
+.locale-switcher__icon {
+  font-size: 1.1rem;
+  color: var(--color-text-muted);
+  user-select: none;
+}
+
+.locale-switcher__item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.locale-switcher__sep {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+  user-select: none;
+}
+
+.locale-switcher__btn {
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  padding-block: var(--space-1);
+  padding-inline: var(--space-2);
+  border-radius: var(--radius-sm);
+  border: none;
+  background: none;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  transition: color var(--transition-fast);
+}
+
+.locale-switcher__btn:hover:not(:disabled) {
+  color: var(--color-primary);
+}
+
+.locale-switcher__btn--active,
+.locale-switcher__btn:disabled {
+  color: var(--color-text);
+  cursor: default;
+}

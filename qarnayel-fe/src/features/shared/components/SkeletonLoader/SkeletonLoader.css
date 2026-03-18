@@ -1,0 +1,30 @@
+/* ==========================================================================
+   SkeletonLoader
+   NOTE: The @keyframes skeleton-shimmer animation is defined in
+         /styles/animations.css. The .skeleton utility class in that file
+         applies the same shimmer effect and can be applied to individual
+         elements directly when a SkeletonLoader widget is not needed.
+   ========================================================================== */
+
+.skeleton-loader {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.skeleton-loader__line {
+  height: 1rem;
+  border-radius: var(--radius-sm);
+  background: linear-gradient(
+    90deg,
+    var(--color-border) 25%,
+    var(--color-surface-alt) 50%,
+    var(--color-border) 75%
+  );
+  background-size: 800px 100%;
+  animation: skeleton-shimmer 1.4s ease infinite;
+}
+
+.skeleton-loader__line:nth-child(3) {
+  width: 60%;
+}

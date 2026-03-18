@@ -1,7 +1,7 @@
 import { fetchSiteSettings } from '@/features/pages/repositories/pages.repository';
 import { HtmlLocaleSync } from '@/features/shared/components/HtmlLocaleSync';
-import { SiteFooter } from '@/features/shared/components/SiteFooter';
-import { SiteHeader } from '@/features/shared/components/SiteHeader';
+import { SiteFooter } from '@/features/shared/components/SiteFooter/SiteFooter';
+import { SiteHeader } from '@/features/shared/components/SiteHeader/SiteHeader';
 import { getDictionary } from '@/lib/i18n';
 import { isValidLocale, LOCALES } from '@/lib/i18n/locales';
 import type { Metadata } from 'next';

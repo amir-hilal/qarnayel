@@ -1,0 +1,17 @@
+/* ==========================================================================
+   MainCTAs
+   ========================================================================== */
+
+.main-ctas {
+  padding-block: var(--space-12);
+}
+
+.main-ctas__inner {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-4);
+  max-width: var(--max-width-content);
+  margin-inline: auto;
+  padding-inline: var(--space-6);
+}

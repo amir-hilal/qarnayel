@@ -1,0 +1,27 @@
+/* ==========================================================================
+   ThemeSwitcher
+   ========================================================================== */
+
+.theme-switcher__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: var(--radius-sm);
+  border: none;
+  background: none;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  transition: color var(--transition-fast), background-color var(--transition-fast);
+}
+
+.theme-switcher__btn:hover {
+  color: var(--color-primary);
+  background-color: var(--color-primary-light);
+}
+
+.theme-switcher__placeholder {
+  width: 2rem;
+  height: 2rem;
+}

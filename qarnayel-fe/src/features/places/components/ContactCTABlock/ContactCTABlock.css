@@ -1,0 +1,31 @@
+/* ==========================================================================
+   ContactCTABlock
+   TODO: .contact-cta__item, .contact-cta__link--phone, .contact-cta__link--website,
+         .contact-cta__item--address, .contact-cta__address are used in the
+         component but have no styles yet.
+   ========================================================================== */
+
+.contact-cta__heading {
+  font-size: var(--font-size-xl);
+  margin-block-end: var(--space-4);
+}
+
+.contact-cta__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.contact-cta__link {
+  color: var(--color-primary);
+  text-decoration: underline;
+}
+
+.contact-cta__link:hover {
+  color: var(--color-primary-dark);
+}
+
+.contact-cta__label {
+  font-weight: 600;
+  margin-inline-end: var(--space-2);
+}

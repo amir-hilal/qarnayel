@@ -1,0 +1,16 @@
+/* ==========================================================================
+   EmptyState
+   TODO: .empty-state__message and .empty-state__action are used in the
+         component but have no styles yet.
+   ========================================================================== */
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-block: var(--space-20);
+  text-align: center;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-lg);
+}

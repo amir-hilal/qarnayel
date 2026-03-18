@@ -1,6 +1,6 @@
 import { HistorySection } from '@/features/history/components/HistorySection';
 import { fetchPublishedHistory } from '@/features/history/repositories/history.repository';
-import { EmptyState } from '@/features/shared/components/EmptyState';
+import { EmptyState } from '@/features/shared/components/EmptyState/EmptyState';
 import { getDictionary } from '@/lib/i18n';
 import { isValidLocale } from '@/lib/i18n/locales';
 import { buildMetadata } from '@/lib/seo/metadata';

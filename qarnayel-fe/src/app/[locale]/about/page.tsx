@@ -1,5 +1,5 @@
 import { PAGE_SLUGS } from '@/config/constants';
-import { AboutSection } from '@/features/pages/components/AboutSection';
+import { AboutSection } from '@/features/pages/components/AboutSection/AboutSection';
 import { fetchPageContent } from '@/features/pages/repositories/pages.repository';
 import { getDictionary } from '@/lib/i18n';
 import { isValidLocale } from '@/lib/i18n/locales';

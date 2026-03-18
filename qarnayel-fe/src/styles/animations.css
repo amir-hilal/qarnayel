@@ -1,0 +1,26 @@
+/* ==========================================================================
+   Keyframe animations and skeleton utility class
+   ========================================================================== */
+
+@keyframes skeleton-shimmer {
+  0%   { background-position: -400px 0; }
+  100% { background-position:  400px 0; }
+}
+
+/**
+ * .skeleton — standalone utility.
+ * Apply directly to any element for a shimmer loading placeholder.
+ * The SkeletonLoader component uses .skeleton-loader__line which inherits
+ * these same animation values in its own stylesheet.
+ */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--color-border) 25%,
+    var(--color-surface-alt) 50%,
+    var(--color-border) 75%
+  );
+  background-size: 800px 100%;
+  animation: skeleton-shimmer 1.4s ease infinite;
+  border-radius: var(--radius-sm);
+}

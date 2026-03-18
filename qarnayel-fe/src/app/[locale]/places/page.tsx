@@ -1,6 +1,6 @@
 import { PLACE_CATEGORIES, PLACE_TYPES } from '@/config/constants';
-import { PlaceFilters } from '@/features/places/components/PlaceFilters';
-import { PlaceList } from '@/features/places/components/PlaceList';
+import { PlaceFilters } from '@/features/places/components/PlaceFilters/PlaceFilters';
+import { PlaceList } from '@/features/places/components/PlaceList/PlaceList';
 import { fetchPublishedPlaces } from '@/features/places/repositories/places.repository';
 import type { PlaceCategory, PlaceType } from '@/features/places/types';
 import { getDictionary } from '@/lib/i18n';

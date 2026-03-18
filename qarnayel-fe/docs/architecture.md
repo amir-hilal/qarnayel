@@ -22,6 +22,14 @@ qarnayel-fe/
 │   └── instructions/                    # Topic-level Copilot instruction files
 ├── docs/                                # Human developer documentation
 ├── src/
+│   ├── styles/                          # Global CSS partials (import hub pattern)
+│   │   ├── globals.css                  # @import hub only — do not add styles here
+│   │   ├── tokens.css                   # CSS custom properties, dark theme, locale overrides
+│   │   ├── reset.css                    # Browser resets
+│   │   ├── layout.css                   # .page-layout, .container, .container--narrow
+│   │   ├── utilities.css                # .sr-only, :focus-visible, print rules
+│   │   ├── buttons.css                  # .btn base + all variants
+│   │   └── animations.css              # @keyframes + .skeleton utility
 │   ├── app/                             # Next.js App Router entries (thin)
 │   │   ├── [locale]/
 │   │   │   ├── layout.tsx
@@ -52,21 +60,54 @@ qarnayel-fe/
 │   ├── features/
 │   │   ├── home/
 │   │   │   ├── components/
-│   │   │   │   ├── HeroSection.tsx
-│   │   │   │   ├── FeaturedPlaces.tsx
-│   │   │   │   ├── TownIntroduction.tsx
-│   │   │   │   └── MainCTAs.tsx
+│   │   │   │   ├── HeroSection.tsx             # barrel → HeroSection/HeroSection.tsx
+│   │   │   │   ├── HeroSection/
+│   │   │   │   │   ├── HeroSection.tsx          # implementation + CSS import
+│   │   │   │   │   └── HeroSection.css
+│   │   │   │   ├── FeaturedPlaces.tsx          # barrel
+│   │   │   │   ├── FeaturedPlaces/
+│   │   │   │   │   ├── FeaturedPlaces.tsx
+│   │   │   │   │   └── FeaturedPlaces.css
+│   │   │   │   ├── TownIntroduction.tsx        # barrel
+│   │   │   │   ├── TownIntroduction/
+│   │   │   │   │   ├── TownIntroduction.tsx
+│   │   │   │   │   └── TownIntroduction.css
+│   │   │   │   ├── MainCTAs.tsx                # barrel
+│   │   │   │   └── MainCTAs/
+│   │   │   │       ├── MainCTAs.tsx
+│   │   │   │       └── MainCTAs.css
 │   │   │   └── view-models/
 │   │   │       └── home.view-model.ts
 │   │   ├── places/
 │   │   │   ├── components/
-│   │   │   │   ├── PlaceCard.tsx
-│   │   │   │   ├── PlaceList.tsx
-│   │   │   │   ├── PlaceFilters.tsx
-│   │   │   │   ├── PlaceDetail.tsx
-│   │   │   │   ├── CategoryBadge.tsx
-│   │   │   │   ├── ContactCTABlock.tsx
-│   │   │   │   └── ResourceList.tsx
+│   │   │   │   ├── CategoryBadge.tsx           # barrel → CategoryBadge/CategoryBadge.tsx
+│   │   │   │   ├── CategoryBadge/
+│   │   │   │   │   ├── CategoryBadge.tsx
+│   │   │   │   │   └── CategoryBadge.css
+│   │   │   │   ├── PlaceCard.tsx               # barrel
+│   │   │   │   ├── PlaceCard/
+│   │   │   │   │   ├── PlaceCard.tsx
+│   │   │   │   │   └── PlaceCard.css
+│   │   │   │   ├── PlaceList.tsx               # barrel
+│   │   │   │   ├── PlaceList/
+│   │   │   │   │   ├── PlaceList.tsx
+│   │   │   │   │   └── PlaceList.css
+│   │   │   │   ├── PlaceFilters.tsx            # barrel
+│   │   │   │   ├── PlaceFilters/
+│   │   │   │   │   ├── PlaceFilters.tsx
+│   │   │   │   │   └── PlaceFilters.css
+│   │   │   │   ├── PlaceDetail.tsx             # barrel
+│   │   │   │   ├── PlaceDetail/
+│   │   │   │   │   ├── PlaceDetail.tsx
+│   │   │   │   │   └── PlaceDetail.css
+│   │   │   │   ├── ContactCTABlock.tsx         # barrel
+│   │   │   │   ├── ContactCTABlock/
+│   │   │   │   │   ├── ContactCTABlock.tsx
+│   │   │   │   │   └── ContactCTABlock.css
+│   │   │   │   ├── ResourceList.tsx            # barrel
+│   │   │   │   └── ResourceList/
+│   │   │   │       ├── ResourceList.tsx
+│   │   │   │       └── ResourceList.css
 │   │   │   ├── repositories/
 │   │   │   │   └── places.repository.ts
 │   │   │   ├── mappers/
@@ -81,8 +122,14 @@ qarnayel-fe/
 │   │   │       └── index.ts
 │   │   ├── history/
 │   │   │   ├── components/
-│   │   │   │   ├── HistorySection.tsx
-│   │   │   │   └── SourceList.tsx
+│   │   │   │   ├── HistorySection.tsx          # barrel → HistorySection/HistorySection.tsx
+│   │   │   │   ├── HistorySection/
+│   │   │   │   │   ├── HistorySection.tsx
+│   │   │   │   │   └── HistorySection.css
+│   │   │   │   ├── SourceList.tsx              # barrel
+│   │   │   │   └── SourceList/
+│   │   │   │       ├── SourceList.tsx
+│   │   │   │       └── SourceList.css
 │   │   │   ├── repositories/
 │   │   │   │   └── history.repository.ts
 │   │   │   ├── mappers/
@@ -93,8 +140,14 @@ qarnayel-fe/
 │   │   │       └── index.ts
 │   │   ├── pages/
 │   │   │   ├── components/
-│   │   │   │   ├── AboutSection.tsx
-│   │   │   │   └── ContactSection.tsx
+│   │   │   │   ├── AboutSection.tsx            # barrel → AboutSection/AboutSection.tsx
+│   │   │   │   ├── AboutSection/
+│   │   │   │   │   ├── AboutSection.tsx
+│   │   │   │   │   └── AboutSection.css
+│   │   │   │   ├── ContactSection.tsx          # barrel
+│   │   │   │   └── ContactSection/
+│   │   │   │       ├── ContactSection.tsx
+│   │   │   │       └── ContactSection.css
 │   │   │   ├── repositories/
 │   │   │   │   └── pages.repository.ts
 │   │   │   ├── mappers/

@@ -1,0 +1,25 @@
+/* ==========================================================================
+   CategoryBadge
+   ========================================================================== */
+
+.category-badge {
+  display: inline-block;
+  padding-block: var(--space-1);
+  padding-inline: var(--space-3);
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background-color: var(--color-primary-light);
+  color: var(--color-primary-dark);
+}
+
+/* ── Category colour modifiers ───────────────────────────────────────────── */
+.category-badge--religious    { background-color: #f0e8ff; color: #5d35b0; }
+.category-badge--historical   { background-color: #fff3e0; color: #8c6000; }
+.category-badge--natural      { background-color: #e8f5ee; color: #1a6b3a; }
+.category-badge--cultural     { background-color: #e3f2fd; color: #1565c0; }
+.category-badge--recreational { background-color: #f3e5f5; color: #7b1fa2; }
+.category-badge--commercial   { background-color: #fce4ec; color: #c62828; }
+.category-badge--civic        { background-color: #e8eaf6; color: #283593; }

@@ -1,5 +1,5 @@
 import { PAGE_SLUGS } from '@/config/constants';
-import { ContactSection } from '@/features/pages/components/ContactSection';
+import { ContactSection } from '@/features/pages/components/ContactSection/ContactSection';
 import {
   fetchPageContent,
   fetchSiteSettings,

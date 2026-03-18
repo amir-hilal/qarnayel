@@ -1,0 +1,66 @@
+/* ==========================================================================
+   PlaceCard
+   Used in list views (PlaceList). The same visual treatment is applied to
+   .featured-place-card inside FeaturedPlaces — kept separate per component.
+   ========================================================================== */
+
+.place-card__link {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background-color: var(--color-surface);
+  border: var(--border-width) solid var(--color-border);
+  box-shadow: var(--shadow-sm);
+  text-decoration: none;
+  color: var(--color-text);
+  transition: box-shadow var(--transition-base), transform var(--transition-base);
+}
+
+.place-card__link:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.place-card__image-wrap {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+}
+
+.place-card__image {
+  object-fit: cover;
+  transition: transform var(--transition-base);
+}
+
+.place-card__link:hover .place-card__image {
+  transform: scale(1.04);
+}
+
+.place-card__image-placeholder {
+  aspect-ratio: 4 / 3;
+  background-color: var(--color-surface-alt);
+}
+
+.place-card__body {
+  padding: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.place-card__title {
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+}
+
+.place-card__description {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}

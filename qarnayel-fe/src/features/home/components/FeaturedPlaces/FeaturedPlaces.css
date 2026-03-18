@@ -1,0 +1,104 @@
+/* ==========================================================================
+   FeaturedPlaces section + FeaturedPlaceCard
+   The .featured-place-card styles live here because the card markup is
+   inlined inside FeaturedPlaces — it is not a shared component.
+   Shared list-card styles (same visual treatment) live in PlaceCard.css.
+   ========================================================================== */
+
+/* ── Section ─────────────────────────────────────────────────────────────── */
+
+.featured-places {
+  padding-block: var(--space-16);
+}
+
+.featured-places__inner {
+  max-width: var(--max-width-content);
+  margin-inline: auto;
+  padding-inline: var(--space-6);
+}
+
+.featured-places__title {
+  font-size: var(--font-size-2xl);
+  margin-block-end: var(--space-8);
+  text-align: center;
+}
+
+.featured-places__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+  gap: var(--space-6);
+}
+
+.featured-places__footer {
+  text-align: center;
+  margin-block-start: var(--space-8);
+}
+
+/* ── Featured place card ─────────────────────────────────────────────────── */
+
+.featured-place-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background-color: var(--color-surface);
+  border: var(--border-width) solid var(--color-border);
+  box-shadow: var(--shadow-sm);
+  text-decoration: none;
+  color: var(--color-text);
+  transition: box-shadow var(--transition-base), transform var(--transition-base);
+}
+
+.featured-place-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.featured-place-card__image-wrap {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+}
+
+.featured-place-card__image {
+  object-fit: cover;
+  transition: transform var(--transition-base);
+}
+
+.featured-place-card:hover .featured-place-card__image {
+  transform: scale(1.04);
+}
+
+.featured-place-card__image-placeholder {
+  aspect-ratio: 4 / 3;
+  background-color: var(--color-surface-alt);
+}
+
+.featured-place-card__body {
+  padding: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.featured-place-card__title {
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+}
+
+.featured-place-card__desc {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .featured-places__grid {
+    grid-template-columns: 1fr;
+  }
+}

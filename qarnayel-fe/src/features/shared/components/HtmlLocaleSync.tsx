@@ -1,7 +1,7 @@
 'use client';
 
-import { LOCALE_DIRS } from '@/lib/i18n/locales';
 import type { Locale } from '@/lib/i18n/locales';
+import { LOCALE_DIRS } from '@/lib/i18n/locales';
 import { useLayoutEffect } from 'react';
 
 /**

@@ -1,4 +1,4 @@
-import { SkeletonLoader } from '@/features/shared/components/SkeletonLoader';
+import { SkeletonLoader } from '@/features/shared/components/SkeletonLoader/SkeletonLoader';
 
 export default function HomeLoading(): React.ReactElement {
   return (

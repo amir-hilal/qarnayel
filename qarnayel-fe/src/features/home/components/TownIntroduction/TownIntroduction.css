@@ -1,0 +1,26 @@
+/* ==========================================================================
+   TownIntroduction
+   ========================================================================== */
+
+.town-intro {
+  padding-block: var(--space-16);
+  background-color: var(--color-surface-alt);
+}
+
+.town-intro__inner {
+  max-width: var(--max-width-narrow);
+  margin-inline: auto;
+  padding-inline: var(--space-6);
+  text-align: center;
+}
+
+.town-intro__heading {
+  font-size: var(--font-size-2xl);
+  margin-block-end: var(--space-4);
+  color: var(--color-primary);
+}
+
+.town-intro__body {
+  font-size: var(--font-size-lg);
+  color: var(--color-text-muted);
+}

@@ -1,0 +1,15 @@
+/* ==========================================================================
+   PlaceList
+   ========================================================================== */
+
+.place-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+  gap: var(--space-6);
+}
+
+@media (max-width: 768px) {
+  .place-list {
+    grid-template-columns: 1fr;
+  }
+}
