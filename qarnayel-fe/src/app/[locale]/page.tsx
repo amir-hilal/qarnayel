@@ -23,12 +23,15 @@ export async function generateMetadata({
   const { locale } = await params;
   if (!isValidLocale(locale)) return {};
   const dict = await getDictionary(locale);
-  return buildMetadata({
-    title: dict.common.siteName,
-    description: dict.home.metaDescription,
-    locale,
-    path: `/${locale}`,
-  });
+  return {
+    ...buildMetadata({
+      title: dict.common.siteName,
+      description: dict.home.metaDescription,
+      locale,
+      path: `/${locale}`,
+    }),
+    title: { absolute: dict.common.siteName },
+  };
 }
 
 export default async function HomePage({

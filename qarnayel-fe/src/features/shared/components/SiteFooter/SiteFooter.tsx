@@ -73,7 +73,9 @@ export function SiteFooter({
         )}
 
         <p className="site-footer__copyright">
-          &copy; {currentYear} Qarnayel, Lebanon
+          &copy; {currentYear}{' '}
+          {settings ? localise(settings.siteName, locale) : 'Qarnayel'},{' '}
+          {locale === 'ar' ? 'لبنان' : 'Lebanon'}
         </p>
       </div>
     </footer>
