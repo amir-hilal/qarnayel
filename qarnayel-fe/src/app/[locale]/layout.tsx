@@ -1,4 +1,5 @@
 import { fetchSiteSettings } from '@/features/pages/repositories/pages.repository';
+import { HtmlLocaleSync } from '@/features/shared/components/HtmlLocaleSync';
 import { SiteFooter } from '@/features/shared/components/SiteFooter';
 import { SiteHeader } from '@/features/shared/components/SiteHeader';
 import { getDictionary } from '@/lib/i18n';
@@ -54,6 +55,7 @@ export default async function LocaleLayout({
 
   return (
     <>
+      <HtmlLocaleSync locale={locale} />
       {/* React 19 hoists <link> tags to <head> automatically */}
       <link rel="preconnect" href="https://fonts.googleapis.com" />
       <link

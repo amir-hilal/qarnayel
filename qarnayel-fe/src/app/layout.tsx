@@ -1,5 +1,6 @@
 ﻿import '@/styles/globals.css';
 import type { Metadata } from 'next';
+import { DEFAULT_LOCALE, LOCALE_DIRS } from '@/lib/i18n/locales';
 
 export const metadata: Metadata = {
   title: {
@@ -12,21 +13,10 @@ export const metadata: Metadata = {
   ),
 };
 
-// Inline script runs synchronously before first paint:
-// • Reads theme from localStorage (or prefers-color-scheme) → sets data-theme
-// • Reads locale from URL path → corrects lang/dir if not the default (ar/rtl)
-const INIT_SCRIPT = `try{
-  var t=localStorage.getItem('theme');
-  if(!t)t=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';
-  document.documentElement.setAttribute('data-theme',t);
-  var loc=location.pathname.split('/')[1];
-  if(loc==='en'){document.documentElement.lang='en';document.documentElement.dir='ltr';}
-}catch(e){}`;
-
 // ---------------------------------------------------------------------------
 // Root layout — owns the document shell.
-// • lang/dir default to Arabic (primary locale); the init script corrects them
-//   for English before the first paint, avoiding any layout flash.
+// • lang/dir default to the primary locale; public/scripts/init.js corrects
+//   them for other locales before the first paint, avoiding any layout flash.
 // • suppressHydrationWarning silences the expected data-theme / lang / dir
 //   attribute mismatches between SSR and the init-script-modified DOM.
 // ---------------------------------------------------------------------------
@@ -36,10 +26,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }): React.ReactElement {
   return (
-    <html lang="ar" dir="rtl" suppressHydrationWarning>
+    <html
+      lang={DEFAULT_LOCALE}
+      dir={LOCALE_DIRS[DEFAULT_LOCALE]}
+      suppressHydrationWarning
+    >
       <head>
         {/* eslint-disable-next-line @next/next/no-sync-scripts */}
-        <script dangerouslySetInnerHTML={{ __html: INIT_SCRIPT }} />
+        <script src="/scripts/init.js" />
       </head>
       <body>{children}</body>
     </html>
