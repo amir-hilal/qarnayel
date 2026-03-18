@@ -1,17 +1,20 @@
-import './SiteFooter.css';
-import Link from 'next/link';
 import { ROUTES } from '@/config/constants';
+import { SafeExternalLink } from '@/features/shared/components/SafeExternalLink';
+import { localise } from '@/lib/i18n/helpers';
 import type { Locale } from '@/lib/i18n/locales';
 import type { SiteSettings } from '@/types';
-import { localise } from '@/lib/i18n/helpers';
-import { SafeExternalLink } from '@/features/shared/components/SafeExternalLink';
+import Link from 'next/link';
+import './SiteFooter.css';
 
 type SiteFooterProps = {
   locale: Locale;
   settings: SiteSettings | null;
 };
 
-export function SiteFooter({ locale, settings }: SiteFooterProps): React.ReactElement {
+export function SiteFooter({
+  locale,
+  settings,
+}: SiteFooterProps): React.ReactElement {
   const currentYear = new Date().getFullYear();
 
   return (
@@ -19,14 +22,21 @@ export function SiteFooter({ locale, settings }: SiteFooterProps): React.ReactEl
       <div className="site-footer__inner">
         <div className="site-footer__brand">
           <p className="site-footer__site-name">
-            {settings ? localise(settings.siteName, locale) : 'Qarnayel | قرنايل'}
+            {settings
+              ? localise(settings.siteName, locale)
+              : 'Qarnayel | قرنايل'}
           </p>
           {settings?.tagline && (
-            <p className="site-footer__tagline">{localise(settings.tagline, locale)}</p>
+            <p className="site-footer__tagline">
+              {localise(settings.tagline, locale)}
+            </p>
           )}
         </div>
 
-        <nav className="site-footer__nav" aria-label={locale === 'ar' ? 'روابط سريعة' : 'Quick links'}>
+        <nav
+          className="site-footer__nav"
+          aria-label={locale === 'ar' ? 'روابط سريعة' : 'Quick links'}
+        >
           <Link href={ROUTES.PLACES(locale)} className="site-footer__link">
             {locale === 'ar' ? 'الأماكن' : 'Places'}
           </Link>

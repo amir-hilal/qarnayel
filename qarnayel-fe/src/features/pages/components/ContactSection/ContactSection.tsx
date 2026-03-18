@@ -1,6 +1,6 @@
-import './ContactSection.css';
 import type { PageContent } from '@/features/pages/types';
 import type { SiteSettings } from '@/types';
+import './ContactSection.css';
 
 type ContactSectionProps = {
   page: PageContent;

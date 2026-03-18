@@ -1,10 +1,10 @@
 ﻿import { DEFAULT_LOCALE, LOCALE_DIRS } from '@/lib/i18n/locales';
-import '@/styles/tokens.css';
-import '@/styles/reset.css';
-import '@/styles/layout.css';
-import '@/styles/utilities.css';
-import '@/styles/buttons.css';
 import '@/styles/animations.css';
+import '@/styles/buttons.css';
+import '@/styles/layout.css';
+import '@/styles/reset.css';
+import '@/styles/tokens.css';
+import '@/styles/utilities.css';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {

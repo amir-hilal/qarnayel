@@ -1,9 +1,9 @@
-import './PlaceCard.css';
 import type { Place } from '@/features/places/types';
 import { getPrimaryImageUrl } from '@/features/places/utils';
 import Image from 'next/image';
 import Link from 'next/link';
 import { CategoryBadge } from '../CategoryBadge/CategoryBadge';
+import './PlaceCard.css';
 
 type PlaceCardProps = {
   place: Place;

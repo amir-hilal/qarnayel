@@ -1,6 +1,6 @@
-import './ResourceList.css';
 import type { PlaceResource } from '@/features/places/types';
 import { SafeExternalLink } from '@/features/shared/components/SafeExternalLink';
+import './ResourceList.css';
 
 type ResourceListProps = {
   resources: PlaceResource[];
@@ -24,10 +24,14 @@ export function ResourceList({
       <ul className="resource-list__items" role="list">
         {resources.map((resource, index) => {
           const label =
-            resource.label[locale as keyof typeof resource.label] ?? resource.label.ar;
+            resource.label[locale as keyof typeof resource.label] ??
+            resource.label.ar;
           return (
             <li key={index} className="resource-list__item">
-              <SafeExternalLink href={resource.url} className="resource-list__link">
+              <SafeExternalLink
+                href={resource.url}
+                className="resource-list__link"
+              >
                 {label}
               </SafeExternalLink>
             </li>

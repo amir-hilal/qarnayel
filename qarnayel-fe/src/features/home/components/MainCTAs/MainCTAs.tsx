@@ -1,5 +1,5 @@
-import './MainCTAs.css';
 import Link from 'next/link';
+import './MainCTAs.css';
 
 type MainCTAsProps = {
   ctas: Array<{ label: string; href: string }>;

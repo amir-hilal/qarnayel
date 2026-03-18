@@ -1,5 +1,5 @@
-import './HeroSection.css';
 import type { HomeViewModel } from '@/features/home/view-models/home.view-model';
+import './HeroSection.css';
 
 type HeroSectionProps = {
   heroTitle: string;

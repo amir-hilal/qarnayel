@@ -1,8 +1,8 @@
 'use client';
 
+import type { PlaceCategory, PlaceType } from '@/features/places/types';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import './PlaceFilters.css';
-import { useRouter, usePathname, useSearchParams } from 'next/navigation';
-import type { PlaceType, PlaceCategory } from '@/features/places/types';
 
 type PlaceFiltersProps = {
   allLabel: string;
@@ -54,10 +54,10 @@ export function PlaceFilters({
           id="filter-type"
           className="place-filters__select"
           value={currentType}
-          onChange={e => updateFilter('type', e.target.value)}
+          onChange={(e) => updateFilter('type', e.target.value)}
         >
           <option value="all">{allLabel}</option>
-          {availableTypes.map(type => (
+          {availableTypes.map((type) => (
             <option key={type} value={type}>
               {typeLabels[type]}
             </option>
@@ -73,10 +73,10 @@ export function PlaceFilters({
           id="filter-category"
           className="place-filters__select"
           value={currentCategory}
-          onChange={e => updateFilter('category', e.target.value)}
+          onChange={(e) => updateFilter('category', e.target.value)}
         >
           <option value="all">{allLabel}</option>
-          {availableCategories.map(category => (
+          {availableCategories.map((category) => (
             <option key={category} value={category}>
               {categoryLabels[category]}
             </option>

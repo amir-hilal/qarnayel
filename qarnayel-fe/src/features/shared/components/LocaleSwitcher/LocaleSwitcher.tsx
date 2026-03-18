@@ -1,10 +1,10 @@
 'use client';
 
-import './LocaleSwitcher.css';
 import { switchLocalePath } from '@/lib/i18n/helpers';
 import type { Locale } from '@/lib/i18n/locales';
 import { LOCALES, LOCALE_LABELS } from '@/lib/i18n/locales';
 import { usePathname, useRouter } from 'next/navigation';
+import './LocaleSwitcher.css';
 
 type LocaleSwitcherProps = {
   currentLocale: Locale;

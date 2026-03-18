@@ -1,6 +1,6 @@
-import './SourceList.css';
 import type { HistorySource } from '@/features/history/types';
 import { SafeExternalLink } from '@/features/shared/components/SafeExternalLink';
+import './SourceList.css';
 
 type SourceListProps = {
   sources: HistorySource[];

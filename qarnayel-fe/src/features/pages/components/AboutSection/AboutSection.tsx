@@ -1,5 +1,5 @@
-import './AboutSection.css';
 import type { PageContent } from '@/features/pages/types';
+import './AboutSection.css';
 
 type AboutSectionProps = {
   page: PageContent;
@@ -9,7 +9,10 @@ type AboutSectionProps = {
 // ---------------------------------------------------------------------------
 // AboutSection — renders PageContent for the about page
 // ---------------------------------------------------------------------------
-export function AboutSection({ page, locale }: AboutSectionProps): React.ReactElement {
+export function AboutSection({
+  page,
+  locale,
+}: AboutSectionProps): React.ReactElement {
   const l = locale as 'ar' | 'en';
   const title = page.title[l] ?? page.title.ar;
   const body = page.body[l] ?? page.body.ar;

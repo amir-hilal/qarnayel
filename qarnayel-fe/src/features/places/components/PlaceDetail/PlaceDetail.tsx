@@ -1,10 +1,10 @@
-import './PlaceDetail.css';
 import type { Place } from '@/features/places/types';
 import { SafeExternalLink } from '@/features/shared/components/SafeExternalLink';
 import Image from 'next/image';
 import { CategoryBadge } from '../CategoryBadge/CategoryBadge';
 import { ContactCTABlock } from '../ContactCTABlock/ContactCTABlock';
 import { ResourceList } from '../ResourceList/ResourceList';
+import './PlaceDetail.css';
 
 type PlaceDetailDict = {
   contactLabel: string;

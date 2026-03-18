@@ -1,8 +1,8 @@
-import './PlaceList.css';
 import { ROUTES } from '@/config/constants';
 import type { Place } from '@/features/places/types';
 import { EmptyState } from '@/features/shared/components/EmptyState/EmptyState';
 import { PlaceCard } from '../PlaceCard/PlaceCard';
+import './PlaceList.css';
 
 type PlaceListProps = {
   places: Place[];

@@ -1,10 +1,10 @@
-import './ContactCTABlock.css';
 import type {
   ContactMode,
   LocalizedText,
   PlaceContact,
 } from '@/features/places/types';
 import { SafeExternalLink } from '@/features/shared/components/SafeExternalLink';
+import './ContactCTABlock.css';
 
 type ContactCTABlockProps = {
   contact: PlaceContact;

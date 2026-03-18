@@ -1,10 +1,10 @@
-import './SiteHeader.css';
 import { NAV_ITEMS, ROUTES } from '@/config/constants';
 import { LocaleSwitcher } from '@/features/shared/components/LocaleSwitcher/LocaleSwitcher';
 import { ThemeSwitcher } from '@/features/shared/components/ThemeSwitcher/ThemeSwitcher';
 import type { Dictionary } from '@/lib/i18n';
 import type { Locale } from '@/lib/i18n/locales';
 import Link from 'next/link';
+import './SiteHeader.css';
 
 type SiteHeaderProps = {
   locale: Locale;

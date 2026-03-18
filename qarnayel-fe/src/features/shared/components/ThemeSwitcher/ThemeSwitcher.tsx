@@ -1,7 +1,7 @@
 'use client';
 
-import './ThemeSwitcher.css';
 import { useEffect, useState } from 'react';
+import './ThemeSwitcher.css';
 
 // ---------------------------------------------------------------------------
 // ThemeSwitcher — toggles light/dark theme via data-theme on <html>
