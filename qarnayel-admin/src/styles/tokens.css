@@ -1,0 +1,126 @@
+/* ==========================================================================
+   Design tokens — all CSS custom properties for the admin dashboard.
+   ========================================================================== */
+
+:root {
+  /* --- Brand colours --- */
+  --color-primary: #6a863f;
+  --color-primary-dark: #4f6430;
+  --color-primary-light: #8aaa56;
+  --color-primary-contrast: #ffffff;
+
+  --color-text: #1a1a1a;
+  --color-text-muted: #6b6b6b;
+  --color-text-inverted: #ffffff;
+
+  --color-background: #ffffff;
+  --color-surface: #f7f5f0;
+  --color-border: #ddd8ce;
+  --color-border-strong: #b8b0a2;
+
+  /* --- Admin-specific colours --- */
+  --color-sidebar-bg: #1e2328;
+  --color-sidebar-text: #c9ced4;
+  --color-sidebar-text-active: #ffffff;
+  --color-sidebar-active-bg: #2d3540;
+  --color-sidebar-hover-bg: #262d35;
+
+  --color-header-bg: #ffffff;
+  --color-header-border: #e8e4de;
+
+  --color-success: #2d7a3a;
+  --color-success-bg: #eef7f0;
+  --color-success-border: #b5dfc0;
+
+  --color-warning: #a05f00;
+  --color-warning-bg: #fff8ec;
+  --color-warning-border: #f0cc88;
+
+  --color-error: #c0392b;
+  --color-error-bg: #fef2f0;
+  --color-error-border: #f5b8b2;
+
+  --color-info: #1565c0;
+  --color-info-bg: #eef4fd;
+  --color-info-border: #aacff5;
+
+  --color-overlay: rgba(0, 0, 0, 0.5);
+
+  /* --- Status badge colours --- */
+  --color-status-draft-text: #7a5200;
+  --color-status-draft-bg: #fff8ec;
+  --color-status-draft-border: #f0cc88;
+
+  --color-status-published-text: #1a5c2a;
+  --color-status-published-bg: #eef7f0;
+  --color-status-published-border: #b5dfc0;
+
+  --color-status-archived-text: #555555;
+  --color-status-archived-bg: #f0f0f0;
+  --color-status-archived-border: #cccccc;
+
+  /* --- Typography --- */
+  --font-arabic: 'Cairo', 'Noto Sans Arabic', sans-serif;
+  --font-latin: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+
+  --font-size-xs: 0.75rem;   /* 12px */
+  --font-size-sm: 0.875rem;  /* 14px */
+  --font-size-base: 1rem;    /* 16px */
+  --font-size-lg: 1.125rem;  /* 18px */
+  --font-size-xl: 1.25rem;   /* 20px */
+  --font-size-2xl: 1.5rem;   /* 24px */
+  --font-size-3xl: 1.875rem; /* 30px */
+
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  --line-height-tight: 1.25;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.75;
+
+  /* --- Spacing (8-pt grid) --- */
+  --space-1: 0.25rem;  /* 4px */
+  --space-2: 0.5rem;   /* 8px */
+  --space-3: 0.75rem;  /* 12px */
+  --space-4: 1rem;     /* 16px */
+  --space-5: 1.25rem;  /* 20px */
+  --space-6: 1.5rem;   /* 24px */
+  --space-8: 2rem;     /* 32px */
+  --space-10: 2.5rem;  /* 40px */
+  --space-12: 3rem;    /* 48px */
+  --space-16: 4rem;    /* 64px */
+
+  /* --- Border radius --- */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-full: 9999px;
+
+  /* --- Shadows --- */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 4px 16px rgba(0, 0, 0, 0.14);
+  --shadow-xl: 0 8px 32px rgba(0, 0, 0, 0.18);
+
+  /* --- Layout --- */
+  --sidebar-width: 15rem;
+  --header-height: 3.5rem;
+  --content-max-width: 72rem;
+
+  /* --- Transitions --- */
+  --transition-fast: 120ms ease;
+  --transition-normal: 200ms ease;
+  --transition-slow: 320ms ease;
+
+  /* --- Z-index --- */
+  --z-base: 0;
+  --z-dropdown: 100;
+  --z-sticky: 200;
+  --z-overlay: 300;
+  --z-modal: 400;
+  --z-toast: 500;
+}

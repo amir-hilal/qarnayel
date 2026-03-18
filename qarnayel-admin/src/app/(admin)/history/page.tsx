@@ -2,8 +2,8 @@
 
 import { ADMIN_ROUTES } from '@/config/routes';
 import { fetchAllHistoryEntries } from '@/features/history/repositories/history.repository';
-import { EmptyState } from '@/features/shared/components/EmptyState';
-import { StatusBadge } from '@/features/shared/components/StatusBadge';
+import { EmptyState } from '@/features/shared/components/EmptyState/EmptyState';
+import { StatusBadge } from '@/features/shared/components/StatusBadge/StatusBadge';
 import type { HistoryEntry } from '@/types';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';

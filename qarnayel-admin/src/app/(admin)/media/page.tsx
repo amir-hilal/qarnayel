@@ -1,7 +1,7 @@
 'use client';
 
 import { fetchAllMediaAssets } from '@/features/media/repositories/media.repository';
-import { EmptyState } from '@/features/shared/components/EmptyState';
+import { EmptyState } from '@/features/shared/components/EmptyState/EmptyState';
 import type { MediaAsset } from '@/types';
 import { useEffect, useState } from 'react';
 

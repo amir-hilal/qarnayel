@@ -1,0 +1,106 @@
+/* ==========================================================================
+   Shared form primitives — used across all admin forms.
+   Component-specific form layouts (FormSection, BilingualSection) live in
+   their own component CSS files.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Form field — the base wrapper for a labelled input
+   -------------------------------------------------------------------------- */
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.form-field__label {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text);
+}
+
+.form-field__label--required::after {
+  content: ' *';
+  color: var(--color-error);
+}
+
+.form-field__input,
+.form-field__textarea,
+.form-field__select {
+  width: 100%;
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-sm);
+  color: var(--color-text);
+  background-color: var(--color-background);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+  appearance: none;
+}
+
+.form-field__input:focus,
+.form-field__textarea:focus,
+.form-field__select:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(106, 134, 63, 0.15);
+}
+
+.form-field__input--error,
+.form-field__textarea--error,
+.form-field__select--error {
+  border-color: var(--color-error);
+}
+
+.form-field__input--error:focus,
+.form-field__textarea--error:focus,
+.form-field__select--error:focus {
+  box-shadow: 0 0 0 3px rgba(192, 57, 43, 0.15);
+}
+
+.form-field__textarea {
+  resize: vertical;
+  min-height: 6rem;
+}
+
+.form-field__hint {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+}
+
+.form-field__error {
+  font-size: var(--font-size-xs);
+  color: var(--color-error);
+}
+
+/* --------------------------------------------------------------------------
+   Form actions bar — sticky bottom bar used in all edit/create forms
+   -------------------------------------------------------------------------- */
+
+.form-actions {
+  position: sticky;
+  inset-block-end: 0;
+  background-color: var(--color-background);
+  border-block-start: 1px solid var(--color-border);
+  padding: var(--space-4) var(--space-6);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  z-index: var(--z-sticky);
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.06);
+  flex-wrap: wrap;
+}
+
+.form-actions__left {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.form-actions__right {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}

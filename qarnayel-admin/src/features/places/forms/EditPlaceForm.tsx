@@ -11,9 +11,9 @@ import {
   updatePlace,
 } from '@/features/places/repositories/places.repository';
 import { placeFormSchema } from '@/features/places/schemas/place.schema';
-import { useToast } from '@/features/shared/components/Toast';
-import { ConfirmDialog } from '@/features/shared/forms/ConfirmDialog';
-import { FormSection } from '@/features/shared/forms/FormSection';
+import { useToast } from '@/features/shared/components/Toast/Toast';
+import { ConfirmDialog } from '@/features/shared/forms/ConfirmDialog/ConfirmDialog';
+import { FormSection } from '@/features/shared/forms/FormSection/FormSection';
 import { LocalizedTextField } from '@/features/shared/forms/LocalizedTextField';
 import { LocalizedTextareaField } from '@/features/shared/forms/LocalizedTextareaField';
 import { StatusSelect } from '@/features/shared/forms/StatusSelect';

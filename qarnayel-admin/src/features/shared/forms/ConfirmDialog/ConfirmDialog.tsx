@@ -1,5 +1,7 @@
 'use client';
 
+import './ConfirmDialog.css';
+
 // =============================================================================
 // ConfirmDialog — a modal confirmation dialog with confirm / cancel actions
 // =============================================================================

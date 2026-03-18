@@ -2,8 +2,8 @@
 
 import { ADMIN_ROUTES } from '@/config/routes';
 import { fetchAllPlaces } from '@/features/places/repositories/places.repository';
-import { EmptyState } from '@/features/shared/components/EmptyState';
-import { StatusBadge } from '@/features/shared/components/StatusBadge';
+import { EmptyState } from '@/features/shared/components/EmptyState/EmptyState';
+import { StatusBadge } from '@/features/shared/components/StatusBadge/StatusBadge';
 import type { Place } from '@/types';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';

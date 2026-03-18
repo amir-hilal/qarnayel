@@ -1,0 +1,35 @@
+/* ==========================================================================
+   Animations and skeleton loading utility classes.
+   ========================================================================== */
+
+@keyframes skeleton-shimmer {
+  0%   { background-position: 200% center; }
+  100% { background-position: -200% center; }
+}
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--color-border) 25%,
+    var(--color-surface) 50%,
+    var(--color-border) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.4s infinite;
+  border-radius: var(--radius-sm);
+}
+
+.skeleton--text {
+  height: 1em;
+  width: 100%;
+}
+
+.skeleton--heading {
+  height: 1.5em;
+  width: 60%;
+}
+
+.skeleton--block {
+  height: 8rem;
+  width: 100%;
+}

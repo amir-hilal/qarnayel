@@ -1,4 +1,5 @@
 import React from 'react';
+import './EmptyState.css';
 
 // =============================================================================
 // EmptyState — shown in list pages when there are no results

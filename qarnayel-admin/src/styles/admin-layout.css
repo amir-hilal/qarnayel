@@ -1,0 +1,40 @@
+/* ==========================================================================
+   Admin shell grid layout and content area.
+   ========================================================================== */
+
+.admin-shell {
+  display: grid;
+  grid-template-columns: var(--sidebar-width) 1fr;
+  grid-template-rows: var(--header-height) 1fr;
+  grid-template-areas:
+    'sidebar header'
+    'sidebar content';
+  min-height: 100dvh;
+  background-color: var(--color-surface);
+}
+
+.admin-shell--sidebar-collapsed {
+  grid-template-columns: 0 1fr;
+}
+
+@media (max-width: 768px) {
+  .admin-shell {
+    grid-template-columns: 1fr;
+    grid-template-rows: var(--header-height) 1fr;
+    grid-template-areas:
+      'header'
+      'content';
+  }
+}
+
+.admin-content {
+  grid-area: content;
+  padding: var(--space-6);
+  overflow-y: auto;
+  min-width: 0;
+}
+
+.admin-content__inner {
+  max-width: var(--content-max-width);
+  margin-inline: auto;
+}

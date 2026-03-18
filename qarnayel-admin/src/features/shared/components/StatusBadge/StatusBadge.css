@@ -1,0 +1,35 @@
+/* ==========================================================================
+   StatusBadge — visual indicator for draft / published / archived status.
+   ========================================================================== */
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: 0.2em 0.6em;
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  line-height: 1;
+  border-width: 1px;
+  border-style: solid;
+  white-space: nowrap;
+}
+
+.status-badge--draft {
+  color: var(--color-status-draft-text);
+  background-color: var(--color-status-draft-bg);
+  border-color: var(--color-status-draft-border);
+}
+
+.status-badge--published {
+  color: var(--color-status-published-text);
+  background-color: var(--color-status-published-bg);
+  border-color: var(--color-status-published-border);
+}
+
+.status-badge--archived {
+  color: var(--color-status-archived-text);
+  background-color: var(--color-status-archived-bg);
+  border-color: var(--color-status-archived-border);
+}

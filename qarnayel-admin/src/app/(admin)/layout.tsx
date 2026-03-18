@@ -1,9 +1,9 @@
 'use client';
 
 import { ADMIN_ROUTES } from '@/config/routes';
-import { AdminHeader } from '@/features/shared/components/AdminHeader';
-import { Sidebar } from '@/features/shared/components/Sidebar';
-import { ToastProvider } from '@/features/shared/components/Toast';
+import { AdminHeader } from '@/features/shared/components/AdminHeader/AdminHeader';
+import { Sidebar } from '@/features/shared/components/Sidebar/Sidebar';
+import { ToastProvider } from '@/features/shared/components/Toast/Toast';
 import { useAdminAuth } from '@/lib/auth';
 import { redirect } from 'next/navigation';
 import React, { useState } from 'react';

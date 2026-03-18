@@ -2,7 +2,7 @@
 
 import { ADMIN_ROUTES } from '@/config/routes';
 import { fetchAllPageContent } from '@/features/pages/repositories/pages.repository';
-import { StatusBadge } from '@/features/shared/components/StatusBadge';
+import { StatusBadge } from '@/features/shared/components/StatusBadge/StatusBadge';
 import type { PageContent } from '@/types';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';

@@ -1,4 +1,5 @@
 import React from 'react';
+import './FormSection.css';
 
 // =============================================================================
 // FormSection — groups a set of related form fields with a visible heading

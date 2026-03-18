@@ -3,8 +3,8 @@
 import { ADMIN_ROUTES } from '@/config/routes';
 import { createHistoryEntry } from '@/features/history/repositories/history.repository';
 import { historyEntryFormSchema } from '@/features/history/schemas/history.schema';
-import { useToast } from '@/features/shared/components/Toast';
-import { FormSection } from '@/features/shared/forms/FormSection';
+import { useToast } from '@/features/shared/components/Toast/Toast';
+import { FormSection } from '@/features/shared/forms/FormSection/FormSection';
 import { LocalizedTextField } from '@/features/shared/forms/LocalizedTextField';
 import { LocalizedTextareaField } from '@/features/shared/forms/LocalizedTextareaField';
 import { StatusSelect } from '@/features/shared/forms/StatusSelect';

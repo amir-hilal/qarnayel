@@ -1,4 +1,5 @@
 import React from 'react';
+import './BilingualSection.css';
 
 // =============================================================================
 // BilingualSection — layout wrapper for two-column AR / EN content blocks

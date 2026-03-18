@@ -1,5 +1,12 @@
-import '@/styles/admin.css';
-import '@/styles/globals.css';
+import '@/styles/admin-layout.css';
+import '@/styles/admin-patterns.css';
+import '@/styles/animations.css';
+import '@/styles/buttons.css';
+import '@/styles/feedback.css';
+import '@/styles/forms.css';
+import '@/styles/reset.css';
+import '@/styles/tokens.css';
+import '@/styles/utilities.css';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {

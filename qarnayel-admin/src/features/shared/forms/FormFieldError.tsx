@@ -1,9 +1,3 @@
-import React from 'react';
-
-// =============================================================================
-// FormFieldError — shows a react-hook-form field error message
-// =============================================================================
-
 interface FormFieldErrorProps {
   message?: string;
 }

@@ -75,7 +75,44 @@ src/
 │   ├── settings/
 │   └── shared/
 │       ├── components/
+│       │   ├── AdminHeader/
+│       │   │   ├── AdminHeader.tsx
+│       │   │   └── AdminHeader.css
+│       │   ├── AdminHeader.tsx  ← barrel re-export
+│       │   ├── Sidebar/
+│       │   │   ├── Sidebar.tsx
+│       │   │   └── Sidebar.css
+│       │   ├── Sidebar.tsx      ← barrel re-export
+│       │   ├── EmptyState/
+│       │   │   ├── EmptyState.tsx
+│       │   │   └── EmptyState.css
+│       │   ├── EmptyState.tsx   ← barrel re-export
+│       │   ├── StatusBadge/
+│       │   │   ├── StatusBadge.tsx
+│       │   │   └── StatusBadge.css
+│       │   ├── StatusBadge.tsx  ← barrel re-export
+│       │   ├── Toast/
+│       │   │   ├── Toast.tsx
+│       │   │   └── Toast.css
+│       │   └── Toast.tsx        ← barrel re-export
 │       ├── forms/
+│       │   ├── FormSection/
+│       │   │   ├── FormSection.tsx
+│       │   │   └── FormSection.css
+│       │   ├── FormSection.tsx      ← barrel re-export
+│       │   ├── BilingualSection/
+│       │   │   ├── BilingualSection.tsx
+│       │   │   └── BilingualSection.css
+│       │   ├── BilingualSection.tsx ← barrel re-export
+│       │   ├── ConfirmDialog/
+│       │   │   ├── ConfirmDialog.tsx
+│       │   │   └── ConfirmDialog.css
+│       │   ├── ConfirmDialog.tsx    ← barrel re-export
+│       │   ├── FormFieldError.tsx   (flat — no component CSS)
+│       │   ├── LocalizedTextField.tsx
+│       │   ├── LocalizedTextareaField.tsx
+│       │   ├── StatusSelect.tsx
+│       │   └── ValidationSummary.tsx
 │       ├── utils/
 │       └── validation/
 ├── lib/
@@ -90,8 +127,17 @@ src/
 │   ├── preview/
 │   └── validation/
 ├── styles/
-│   ├── globals.css
-│   └── admin.css
+│   ├── tokens.css            # All CSS custom properties (:root)
+│   ├── reset.css             # Browser reset + base HTML element styles
+│   ├── buttons.css           # .btn and all variants
+│   ├── forms.css             # .form-field, .form-actions
+│   ├── feedback.css          # .alert and variants
+│   ├── animations.css        # @keyframes skeleton-shimmer, .skeleton
+│   ├── utilities.css         # .visually-hidden, .truncate
+│   ├── admin-layout.css      # .admin-shell grid, .admin-content
+│   ├── admin-patterns.css    # .admin-page-header, .admin-card, .admin-table, .stat-card
+│   ├── globals.css           # (legacy placeholder — do not add styles here)
+│   └── admin.css             # (legacy placeholder — do not add styles here)
 └── types/
     └── index.ts
 ```

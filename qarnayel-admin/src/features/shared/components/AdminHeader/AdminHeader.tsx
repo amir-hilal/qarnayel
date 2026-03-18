@@ -2,6 +2,7 @@
 
 import { ADMIN_ROUTES } from '@/config/routes';
 import { signOut, useAdminAuth } from '@/lib/auth';
+import './AdminHeader.css';
 
 // =============================================================================
 // AdminHeader — top header bar for the admin shell

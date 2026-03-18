@@ -1,0 +1,44 @@
+/* ==========================================================================
+   BilingualSection — two-column AR / EN layout wrapper.
+   ========================================================================== */
+
+.bilingual-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
+}
+
+@media (max-width: 768px) {
+  .bilingual-section {
+    grid-template-columns: 1fr;
+  }
+}
+
+.bilingual-section__locale-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-block-end: var(--space-3);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-muted);
+}
+
+.bilingual-section__locale-label {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.15em 0.5em;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.bilingual-section__column--arabic .form-field__input,
+.bilingual-section__column--arabic .form-field__textarea {
+  direction: rtl;
+  font-family: var(--font-arabic);
+}

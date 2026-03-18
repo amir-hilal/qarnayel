@@ -1,4 +1,5 @@
 import type { PublishStatus } from '@/types';
+import './StatusBadge.css';
 
 // =============================================================================
 // StatusBadge — visual indicator for draft / published / archived status
