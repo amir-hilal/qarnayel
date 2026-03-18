@@ -177,11 +177,11 @@ export type SiteSettings = {
   ctas: HomeCTA[];
   townIntroduction: LocalizedText;
   contactEmail?: string;
-  contactPhone?: string;
+  contactPhone?: string | null;
   socialLinks?: {
-    facebook?: string;
-    instagram?: string;
-    youtube?: string;
+    facebook?: string | null;
+    instagram?: string | null;
+    youtube?: string | null;
   };
   updatedAt: string;
 };

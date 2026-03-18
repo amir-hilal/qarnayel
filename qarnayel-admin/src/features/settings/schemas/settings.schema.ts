@@ -19,12 +19,12 @@ export const siteSettingsSchema = z.object({
   ctas: z.array(ctaItemSchema).default([]),
   townIntroduction: localizedTextSchema,
   contactEmail: z.string().email().optional().or(z.literal('')),
-  contactPhone: z.string().optional(),
+  contactPhone: z.string().nullish(),
   socialLinks: z
     .object({
-      facebook: z.string().optional().or(z.literal('')),
-      instagram: z.string().optional().or(z.literal('')),
-      youtube: z.string().optional().or(z.literal('')),
+      facebook: z.string().nullish().or(z.literal('')),
+      instagram: z.string().nullish().or(z.literal('')),
+      youtube: z.string().nullish().or(z.literal('')),
     })
     .optional(),
   updatedAt: z.string(),

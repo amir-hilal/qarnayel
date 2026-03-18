@@ -45,10 +45,10 @@ export function SettingsForm({ initialData }: SettingsFormProps) {
         townIntroduction: initialData.townIntroduction,
         contactEmail: initialData.contactEmail ?? '',
         contactPhone: initialData.contactPhone ?? '',
-        socialLinks: initialData.socialLinks ?? {
-          facebook: '',
-          instagram: '',
-          youtube: '',
+        socialLinks: {
+          facebook: initialData.socialLinks?.facebook ?? '',
+          instagram: initialData.socialLinks?.instagram ?? '',
+          youtube: initialData.socialLinks?.youtube ?? '',
         },
       }
     : DEFAULT_VALUES;
