@@ -1,5 +1,6 @@
 import { NAV_ITEMS, ROUTES } from '@/config/constants';
 import { LocaleSwitcher } from '@/features/shared/components/LocaleSwitcher/LocaleSwitcher';
+import { SiteNav } from '@/features/shared/components/SiteNav/SiteNav';
 import { ThemeSwitcher } from '@/features/shared/components/ThemeSwitcher/ThemeSwitcher';
 import type { Dictionary } from '@/lib/i18n';
 import type { Locale } from '@/lib/i18n/locales';
@@ -35,20 +36,14 @@ export function SiteHeader({
           )}
         </Link>
 
-        <nav
+        <SiteNav
           className="site-header__nav"
-          aria-label={locale === 'ar' ? 'التنقل الرئيسي' : 'Main navigation'}
-        >
-          {NAV_ITEMS.map((item) => (
-            <Link
-              key={item.key}
-              href={item.route(locale)}
-              className="site-header__nav-link"
-            >
-              {dict.nav[item.key as NavKey]}
-            </Link>
-          ))}
-        </nav>
+          ariaLabel={locale === 'ar' ? 'التنقل الرئيسي' : 'Main navigation'}
+          items={NAV_ITEMS.map((item) => ({
+            href: item.route(locale),
+            label: dict.nav[item.key as NavKey],
+          }))}
+        />
 
         <div
           style={{

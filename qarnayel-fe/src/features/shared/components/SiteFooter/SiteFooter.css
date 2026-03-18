@@ -1,8 +1,5 @@
 /* ==========================================================================
    SiteFooter
-   TODO: .site-footer__brand, .site-footer__nav, .site-footer__link,
-         .site-footer__social, .site-footer__social-link are used in the
-         component but have no styles yet. These are unstyled technical debt.
    ========================================================================== */
 
 .site-footer {
@@ -19,6 +16,20 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
   gap: var(--space-8);
+}
+
+/* Nav override: stack links vertically with a tighter gap
+   ========================================================================== */
+
+.site-footer__nav {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-2);
+}
+
+.site-footer__nav .site-nav__link {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
 }
 
 .site-footer__copyright {

@@ -1,18 +1,23 @@
-import { ROUTES } from '@/config/constants';
+import { NAV_ITEMS } from '@/config/constants';
 import { SafeExternalLink } from '@/features/shared/components/SafeExternalLink';
+import { SiteNav } from '@/features/shared/components/SiteNav/SiteNav';
+import type { Dictionary } from '@/lib/i18n';
 import { localise } from '@/lib/i18n/helpers';
 import type { Locale } from '@/lib/i18n/locales';
 import type { SiteSettings } from '@/types';
-import Link from 'next/link';
 import './SiteFooter.css';
+
+type NavKey = keyof Dictionary['nav'];
 
 type SiteFooterProps = {
   locale: Locale;
+  dict: Dictionary;
   settings: SiteSettings | null;
 };
 
 export function SiteFooter({
   locale,
+  dict,
   settings,
 }: SiteFooterProps): React.ReactElement {
   const currentYear = new Date().getFullYear();
@@ -33,23 +38,16 @@ export function SiteFooter({
           )}
         </div>
 
-        <nav
+        <SiteNav
           className="site-footer__nav"
-          aria-label={locale === 'ar' ? 'روابط سريعة' : 'Quick links'}
-        >
-          <Link href={ROUTES.PLACES(locale)} className="site-footer__link">
-            {locale === 'ar' ? 'الأماكن' : 'Places'}
-          </Link>
-          <Link href={ROUTES.HISTORY(locale)} className="site-footer__link">
-            {locale === 'ar' ? 'التاريخ' : 'History'}
-          </Link>
-          <Link href={ROUTES.ABOUT(locale)} className="site-footer__link">
-            {locale === 'ar' ? 'عن قرنايل' : 'About'}
-          </Link>
-          <Link href={ROUTES.CONTACT(locale)} className="site-footer__link">
-            {locale === 'ar' ? 'تواصل معنا' : 'Contact'}
-          </Link>
-        </nav>
+          ariaLabel={locale === 'ar' ? 'روابط سريعة' : 'Quick links'}
+          items={NAV_ITEMS.filter((item) => item.key !== 'home').map(
+            (item) => ({
+              href: item.route(locale),
+              label: dict.nav[item.key as NavKey],
+            }),
+          )}
+        />
 
         {settings?.socialLinks && (
           <div className="site-footer__social">
