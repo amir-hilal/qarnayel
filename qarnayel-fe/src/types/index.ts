@@ -101,26 +101,6 @@ export type Place = {
 };
 
 // ---------------------------------------------------------------------------
-// History domain types
-// ---------------------------------------------------------------------------
-export type HistorySource = {
-  label: LocalizedText;
-  url?: string;
-  // TODO: All history content must be verified against primary or secondary academic sources
-};
-
-export type HistoryEntry = {
-  id: string;
-  order: number;
-  title: LocalizedText;
-  content: LocalizedText;
-  period?: string;
-  sources: HistorySource[];
-  status: PublishStatus;
-  updatedAt: string;
-};
-
-// ---------------------------------------------------------------------------
 // Page content (About, Contact, etc.)
 // ---------------------------------------------------------------------------
 export type PageContent = {

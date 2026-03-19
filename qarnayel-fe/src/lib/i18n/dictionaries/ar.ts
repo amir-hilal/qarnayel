@@ -7,7 +7,6 @@ export const ar = {
     home: 'الرئيسية',
     places: 'الأماكن',
     history: 'التاريخ',
-    about: 'عن قرنايل',
     contact: 'تواصل معنا',
     switchLocale: 'English',
   },

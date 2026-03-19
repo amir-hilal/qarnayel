@@ -37,6 +37,7 @@ export const CONTACT_MODES = {
 
 // Page content slugs
 export const PAGE_SLUGS = {
+  HISTORY: 'history',
   ABOUT: 'about',
   CONTACT: 'contact',
 } as const;

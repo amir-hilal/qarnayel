@@ -1,22 +1,45 @@
 'use client';
 
-import { ADMIN_ROUTES } from '@/config/routes';
-import { fetchAllHistoryEntries } from '@/features/history/repositories/history.repository';
-import { EmptyState } from '@/features/shared/components/EmptyState/EmptyState';
-import { StatusBadge } from '@/features/shared/components/StatusBadge/StatusBadge';
-import type { HistoryEntry } from '@/types';
-import Link from 'next/link';
+import { PAGE_SLUGS } from '@/config/constants';
+import { EditPageContentForm } from '@/features/pages/forms/EditPageContentForm';
+import {
+  fetchPageContentBySlug,
+  upsertPageContent,
+} from '@/features/pages/repositories/pages.repository';
+import type { PageContent, PageContentFormValues } from '@/types';
 import { useEffect, useState } from 'react';
 
+const BLANK: PageContentFormValues = {
+  slug: PAGE_SLUGS.HISTORY,
+  status: 'draft',
+  title: { ar: '', en: '' },
+  body: { ar: '', en: '' },
+  seo: {
+    ar: { title: '', description: '' },
+    en: { title: '', description: '' },
+  },
+};
+
 export default function HistoryPage() {
-  const [entries, setEntries] = useState<HistoryEntry[]>([]);
+  const [page, setPage] = useState<PageContent | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetchAllHistoryEntries()
-      .then(setEntries)
-      .finally(() => setLoading(false));
+    fetchPageContentBySlug(PAGE_SLUGS.HISTORY).then(async (result) => {
+      if (!result) {
+        await upsertPageContent(PAGE_SLUGS.HISTORY, BLANK);
+        const created = await fetchPageContentBySlug(PAGE_SLUGS.HISTORY);
+        setPage(created);
+      } else {
+        setPage(result);
+      }
+      setLoading(false);
+    });
   }, []);
+
+  if (loading) return <div className="admin-page-loading">Loading…</div>;
+  if (!page)
+    return <div className="admin-page-loading">Could not load page.</div>;
 
   return (
     <>
@@ -24,72 +47,12 @@ export default function HistoryPage() {
         <div className="admin-page-header__text">
           <h1 className="admin-page-header__title">History</h1>
           <p className="admin-page-header__subtitle">
-            {loading
-              ? 'Loading…'
-              : `${entries.length} entr${entries.length !== 1 ? 'ies' : 'y'} total`}
+            Edit the history page content shown on the public website.
           </p>
-        </div>
-        <div className="admin-page-header__actions">
-          <Link href={ADMIN_ROUTES.HISTORY_NEW} className="btn btn--primary">
-            Add entry
-          </Link>
         </div>
       </div>
 
-      <div className="admin-card">
-        {loading ? (
-          <div className="admin-page-loading">Loading…</div>
-        ) : entries.length === 0 ? (
-          <EmptyState
-            title="No history entries yet"
-            description="Document the history of Qarnayel by adding the first entry."
-            action={
-              <Link
-                href={ADMIN_ROUTES.HISTORY_NEW}
-                className="btn btn--primary"
-              >
-                Add entry
-              </Link>
-            }
-          />
-        ) : (
-          <div className="admin-table-wrapper">
-            <table className="admin-table">
-              <thead>
-                <tr>
-                  <th>Title (EN)</th>
-                  <th>Title (AR)</th>
-                  <th>Period</th>
-                  <th>Status</th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody>
-                {entries.map((entry) => (
-                  <tr key={entry.id}>
-                    <td>{entry.title.en}</td>
-                    <td dir="rtl" lang="ar">
-                      {entry.title.ar}
-                    </td>
-                    <td>{entry.period ?? '—'}</td>
-                    <td>
-                      <StatusBadge status={entry.status} />
-                    </td>
-                    <td className="admin-table__actions">
-                      <Link
-                        href={ADMIN_ROUTES.HISTORY_EDIT(entry.id)}
-                        className="btn btn--ghost btn--sm"
-                      >
-                        Edit
-                      </Link>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        )}
-      </div>
+      <EditPageContentForm page={page} />
     </>
   );
 }

@@ -34,20 +34,6 @@ The primary content collection. Each document represents a place in or around Qa
 | `createdAt` | `Timestamp` | ✅ | Firestore server timestamp |
 | `updatedAt` | `Timestamp` | ✅ | Firestore server timestamp |
 
-### `history`
-
-Historical entries about Qarnayel, ordered and sourced.
-
-| Field | Type | Required | Notes |
-|---|---|---|---|
-| `order` | `number` | ✅ | Determines display order (ascending) |
-| `title` | `{ ar: string; en: string }` | ✅ | Section title |
-| `body` | `{ ar: string; en: string }` | ✅ | Main content |
-| `period` | `{ ar: string; en: string }` | optional | e.g. "Byzantine era" |
-| `sources` | `HistorySource[]` | optional | All factual claims should be sourced |
-| `status` | `'draft' \| 'published' \| 'archived'` | ✅ | Only `published` is visible |
-| `updatedAt` | `Timestamp` | ✅ | |
-
 ### `pageContent`
 
 Static page content managed via the admin dashboard.
@@ -60,7 +46,7 @@ Static page content managed via the admin dashboard.
 | `seo` | `{ ar: SeoFields; en: SeoFields }` | ✅ |
 | `updatedAt` | `Timestamp` | ✅ |
 
-Page slugs: `about`, `contact`
+Page slugs: `history`, `contact`
 
 ### `siteSettings`
 

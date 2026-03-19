@@ -9,7 +9,6 @@ export const en: Dictionary = {
     home: 'Home',
     places: 'Places',
     history: 'History',
-    about: 'About',
     contact: 'Contact',
     switchLocale: 'العربية',
   },

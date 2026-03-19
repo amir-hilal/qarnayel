@@ -21,8 +21,8 @@ This is the **admin dashboard** for the Qarnayel public website. It is the **onl
 ## Content domains managed
 
 - **Places** — forests, lakes, restaurants, shops, pharmacies, salons, landmarks, and other types
-- **History** — historical entry records for the Qarnayel history page
-- **Page Content** — static page sections: About, Contact, Homepage sections
+- **History** — single-page content for the Qarnayel history page (title, body, SEO)
+- **Page Content** — static page documents: History, Contact
 - **Media** — image upload and metadata management
 - **Site Settings** — global CTAs, contact details
 

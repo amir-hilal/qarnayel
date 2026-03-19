@@ -106,14 +106,14 @@ async function seedSiteSettings() {
 }
 
 // ---------------------------------------------------------------------------
-// pageContent — about & contact
+// pageContent — history intro & contact
 // ---------------------------------------------------------------------------
 async function seedPageContent() {
   console.log('\n📄 pageContent');
 
-  await upsert('pageContent', 'about', {
-    id: 'about',
-    slug: 'about',
+  await upsert('pageContent', 'history', {
+    id: 'history',
+    slug: 'history',
     status: 'published',
     title: { ar: 'عن قرنايل', en: 'About Qarnayel' },
     body: {
@@ -122,12 +122,12 @@ async function seedPageContent() {
     },
     seo: {
       ar: {
-        title: 'عن قرنايل — تعرّف على تاريخ وطبيعة البلدة',
+        title: 'تاريخ قرنايل — عبر العصور',
         description:
           'اكتشف تاريخ قرنايل، موقعها الجغرافي، طبيعتها، وما يميزها عن سائر بلدات المتن.',
       },
       en: {
-        title: 'About Qarnayel — History and Nature of the Village',
+        title: 'History of Qarnayel — Through the Ages',
         description:
           'Learn about the history, geography, nature, and unique character of Qarnayel in the Upper Metn.',
       },
@@ -264,62 +264,13 @@ async function seedPlaces() {
 }
 
 // ---------------------------------------------------------------------------
-// history — sample entries
-// ---------------------------------------------------------------------------
-async function seedHistory() {
-  console.log('\n📄 history');
-
-  const entries = [
-    {
-      id: 'history-1',
-      order: 1,
-      title: { ar: 'الحقبة الفينيقية', en: 'The Phoenician Era' },
-      content: {
-        ar: 'تعود أولى آثار التوطّن البشري في قرنايل إلى الحضارة الفينيقية، إذ أفادت الشواهد الأثرية بوجود مستوطنات تعود إلى الألفية الأولى قبل الميلاد. استغلّ الفينيقيون الموقع الجبلي لمراقبة الطرق التجارية ولاستخراج خشب الأرز.',
-        en: 'The earliest traces of human settlement in Qarnayel date to the Phoenician civilisation. Archaeological evidence points to settlements from the first millennium BCE. The Phoenicians used the mountain location to monitor trade routes and harvest cedar timber.',
-      },
-      period: '1st millennium BCE',
-      sources: [],
-      status: 'published',
-      createdAt: isoNow,
-      updatedAt: isoNow,
-    },
-    {
-      id: 'history-2',
-      order: 2,
-      title: { ar: 'الحقبة الرومانية', en: 'The Roman Era' },
-      content: {
-        ar: 'في العهد الروماني، شهدت المنطقة تطوراً ملحوظاً في البنية التحتية. أُنشئت طرق رومانية تربط الجبل بالساحل، وتشير المخطوطات التاريخية إلى وجود معابد ومواقع دينية في المنطقة.',
-        en: 'During the Roman period, the region saw significant infrastructure development. Roman roads were built connecting the mountain to the coast, and historical manuscripts indicate the presence of temples and religious sites in the area.',
-      },
-      period: '1st – 4th century CE',
-      sources: [],
-      status: 'published',
-      createdAt: isoNow,
-      updatedAt: isoNow,
-    },
-  ];
-
-  for (const entry of entries) {
-    const { id, ...data } = entry;
-    await upsert('history', id, { id, ...data });
-  }
-}
-
-// ---------------------------------------------------------------------------
 // Main
 // ---------------------------------------------------------------------------
 async function main() {
   console.log('🌱 Clearing existing data...');
 
   try {
-    for (const col of [
-      'siteSettings',
-      'pageContent',
-      'places',
-      'history',
-      'media',
-    ]) {
+    for (const col of ['siteSettings', 'pageContent', 'places', 'media']) {
       process.stdout.write(`  Clearing ${col}… `);
       await clearCollection(col);
     }
@@ -328,7 +279,6 @@ async function main() {
     await seedSiteSettings();
     await seedPageContent();
     await seedPlaces();
-    await seedHistory();
 
     console.log('\n✅ Seeding complete.\n');
     console.log(

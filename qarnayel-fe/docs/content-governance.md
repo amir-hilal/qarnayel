@@ -10,7 +10,7 @@ Content governance defines who can create, review, publish, and archive content 
 
 | Role | Responsibilities |
 |---|---|
-| **Content Author** | Creates drafts for places, history entries, and pages |
+| **Content Author** | Creates drafts for places and pages |
 | **Content Reviewer** | Reviews Arabic and English quality, fact-checks sources |
 | **Publisher** | Sets `status: published` — has final authority to make content live |
 | **Technical Admin** | Manages Firebase projects, deploys code, maintains environment |
@@ -47,13 +47,6 @@ A place can only be set to `status: published` when:
 - [ ] If `contactMode` is `guide`, appropriate guide contact info is documented
 - [ ] `slug` is set and unique
 
-A history entry can only be published when:
-
-- [ ] `title.ar` and `title.en` are filled
-- [ ] `body.ar` and `body.en` are filled
-- [ ] Sources are provided for all factual claims
-- [ ] Content has been reviewed by a second person
-
 ---
 
 ## Quality standards
@@ -73,7 +66,6 @@ A history entry can only be published when:
 
 ### Content accuracy
 
-- Every factual claim in history entries must have a source
 - Description text must accurately represent the place
 - Location data (map URLs, coordinates) must be verified
 - Contact information must be current and tested
@@ -106,5 +98,4 @@ Each place has a unique `slug`. The admin project must enforce slug uniqueness. 
 
 - Review all published place content annually
 - Check all external resource links quarterly (links break)
-- Review history entries when new sources become available
 - Update contact information whenever notified of changes

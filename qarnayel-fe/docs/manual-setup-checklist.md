@@ -55,8 +55,7 @@ This checklist documents every task that **cannot be completed automatically** b
 ## Content
 
 - [ ] Create at least one published place in staging Firestore for testing
-- [ ] Create at least one history entry in staging Firestore for testing
-- [ ] Create `pageContent` documents for `about` and `contact` slugs
+- [ ] Create `pageContent` documents for `history` and `contact` slugs
 - [ ] Create `siteSettings` document with ID `global`
 - [ ] Verify all required fields are populated in both Arabic and English
 
@@ -100,7 +99,6 @@ This checklist documents every task that **cannot be completed automatically** b
 
 ## Final pre-launch review
 
-- [ ] All `// TODO: verify` markers in history content resolved
 - [ ] No placeholder text in published content
 - [ ] No test/fake data in production Firestore
 - [ ] All external links tested and valid

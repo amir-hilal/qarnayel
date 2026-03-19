@@ -8,6 +8,7 @@ import {
   pageContentDoc,
 } from '@/lib/firebase/collections';
 import {
+  deleteDoc,
   getDoc,
   getDocs,
   orderBy,
@@ -108,4 +109,11 @@ export async function setPageContentStatus(
     status,
     updatedAt: serverTimestamp(),
   });
+}
+
+/**
+ * Permanently delete a page content document.
+ */
+export async function deletePageContent(slug: string): Promise<void> {
+  await deleteDoc(pageContentDoc(slug));
 }

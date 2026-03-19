@@ -14,8 +14,6 @@ The locale is always the first path segment. There is no locale-free route — a
 /en/places/[slug]          → English place detail
 /ar/history                → Arabic history page
 /en/history                → English history page
-/ar/about                  → Arabic about page
-/en/about                  → English about page
 /ar/contact                → Arabic contact page
 /en/contact                → English contact page
 ```
@@ -49,8 +47,6 @@ src/app/
     ├── history/
     │   ├── page.tsx
     │   └── loading.tsx
-    ├── about/
-    │   └── page.tsx
     └── contact/
         └── page.tsx
 ```
@@ -66,7 +62,6 @@ ROUTES.HOME('ar')              // → '/ar'
 ROUTES.PLACES('en')            // → '/en/places'
 ROUTES.PLACE_DETAIL('ar', 'qarnayel-cedar-forest')  // → '/ar/places/qarnayel-cedar-forest'
 ROUTES.HISTORY('ar')           // → '/ar/history'
-ROUTES.ABOUT('en')             // → '/en/about'
 ROUTES.CONTACT('ar')           // → '/ar/contact'
 ```
 
@@ -140,5 +135,4 @@ The `places/page.tsx` reads `searchParams` as a Server Component and passes them
 | الرئيسية | Home | `ROUTES.HOME(locale)` |
 | الأماكن | Places | `ROUTES.PLACES(locale)` |
 | التاريخ | History | `ROUTES.HISTORY(locale)` |
-| عن قرنايل | About | `ROUTES.ABOUT(locale)` |
 | تواصل معنا | Contact | `ROUTES.CONTACT(locale)` |

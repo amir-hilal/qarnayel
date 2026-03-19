@@ -29,9 +29,13 @@ import { useForm } from 'react-hook-form';
 
 interface EditPageContentFormProps {
   page: PageContent;
+  backRoute?: string;
 }
 
-export function EditPageContentForm({ page }: EditPageContentFormProps) {
+export function EditPageContentForm({
+  page,
+  backRoute = ADMIN_ROUTES.PAGES,
+}: EditPageContentFormProps) {
   const router = useRouter();
   const { toast } = useToast();
   const [saving, setSaving] = useState(false);
@@ -92,7 +96,7 @@ export function EditPageContentForm({ page }: EditPageContentFormProps) {
     try {
       await setPageContentStatus(page.slug, 'published');
       toast('Page published.', 'success');
-      router.push(ADMIN_ROUTES.PAGES);
+      router.push(backRoute);
     } catch {
       toast('Failed to publish page.', 'error');
     } finally {

@@ -1,8 +1,13 @@
 'use client';
 
 import { ADMIN_ROUTES } from '@/config/routes';
-import { fetchAllPageContent } from '@/features/pages/repositories/pages.repository';
+import {
+  deletePageContent,
+  fetchAllPageContent,
+} from '@/features/pages/repositories/pages.repository';
 import { StatusBadge } from '@/features/shared/components/StatusBadge/StatusBadge';
+import { useToast } from '@/features/shared/components/Toast/Toast';
+import { ConfirmDialog } from '@/features/shared/forms/ConfirmDialog/ConfirmDialog';
 import type { PageContent } from '@/types';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
@@ -10,12 +15,29 @@ import { useEffect, useState } from 'react';
 export default function PagesListPage() {
   const [pages, setPages] = useState<PageContent[]>([]);
   const [loading, setLoading] = useState(true);
+  const [deleting, setDeleting] = useState<string | null>(null);
+  const [confirmSlug, setConfirmSlug] = useState<string | null>(null);
+  const { toast } = useToast();
 
   useEffect(() => {
     fetchAllPageContent()
       .then(setPages)
       .finally(() => setLoading(false));
   }, []);
+
+  async function handleDelete(slug: string) {
+    setDeleting(slug);
+    try {
+      await deletePageContent(slug);
+      setPages((prev) => prev.filter((p) => p.slug !== slug));
+      toast('Page deleted.', 'success');
+    } catch {
+      toast('Failed to delete page.', 'error');
+    } finally {
+      setDeleting(null);
+      setConfirmSlug(null);
+    }
+  }
 
   return (
     <>
@@ -70,6 +92,14 @@ export default function PagesListPage() {
                       >
                         Edit
                       </Link>
+                      <button
+                        type="button"
+                        className="btn btn--ghost btn--sm btn--danger"
+                        disabled={deleting === page.slug}
+                        onClick={() => setConfirmSlug(page.slug)}
+                      >
+                        Delete
+                      </button>
                     </td>
                   </tr>
                 ))}
@@ -78,6 +108,16 @@ export default function PagesListPage() {
           </div>
         )}
       </div>
+
+      <ConfirmDialog
+        isOpen={confirmSlug !== null}
+        title="Delete page"
+        message={`Are you sure you want to permanently delete "${confirmSlug}"? This cannot be undone.`}
+        confirmLabel="Delete"
+        isDangerous
+        onConfirm={() => confirmSlug && handleDelete(confirmSlug)}
+        onCancel={() => setConfirmSlug(null)}
+      />
     </>
   );
 }

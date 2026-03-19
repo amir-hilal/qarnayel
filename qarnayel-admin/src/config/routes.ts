@@ -12,8 +12,6 @@ export const ADMIN_ROUTES = {
   PLACE_EDIT: (id: string) => `/places/${id}/edit`,
 
   HISTORY: '/history',
-  HISTORY_NEW: '/history/new',
-  HISTORY_EDIT: (id: string) => `/history/${id}/edit`,
 
   PAGES: '/pages',
   PAGE_EDIT: (slug: string) => `/pages/${slug}/edit`,

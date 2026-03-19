@@ -60,6 +60,7 @@ export const CONTACT_MODES = {
 
 // Page content slugs
 export const PAGE_SLUGS = {
+  HISTORY: 'history',
   ABOUT: 'about',
   CONTACT: 'contact',
 } as const;
@@ -69,6 +70,5 @@ export const NAV_ITEMS = [
   { key: 'home', route: ROUTES.HOME },
   { key: 'places', route: ROUTES.PLACES },
   { key: 'history', route: ROUTES.HISTORY },
-  { key: 'about', route: ROUTES.ABOUT },
   { key: 'contact', route: ROUTES.CONTACT },
 ] as const;

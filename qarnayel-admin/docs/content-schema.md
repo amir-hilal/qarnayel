@@ -5,8 +5,7 @@
 | Collection | Document Key | Purpose |
 |---|---|---|
 | `places` | auto-generated ID | Place entries (all statuses) |
-| `history` | auto-generated ID | History timeline entries |
-| `pageContent` | slug (e.g. `about`) | Static page content |
+| `pageContent` | slug (e.g. `history`) | Static page content |
 | `media` | auto-generated ID | Media asset metadata |
 | `siteSettings` | `global` | Global site configuration |
 
@@ -150,27 +149,9 @@ type PlaceResource = {
 
 ---
 
-## HistoryEntry document shape (collection: `history`)
-
-```ts
-{
-  id: string;
-  title: LocalizedText;
-  body: LocalizedText;
-  period?: string;           // e.g. "Bronze Age", "Ottoman Period"
-  sources: PlaceResource[];
-  status: PublishStatus;
-  order: number;             // Controls display order on the history page
-  createdAt: Timestamp;
-  updatedAt: Timestamp;
-}
-```
-
----
-
 ## PageContent document shape (collection: `pageContent`)
 
-Document IDs match the page slug (e.g. `about`, `contact`).
+Document IDs match the page slug. Active slugs: `history`, `contact`.
 
 ```ts
 {

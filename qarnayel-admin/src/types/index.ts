@@ -100,29 +100,6 @@ export type Place = {
 export type PlaceFormValues = Omit<Place, 'id' | 'createdAt' | 'updatedAt'>;
 
 // ---------------------------------------------------------------------------
-// History domain
-// ---------------------------------------------------------------------------
-
-export type HistoryEntry = {
-  id: string;
-  title: LocalizedText;
-  summary?: LocalizedText;
-  content: LocalizedText;
-  period?: string;
-  sources: PlaceResource[];
-  status: PublishStatus;
-  order: number;
-  seo?: LocalizedSeo;
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type HistoryEntryFormValues = Omit<
-  HistoryEntry,
-  'id' | 'createdAt' | 'updatedAt'
->;
-
-// ---------------------------------------------------------------------------
 // Page content domain
 // ---------------------------------------------------------------------------
 

@@ -51,7 +51,6 @@ Both locales are supported from day one. Arabic is the primary locale.
 | `/[locale]/places` | All published places, filterable by category and type |
 | `/[locale]/places/[slug]` | Individual place detail page |
 | `/[locale]/history` | Town history and heritage |
-| `/[locale]/about` | About Qarnayel |
 | `/[locale]/contact` | Contact page |
 
 ---
@@ -59,8 +58,7 @@ Both locales are supported from day one. Arabic is the primary locale.
 ## Domain model summary
 
 - **Place**: Central content entity. Supports placeType (attraction/service), category (forest, lake, restaurant, etc.), bilingual content, images, contact info, and resource links
-- **HistoryEntry**: A section of the town's historical narrative, sourced and verified
-- **PageContent**: CMS-managed content for static pages (About, Contact)
+- **PageContent**: CMS-managed content for static pages (History, Contact)
 - **SiteSettings**: Global site configuration (hero text, CTAs, contact info)
 
 ---
