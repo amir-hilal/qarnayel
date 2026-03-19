@@ -1,8 +1,14 @@
 import { DOCUMENT_IDS } from '@/config/collections';
 import { toSiteSettings } from '@/features/settings/mappers/settings.mapper';
 import { siteSettingsDoc } from '@/lib/firebase/collections';
-import type { SiteSettings, SiteSettingsFormValues } from '@/types';
-import { getDoc, serverTimestamp, setDoc } from 'firebase/firestore';
+import type {
+  LocalizedText,
+  NavItem,
+  PublishStatus,
+  SiteSettings,
+  SiteSettingsFormValues,
+} from '@/types';
+import { getDoc, serverTimestamp, setDoc, updateDoc } from 'firebase/firestore';
 
 // =============================================================================
 // Settings repository — read/write for the singleton site_settings document
@@ -48,4 +54,41 @@ export async function saveSiteSettings(
     { ...data, updatedAt: serverTimestamp() },
     { merge: true },
   );
+}
+
+/**
+ * Update only the navItems field of the site settings document.
+ * All other fields remain untouched.
+ */
+export async function updateNavItems(navItems: NavItem[]): Promise<void> {
+  await updateDoc(siteSettingsDoc(), {
+    navItems,
+    updatedAt: serverTimestamp(),
+  });
+}
+
+/**
+ * Automatically sync a pageContent page in/out of navItems based on its status.
+ *
+ * - `published`  → appended to navItems if not already present
+ * - anything else → removed from navItems if present
+ *
+ * This is a best-effort operation; errors are swallowed so a nav sync failure
+ * never blocks a page save.
+ */
+export async function syncNavItemForPage(page: {
+  title: LocalizedText;
+  slug: string;
+  status: PublishStatus;
+}): Promise<void> {
+  const settings = await fetchSiteSettings();
+  const currentNavItems = settings?.navItems ?? [];
+  const path = `/${page.slug}`;
+  const alreadyInNav = currentNavItems.some((n) => n.path === path);
+
+  if (page.status === 'published' && !alreadyInNav) {
+    await updateNavItems([...currentNavItems, { label: page.title, path }]);
+  } else if (page.status !== 'published' && alreadyInNav) {
+    await updateNavItems(currentNavItems.filter((n) => n.path !== path));
+  }
 }

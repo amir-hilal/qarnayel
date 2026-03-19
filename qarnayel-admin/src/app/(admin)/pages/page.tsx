@@ -1,27 +1,33 @@
 'use client';
 
 import { ADMIN_ROUTES } from '@/config/routes';
+import { NavOrderManager } from '@/features/pages/components/NavOrderManager/NavOrderManager';
 import {
   deletePageContent,
   fetchAllPageContent,
 } from '@/features/pages/repositories/pages.repository';
+import { fetchSiteSettings } from '@/features/settings/repositories/settings.repository';
 import { StatusBadge } from '@/features/shared/components/StatusBadge/StatusBadge';
 import { useToast } from '@/features/shared/components/Toast/Toast';
 import { ConfirmDialog } from '@/features/shared/forms/ConfirmDialog/ConfirmDialog';
-import type { PageContent } from '@/types';
+import type { NavItem, PageContent } from '@/types';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
 export default function PagesListPage() {
   const [pages, setPages] = useState<PageContent[]>([]);
+  const [navItems, setNavItems] = useState<NavItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [deleting, setDeleting] = useState<string | null>(null);
   const [confirmSlug, setConfirmSlug] = useState<string | null>(null);
   const { toast } = useToast();
 
   useEffect(() => {
-    fetchAllPageContent()
-      .then(setPages)
+    Promise.all([fetchAllPageContent(), fetchSiteSettings()])
+      .then(([pagesData, settings]) => {
+        setPages(pagesData);
+        setNavItems(settings?.navItems ?? []);
+      })
       .finally(() => setLoading(false));
   }, []);
 
@@ -45,12 +51,18 @@ export default function PagesListPage() {
         <div className="admin-page-header__text">
           <h1 className="admin-page-header__title">Pages</h1>
           <p className="admin-page-header__subtitle">
-            Static page content (About, Contact, etc.)
+            Static page content (History, Contact, etc.)
           </p>
+        </div>
+        <div className="admin-page-header__actions">
+          <Link href={ADMIN_ROUTES.PAGE_NEW} className="btn btn--primary">
+            + New Page
+          </Link>
         </div>
       </div>
 
-      <div className="admin-card">
+      {/* Pages table */}
+      <div className="admin-card" style={{ marginBlockEnd: 'var(--space-6)' }}>
         {loading ? (
           <div className="admin-page-loading">Loading…</div>
         ) : (
@@ -108,6 +120,34 @@ export default function PagesListPage() {
           </div>
         )}
       </div>
+
+      {/* Navigation order */}
+      {!loading && (
+        <div className="admin-card">
+          <div className="admin-card__body">
+            <h2
+              style={{
+                fontSize: 'var(--font-size-lg)',
+                fontWeight: 600,
+                marginBlockEnd: 'var(--space-1)',
+              }}
+            >
+              Navigation Order
+            </h2>
+            <p
+              style={{
+                color: 'var(--color-text-muted)',
+                fontSize: 'var(--font-size-sm)',
+                marginBlockEnd: 'var(--space-5)',
+              }}
+            >
+              Drag items to reorder. Home is always first and cannot be moved.
+              Add pages from the list above, or remove them to hide from nav.
+            </p>
+            <NavOrderManager initialNavItems={navItems} pages={pages} />
+          </div>
+        </div>
+      )}
 
       <ConfirmDialog
         isOpen={confirmSlug !== null}

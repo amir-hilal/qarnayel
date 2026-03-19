@@ -128,6 +128,12 @@ export type SocialLinks = {
   instagram?: string;
 };
 
+export type NavItem = {
+  label: LocalizedText;
+  /** Path without locale prefix, e.g. "/places", "/history" */
+  path: string;
+};
+
 export type SiteSettings = {
   siteName: LocalizedText;
   tagline: LocalizedText;
@@ -138,4 +144,6 @@ export type SiteSettings = {
   contactEmail?: string;
   contactPhone?: string;
   socialLinks?: SocialLinks;
+  /** Ordered nav items. Home is always prepended; these are everything else. */
+  navItems: NavItem[];
 };

@@ -16,6 +16,8 @@ The locale is always the first path segment. There is no locale-free route — a
 /en/history                → English history page
 /ar/contact                → Arabic contact page
 /en/contact                → English contact page
+/ar/[slug]                 → Arabic dynamic page (admin-created pageContent)
+/en/[slug]                 → English dynamic page (admin-created pageContent)
 ```
 
 ---
@@ -47,9 +49,23 @@ src/app/
     ├── history/
     │   ├── page.tsx
     │   └── loading.tsx
-    └── contact/
-        └── page.tsx
+    ├── contact/
+    │   └── page.tsx
+    └── [slug]/
+        └── page.tsx                  # Dynamic page renderer for admin-created pageContent
 ```
+
+### Dynamic page route (`[locale]/[slug]`)
+
+Any slug that does not match a static Next.js route (e.g. `places`, `history`, `contact`) is caught by `[locale]/[slug]/page.tsx`. This route:
+
+1. Calls `fetchPublishedPageBySlug(slug)` — a direct `getDoc` on `pageContent/{slug}`.
+2. Calls `notFound()` if the document doesn't exist or is not `published`.
+3. Renders the bilingual title and body from the `pageContent` document.
+4. Exports `generateMetadata` for locale-aware SEO.
+5. Uses `revalidate = 3600` (ISR) so newly published pages appear within an hour without a full rebuild.
+
+**Route precedence**: Next.js static segments always win over `[slug]`. So `/places` is handled by the static `places/page.tsx`, not by `[slug]/page.tsx`.
 
 ---
 
@@ -130,9 +146,18 @@ The `places/page.tsx` reads `searchParams` as a Server Component and passes them
 
 ## Navigation items
 
-| Label (ar) | Label (en) | Route helper |
+Navigation is now **data-driven**, managed via Admin → Pages → Navigation Order section.
+
+- `navItems` is stored in `siteSettings/global` as an ordered array.
+- Home (`/`) is always pinned as the first entry and is never stored in Firestore.
+- Up to 5 items are shown in the nav bar; additional items collapse into an "Other / المزيد" dropdown.
+- Static routes (e.g. `/places`) and admin-created pages (e.g. `/tourism`) both appear as nav items.
+- Publishing a `pageContent` page auto-appends it to `navItems`; drafting/archiving auto-removes it.
+
+The following built-in routes are available to add via the Navigation Order manager:
+
+| Path | Label (ar) | Label (en) |
 |---|---|---|
-| الرئيسية | Home | `ROUTES.HOME(locale)` |
-| الأماكن | Places | `ROUTES.PLACES(locale)` |
-| التاريخ | History | `ROUTES.HISTORY(locale)` |
-| تواصل معنا | Contact | `ROUTES.CONTACT(locale)` |
+| `/places` | الأماكن | Places |
+
+`pageContent`-backed routes (e.g. `/history`, `/contact`, custom admin pages) appear in the picker automatically when they are published.

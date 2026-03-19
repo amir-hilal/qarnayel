@@ -36,34 +36,48 @@ The primary content collection. Each document represents a place in or around Qa
 
 ### `pageContent`
 
-Static page content managed via the admin dashboard.
+Static page content managed via the admin dashboard. Document ID equals the slug.
 
-| Field | Type | Required |
-|---|---|---|
-| `slug` | `string` | ✅ |
-| `title` | `{ ar: string; en: string }` | ✅ |
-| `body` | `{ ar: string; en: string }` | ✅ |
-| `seo` | `{ ar: SeoFields; en: SeoFields }` | ✅ |
-| `updatedAt` | `Timestamp` | ✅ |
+| Field | Type | Required | Notes |
+|---|---|---|---|
+| `slug` | `string` | ✅ | Document ID — URL-safe, lowercase, hyphenated |
+| `status` | `'draft' \| 'published' \| 'archived'` | ✅ | Only `published` is visible publicly |
+| `title` | `{ ar: string; en: string }` | ✅ | |
+| `body` | `{ ar: string; en: string }` | ✅ | |
+| `seo` | `{ ar: SeoFields; en: SeoFields }` | ✅ | |
+| `updatedAt` | `Timestamp` | ✅ | Firestore server timestamp |
 
-Page slugs: `history`, `contact`
+Built-in slugs: `history`, `contact`. Additional slugs are created dynamically by the admin.
+
+Each admin-created published page is rendered at `/[locale]/[slug]` by the dynamic route `src/app/[locale]/[slug]/page.tsx`. Static Next.js routes (e.g. `/places`) take precedence over the dynamic catch-all.
 
 ### `siteSettings`
 
 Single document. Document ID: `global`.
 
-| Field | Type | Required |
-|---|---|---|
-| `siteName` | `{ ar: string; en: string }` | ✅ |
-| `tagline` | `{ ar: string; en: string }` | ✅ |
-| `heroTitle` | `{ ar: string; en: string }` | ✅ |
-| `heroSubtitle` | `{ ar: string; en: string }` | ✅ |
-| `ctaExplorePlaces` | `{ ar: string; en: string }` | ✅ |
-| `ctaDiscoverHistory` | `{ ar: string; en: string }` | ✅ |
-| `townIntroduction` | `{ ar: string; en: string }` | ✅ |
-| `contactEmail` | `string` | optional |
-| `contactPhone` | `string` | optional |
-| `socialLinks` | `{ facebook?: string; instagram?: string }` | optional |
+| Field | Type | Required | Notes |
+|---|---|---|---|
+| `siteName` | `{ ar: string; en: string }` | ✅ | |
+| `tagline` | `{ ar: string; en: string }` | ✅ | |
+| `heroTitle` | `{ ar: string; en: string }` | ✅ | |
+| `heroSubtitle` | `{ ar: string; en: string }` | ✅ | |
+| `ctas` | `Array<{ label: LocalizedText; href: string }>` | ✅ | Homepage call-to-action buttons |
+| `townIntroduction` | `{ ar: string; en: string }` | ✅ | |
+| `contactEmail` | `string` | optional | |
+| `contactPhone` | `string` | optional | |
+| `socialLinks` | `{ facebook?: string; instagram?: string; youtube?: string }` | optional | |
+| `navItems` | `Array<{ label: LocalizedText; path: string }>` | ✅ | Ordered nav entries (see below) |
+| `updatedAt` | `Timestamp` | ✅ | |
+
+#### navItems
+
+`navItems` is the source of truth for the navigation bar. Each entry has:
+- `label` — bilingual display text
+- `path` — locale-agnostic path, e.g. `/places`, `/history`
+
+Home (`/`) is always the first nav entry and is NOT stored in `navItems` — it is prepended by `SiteHeader` at render time.
+
+The nav bar shows up to 5 items; beyond that, extras appear in an "Other / المزيد" dropdown. Items are managed via Admin → Pages (drag-and-drop reorder, Save button). Publishing or drafting a `pageContent` page automatically adds or removes it from `navItems`.
 
 ---
 

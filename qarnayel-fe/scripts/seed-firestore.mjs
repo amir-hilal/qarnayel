@@ -101,6 +101,11 @@ async function seedSiteSettings() {
       instagram: null,
       youtube: null,
     },
+    navItems: [
+      { label: { ar: 'الأماكن', en: 'Places' }, path: '/places' },
+      { label: { ar: 'التاريخ', en: 'History' }, path: '/history' },
+      { label: { ar: 'تواصل معنا', en: 'Contact' }, path: '/contact' },
+    ],
     updatedAt: isoNow,
   });
 }

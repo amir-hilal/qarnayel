@@ -15,6 +15,11 @@ const ctaItemSchema = z.object({
   href: z.string().min(1),
 });
 
+const navItemSchema = z.object({
+  label: localizedTextSchema,
+  path: z.string().min(1),
+});
+
 export const siteSettingsSchema = z.object({
   siteName: localizedTextSchema,
   tagline: localizedTextSchema,
@@ -39,4 +44,5 @@ export const siteSettingsSchema = z.object({
       ),
     })
     .optional(),
+  navItems: z.array(navItemSchema).default([]),
 });

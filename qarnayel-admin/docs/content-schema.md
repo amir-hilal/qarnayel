@@ -151,18 +151,38 @@ type PlaceResource = {
 
 ## PageContent document shape (collection: `pageContent`)
 
-Document IDs match the page slug. Active slugs: `history`, `contact`.
+Document ID equals the page slug. The document ID is the canonical identifier; the `slug` field mirrors it for convenience in mapped types.
+
+Active slugs: `history`, `contact` (built-in static pages), plus any number of admin-created custom pages.
 
 ```ts
 {
-  id: string;               // = slug
+  id: string;               // = slug (document ID)
   slug: string;
+  status: PublishStatus;    // 'draft' | 'published' | 'archived'
   title: LocalizedText;
   body: LocalizedText;
   seo: LocalizedSeo;
   updatedAt: Timestamp;
 }
 ```
+
+### Nav auto-sync behaviour
+
+When the admin creates or edits a `pageContent` document, the nav is automatically kept in sync:
+
+- **Publishing** a page (status → `published`) **appends** it to `siteSettings/global.navItems` if not already present.
+- **Drafting or archiving** a page (status → `draft` | `archived`) **removes** it from `navItems` if present.
+
+This is handled by `syncNavItemForPage()` in `settings.repository.ts`. The admin can still manually reorder or add/remove items via the Navigation Order manager in Admin → Pages.
+
+### Required fields before publish
+
+Both locales required:
+- `title.ar`, `title.en`
+- `body.ar`, `body.en`
+- `seo.ar.title`, `seo.ar.description`
+- `seo.en.title`, `seo.en.description`
 
 ---
 
@@ -171,15 +191,39 @@ Document IDs match the page slug. Active slugs: `history`, `contact`.
 ```ts
 {
   id: 'global';
-  cta: {
-    explorePlaces: LocalizedText;
-    discoverHistory: LocalizedText;
-  };
+  siteName: LocalizedText;
+  tagline: LocalizedText;
+  heroTitle: LocalizedText;
+  heroSubtitle: LocalizedText;
+  ctas: Array<{ label: LocalizedText; href: string }>;
+  townIntroduction: LocalizedText;
   contactEmail?: string;
-  contactPhone?: string;
+  contactPhone?: string | null;
+  socialLinks?: {
+    facebook?: string | null;
+    instagram?: string | null;
+    youtube?: string | null;
+  };
+  /**
+   * Ordered navigation items. Home (/) is always prepended by SiteHeader
+   * and is never stored here. Each item is displayed in the nav bar;
+   * items beyond the 5th appear in an "Other" dropdown.
+   */
+  navItems: Array<{
+    label: LocalizedText;   // e.g. { ar: 'الأماكن', en: 'Places' }
+    path: string;           // locale-agnostic path, e.g. '/places'
+  }>;
   updatedAt: Timestamp;
 }
 ```
+
+### navItems management
+
+- Managed via the **Navigation Order** section in Admin → Pages (drag-and-drop, save button).
+- Auto-synced when pages are published or drafted (see nav auto-sync behaviour above).
+- The Settings form does **not** touch `navItems`; it is updated exclusively via `updateNavItems()`.
+- Static routes (e.g. `/places`) must be added manually through the Navigation Order manager.
+- The public site cap is **5 visible nav items**; overflow items collapse into an "Other / المزيد" dropdown.
 
 ---
 

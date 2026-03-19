@@ -10,6 +10,11 @@ const ctaItemSchema = z.object({
   href: z.string().min(1),
 });
 
+const navItemSchema = z.object({
+  label: localizedTextSchema,
+  path: z.string().min(1),
+});
+
 export const siteSettingsSchema = z.object({
   id: z.string().min(1),
   siteName: localizedTextSchema,
@@ -27,12 +32,15 @@ export const siteSettingsSchema = z.object({
       youtube: z.string().nullish().or(z.literal('')),
     })
     .optional(),
+  navItems: z.array(navItemSchema).default([]),
   updatedAt: z.string(),
 });
 
+/** Form schema — navItems excluded; managed separately via NavOrderManager. */
 export const siteSettingsFormSchema = siteSettingsSchema.omit({
   id: true,
   updatedAt: true,
+  navItems: true,
 });
 
 export type SiteSettingsSchemaOutput = z.output<typeof siteSettingsSchema>;

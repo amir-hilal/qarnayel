@@ -1,1 +1,7 @@
-export type { LocalizedText, Locale, Place, HistoryEntry, PageContent, SiteSettings } from '@/types';
+export type {
+  Locale,
+  LocalizedText,
+  PageContent,
+  Place,
+  SiteSettings,
+} from '@/types';

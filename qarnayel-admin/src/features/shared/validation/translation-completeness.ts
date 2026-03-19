@@ -1,5 +1,4 @@
 import type {
-  HistoryEntryFormValues,
   PageContentFormValues,
   PlaceFormValues,
   SiteSettingsFormValues,
@@ -64,29 +63,6 @@ export function checkPlaceTranslationCompleteness(
       label: 'Description',
       ar: values.description?.ar,
       en: values.description?.en,
-    },
-  ]);
-
-  return { isComplete: missingFields.length === 0, missingFields };
-}
-
-/**
- * Check translation completeness for a history entry.
- * Required bilingual fields: title, content.
- */
-export function checkHistoryEntryTranslationCompleteness(
-  values: HistoryEntryFormValues,
-): TranslationCompletenessResult {
-  const missingFields = checkLocalizedFields([
-    {
-      label: 'Title',
-      ar: values.title?.ar,
-      en: values.title?.en,
-    },
-    {
-      label: 'Content',
-      ar: values.content?.ar,
-      en: values.content?.en,
     },
   ]);
 

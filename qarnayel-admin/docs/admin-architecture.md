@@ -10,6 +10,7 @@
 6. **Server-first** — components are Server Components by default; `'use client'` is the exception
 7. **Write isolation** — all write operations live in repositories only; no Firestore SDK calls in components or forms
 8. **Status-aware reads** — admin lists show all statuses; public website reads only `published`
+9. **Nav auto-sync** — publishing or drafting a `pageContent` page automatically calls `syncNavItemForPage()`, which adds or removes the page from `siteSettings/global.navItems`. The admin can also manually reorder nav items via the Navigation Order manager (Admin → Pages).
 9. **Aligned conventions** — this project follows the same architectural conventions as the public `qarnayel-fe` project
 
 ---
@@ -33,7 +34,9 @@ src/
 │   │   │       └── edit/
 │   │   │           └── page.tsx
 │   │   ├── pages/
-│   │   │   ├── page.tsx
+│   │   │   ├── page.tsx             # Pages list + Navigation Order section
+│   │   │   ├── new/
+│   │   │   │   └── page.tsx         # Create new page
 │   │   │   └── [slug]/
 │   │   │       └── edit/
 │   │   │           └── page.tsx
@@ -61,7 +64,12 @@ src/
 │   │   ├── constants/
 │   │   └── utils/
 │   ├── pages/
+│   │   ├── components/
+│   │   │   └── NavOrderManager/
+│   │   │       ├── NavOrderManager.tsx  # DnD nav reorder + save
+│   │   │       └── NavOrderManager.css
 │   │   ├── forms/
+│   │   │   ├── NewPageContentForm.tsx
 │   │   │   └── EditPageContentForm.tsx
 │   │   ├── repositories/
 │   │   ├── mappers/

@@ -141,6 +141,12 @@ export type HomeCTA = {
   href: string;
 };
 
+export type NavItem = {
+  label: LocalizedText;
+  /** Path without locale prefix, e.g. "/places", "/history" */
+  path: string;
+};
+
 // ---------------------------------------------------------------------------
 // Site settings domain
 // ---------------------------------------------------------------------------
@@ -160,10 +166,16 @@ export type SiteSettings = {
     instagram?: string | null;
     youtube?: string | null;
   };
+  /** Ordered nav items. Home is always prepended; these are everything else. */
+  navItems: NavItem[];
   updatedAt: string;
 };
 
-export type SiteSettingsFormValues = Omit<SiteSettings, 'id' | 'updatedAt'>;
+/** Form values for site settings — navItems excluded (managed via NavOrderManager). */
+export type SiteSettingsFormValues = Omit<
+  SiteSettings,
+  'id' | 'updatedAt' | 'navItems'
+>;
 
 // ---------------------------------------------------------------------------
 // Auth / user

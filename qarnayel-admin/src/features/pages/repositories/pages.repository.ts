@@ -86,6 +86,25 @@ export async function upsertPageContent(
 }
 
 /**
+ * Create a new page content document. Throws if a document with the given slug
+ * already exists, preventing accidental overwrites.
+ */
+export async function createPageContent(
+  slug: string,
+  data: PageContentFormValues,
+): Promise<void> {
+  const existing = await getDoc(pageContentDoc(slug));
+  if (existing.exists()) {
+    throw new Error(`A page with slug "${slug}" already exists.`);
+  }
+  await setDoc(pageContentDoc(slug), {
+    ...data,
+    slug,
+    updatedAt: serverTimestamp(),
+  });
+}
+
+/**
  * Partially update a page content document.
  */
 export async function updatePageContent(

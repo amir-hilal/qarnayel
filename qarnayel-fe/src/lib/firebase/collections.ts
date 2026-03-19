@@ -9,10 +9,11 @@ import { collection, doc } from 'firebase/firestore';
 
 export const placesCollection = () => collection(db, COLLECTIONS.PLACES);
 
-export const historyCollection = () => collection(db, COLLECTIONS.HISTORY);
-
 export const pageContentCollection = () =>
   collection(db, COLLECTIONS.PAGE_CONTENT);
+
+export const pageContentDoc = (slug: string) =>
+  doc(db, COLLECTIONS.PAGE_CONTENT, slug);
 
 export const siteSettingsDoc = () =>
   doc(db, COLLECTIONS.SITE_SETTINGS, DOCUMENT_IDS.SITE_SETTINGS_GLOBAL);

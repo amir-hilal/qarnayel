@@ -12,6 +12,7 @@ export const ADMIN_ROUTES = {
   PLACE_EDIT: (id: string) => `/places/${id}/edit`,
 
   PAGES: '/pages',
+  PAGE_NEW: '/pages/new',
   PAGE_EDIT: (slug: string) => `/pages/${slug}/edit`,
 
   MEDIA: '/media',
