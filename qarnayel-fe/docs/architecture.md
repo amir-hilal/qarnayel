@@ -45,8 +45,6 @@ qarnayel-fe/
 │   │   │   ├── history/
 │   │   │   │   ├── page.tsx
 │   │   │   │   └── loading.tsx
-│   │   │   ├── about/
-│   │   │   │   └── page.tsx
 │   │   │   └── contact/
 │   │   │       └── page.tsx
 │   │   ├── layout.tsx                   # Root layout (lang/dir)
@@ -80,31 +78,24 @@ qarnayel-fe/
 │   │   │       └── home.view-model.ts
 │   │   ├── places/
 │   │   │   ├── components/
-│   │   │   │   ├── CategoryBadge.tsx           # barrel → CategoryBadge/CategoryBadge.tsx
 │   │   │   │   ├── CategoryBadge/
 │   │   │   │   │   ├── CategoryBadge.tsx
 │   │   │   │   │   └── CategoryBadge.css
-│   │   │   │   ├── PlaceCard.tsx               # barrel
 │   │   │   │   ├── PlaceCard/
 │   │   │   │   │   ├── PlaceCard.tsx
 │   │   │   │   │   └── PlaceCard.css
-│   │   │   │   ├── PlaceList.tsx               # barrel
 │   │   │   │   ├── PlaceList/
 │   │   │   │   │   ├── PlaceList.tsx
 │   │   │   │   │   └── PlaceList.css
-│   │   │   │   ├── PlaceFilters.tsx            # barrel
 │   │   │   │   ├── PlaceFilters/
 │   │   │   │   │   ├── PlaceFilters.tsx
 │   │   │   │   │   └── PlaceFilters.css
-│   │   │   │   ├── PlaceDetail.tsx             # barrel
 │   │   │   │   ├── PlaceDetail/
 │   │   │   │   │   ├── PlaceDetail.tsx
 │   │   │   │   │   └── PlaceDetail.css
-│   │   │   │   ├── ContactCTABlock.tsx         # barrel
 │   │   │   │   ├── ContactCTABlock/
 │   │   │   │   │   ├── ContactCTABlock.tsx
 │   │   │   │   │   └── ContactCTABlock.css
-│   │   │   │   ├── ResourceList.tsx            # barrel
 │   │   │   │   └── ResourceList/
 │   │   │   │       ├── ResourceList.tsx
 │   │   │   │       └── ResourceList.css
@@ -121,30 +112,12 @@ qarnayel-fe/
 │   │   │   └── utils/
 │   │   │       └── index.ts
 │   │   ├── history/
-│   │   │   ├── components/
-│   │   │   │   ├── HistorySection.tsx          # barrel → HistorySection/HistorySection.tsx
-│   │   │   │   ├── HistorySection/
-│   │   │   │   │   ├── HistorySection.tsx
-│   │   │   │   │   └── HistorySection.css
-│   │   │   │   ├── SourceList.tsx              # barrel
-│   │   │   │   └── SourceList/
-│   │   │   │       ├── SourceList.tsx
-│   │   │   │       └── SourceList.css
-│   │   │   ├── repositories/
-│   │   │   │   └── history.repository.ts
-│   │   │   ├── mappers/
-│   │   │   │   └── history.mapper.ts
-│   │   │   ├── schemas/
-│   │   │   │   └── history.schema.ts
-│   │   │   └── types/
-│   │   │       └── index.ts
+│   │   │   └── components/
+│   │   │       └── HistoryIntro/
+│   │   │           ├── HistoryIntro.tsx         # renders pageContent/history body
+│   │   │           └── HistoryIntro.css
 │   │   ├── pages/
 │   │   │   ├── components/
-│   │   │   │   ├── AboutSection.tsx            # barrel → AboutSection/AboutSection.tsx
-│   │   │   │   ├── AboutSection/
-│   │   │   │   │   ├── AboutSection.tsx
-│   │   │   │   │   └── AboutSection.css
-│   │   │   │   ├── ContactSection.tsx          # barrel
 │   │   │   │   └── ContactSection/
 │   │   │   │       ├── ContactSection.tsx
 │   │   │   │       └── ContactSection.css
@@ -158,12 +131,29 @@ qarnayel-fe/
 │   │   │       └── index.ts
 │   │   └── shared/
 │   │       ├── components/
-│   │       │   ├── SiteHeader.tsx
-│   │       │   ├── SiteFooter.tsx
-│   │       │   ├── LocaleSwitcher.tsx
-│   │       │   ├── SafeExternalLink.tsx
-│   │       │   ├── SkeletonLoader.tsx
-│   │       │   └── EmptyState.tsx
+│   │       │   ├── SiteHeader/
+│   │       │   │   ├── SiteHeader.tsx
+│   │       │   │   └── SiteHeader.css
+│   │       │   ├── SiteFooter/
+│   │       │   │   ├── SiteFooter.tsx
+│   │       │   │   └── SiteFooter.css
+│   │       │   ├── SiteNav/
+│   │       │   │   ├── SiteNav.tsx
+│   │       │   │   └── SiteNav.css
+│   │       │   ├── LocaleSwitcher/
+│   │       │   │   ├── LocaleSwitcher.tsx
+│   │       │   │   └── LocaleSwitcher.css
+│   │       │   ├── ThemeSwitcher/
+│   │       │   │   ├── ThemeSwitcher.tsx
+│   │       │   │   └── ThemeSwitcher.css
+│   │       │   ├── SkeletonLoader/
+│   │       │   │   ├── SkeletonLoader.tsx
+│   │       │   │   └── SkeletonLoader.css
+│   │       │   ├── EmptyState/
+│   │       │   │   ├── EmptyState.tsx
+│   │       │   │   └── EmptyState.css
+│   │       │   ├── HtmlLocaleSync.tsx           # syncs <html> lang/dir on client
+│   │       │   └── SafeExternalLink.tsx
 │   │       ├── types/
 │   │       │   └── index.ts
 │   │       └── utils/

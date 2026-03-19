@@ -32,8 +32,6 @@ src/
 │   │   │   └── [id]/
 │   │   │       └── edit/
 │   │   │           └── page.tsx
-│   │   ├── history/
-│   │   │   └── page.tsx             # History page content editor
 │   │   ├── pages/
 │   │   │   ├── page.tsx
 │   │   │   └── [slug]/
@@ -52,64 +50,70 @@ src/
 │   ├── collections.ts               # Firestore collection name constants
 │   └── locales.ts                   # Locale constants
 ├── features/
-│   ├── dashboard/components/
 │   ├── places/
-│   │   ├── components/
 │   │   ├── forms/
-│   │   │   ├── PlaceForm.tsx
-│   │   │   └── sections/
+│   │   │   ├── NewPlaceForm.tsx
+│   │   │   └── EditPlaceForm.tsx
 │   │   ├── repositories/
 │   │   ├── mappers/
 │   │   ├── schemas/
 │   │   ├── types/
 │   │   ├── constants/
 │   │   └── utils/
-│   ├── history/
 │   ├── pages/
+│   │   ├── forms/
+│   │   │   └── EditPageContentForm.tsx
+│   │   ├── repositories/
+│   │   ├── mappers/
+│   │   ├── schemas/
+│   │   └── types/
 │   ├── media/
+│   │   ├── repositories/
+│   │   ├── mappers/
+│   │   ├── schemas/
+│   │   ├── types/
+│   │   └── utils/
 │   ├── settings/
+│   │   ├── forms/
+│   │   │   └── SettingsForm.tsx
+│   │   ├── repositories/
+│   │   ├── mappers/
+│   │   ├── schemas/
+│   │   └── (no types/ — uses global types)
 │   └── shared/
 │       ├── components/
 │       │   ├── AdminHeader/
 │       │   │   ├── AdminHeader.tsx
 │       │   │   └── AdminHeader.css
-│       │   ├── AdminHeader.tsx  ← barrel re-export
 │       │   ├── Sidebar/
 │       │   │   ├── Sidebar.tsx
 │       │   │   └── Sidebar.css
-│       │   ├── Sidebar.tsx      ← barrel re-export
 │       │   ├── EmptyState/
 │       │   │   ├── EmptyState.tsx
 │       │   │   └── EmptyState.css
-│       │   ├── EmptyState.tsx   ← barrel re-export
 │       │   ├── StatusBadge/
 │       │   │   ├── StatusBadge.tsx
 │       │   │   └── StatusBadge.css
-│       │   ├── StatusBadge.tsx  ← barrel re-export
-│       │   ├── Toast/
-│       │   │   ├── Toast.tsx
-│       │   │   └── Toast.css
-│       │   └── Toast.tsx        ← barrel re-export
+│       │   └── Toast/
+│       │       ├── Toast.tsx
+│       │       └── Toast.css
 │       ├── forms/
 │       │   ├── FormSection/
 │       │   │   ├── FormSection.tsx
 │       │   │   └── FormSection.css
-│       │   ├── FormSection.tsx      ← barrel re-export
 │       │   ├── BilingualSection/
 │       │   │   ├── BilingualSection.tsx
 │       │   │   └── BilingualSection.css
-│       │   ├── BilingualSection.tsx ← barrel re-export
 │       │   ├── ConfirmDialog/
 │       │   │   ├── ConfirmDialog.tsx
 │       │   │   └── ConfirmDialog.css
-│       │   ├── ConfirmDialog.tsx    ← barrel re-export
-│       │   ├── FormFieldError.tsx   (flat — no component CSS)
+│       │   ├── FormFieldError.tsx
 │       │   ├── LocalizedTextField.tsx
 │       │   ├── LocalizedTextareaField.tsx
 │       │   ├── StatusSelect.tsx
 │       │   └── ValidationSummary.tsx
-│       ├── utils/
 │       └── validation/
+│           └── translation-completeness.ts
 ├── lib/
 │   ├── env/index.ts
 │   ├── firebase/
