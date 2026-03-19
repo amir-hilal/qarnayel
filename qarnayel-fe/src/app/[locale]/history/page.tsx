@@ -1,4 +1,4 @@
-import { HistorySection } from '@/features/history/components/HistorySection';
+import { HistorySection } from '@/features/history/components/HistorySection/HistorySection';
 import { fetchPublishedHistory } from '@/features/history/repositories/history.repository';
 import { EmptyState } from '@/features/shared/components/EmptyState/EmptyState';
 import { getDictionary } from '@/lib/i18n';

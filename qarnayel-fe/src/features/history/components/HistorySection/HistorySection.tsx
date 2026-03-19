@@ -1,5 +1,5 @@
 import type { HistoryEntry } from '@/features/history/types';
-import { SourceList } from '../SourceList';
+import { SourceList } from '../SourceList/SourceList';
 import './HistorySection.css';
 
 type HistorySectionProps = {
