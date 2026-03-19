@@ -9,14 +9,12 @@ export const ROUTES = {
   PLACES: (locale: string) => `/${locale}/places`,
   PLACE_DETAIL: (locale: string, slug: string) => `/${locale}/places/${slug}`,
   HISTORY: (locale: string) => `/${locale}/history`,
-  ABOUT: (locale: string) => `/${locale}/about`,
   CONTACT: (locale: string) => `/${locale}/contact`,
 } as const;
 
 // Firestore collection names
 export const COLLECTIONS = {
   PLACES: 'places',
-  HISTORY: 'history',
   PAGE_CONTENT: 'pageContent',
   SITE_SETTINGS: 'siteSettings',
 } as const;
@@ -61,7 +59,6 @@ export const CONTACT_MODES = {
 // Page content slugs
 export const PAGE_SLUGS = {
   HISTORY: 'history',
-  ABOUT: 'about',
   CONTACT: 'contact',
 } as const;
 

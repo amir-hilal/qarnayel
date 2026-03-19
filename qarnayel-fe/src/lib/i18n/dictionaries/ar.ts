@@ -66,11 +66,6 @@ export const ar = {
     loadingHistory: 'جاري التحميل...',
     noHistory: 'لا تتوفر مدخلات تاريخية حالياً.',
   },
-  about: {
-    pageTitle: 'عن قرنايل',
-    metaDescription:
-      'تعرّف على تاريخ قرنايل وطبيعتها وموقعها في قلب جبل لبنان.',
-  },
   contact: {
     pageTitle: 'تواصل معنا',
     metaDescription: 'تواصل مع فريق موقع قرنايل لأي استفسار أو اقتراح.',

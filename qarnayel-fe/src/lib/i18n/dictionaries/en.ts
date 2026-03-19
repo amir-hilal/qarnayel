@@ -68,11 +68,6 @@ export const en: Dictionary = {
     loadingHistory: 'Loading...',
     noHistory: 'No history entries available yet.',
   },
-  about: {
-    pageTitle: 'About Qarnayel',
-    metaDescription:
-      'Learn about the history, nature, and character of Qarnayel in the heart of Mount Lebanon.',
-  },
   contact: {
     pageTitle: 'Contact Us',
     metaDescription:
