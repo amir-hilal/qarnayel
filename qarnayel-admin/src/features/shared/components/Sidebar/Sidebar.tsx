@@ -64,23 +64,6 @@ const NAV_SECTIONS: NavSection[] = [
         ),
       },
       {
-        label: 'History',
-        href: ADMIN_ROUTES.HISTORY,
-        icon: (
-          <svg
-            {...ICON_SIZE}
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth={1.75}
-            aria-hidden="true"
-          >
-            <circle cx="12" cy="12" r="9" />
-            <polyline points="12 7 12 12 15 15" />
-          </svg>
-        ),
-      },
-      {
         label: 'Pages',
         href: ADMIN_ROUTES.PAGES,
         icon: (
