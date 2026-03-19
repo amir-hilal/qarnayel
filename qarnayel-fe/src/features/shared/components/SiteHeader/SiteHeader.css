@@ -31,4 +31,10 @@
   text-decoration: none;
 }
 
+/* Hide desktop nav on small screens */
+@media (max-width: 768px) {
+  .site-header__nav {
+    display: none;
+  }
+}
 

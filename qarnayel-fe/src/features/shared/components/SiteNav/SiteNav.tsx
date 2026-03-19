@@ -1,4 +1,7 @@
+'use client';
+
 import Link from 'next/link';
+import { useEffect, useRef, useState } from 'react';
 import './SiteNav.css';
 
 // ---------------------------------------------------------------------------
@@ -7,7 +10,7 @@ import './SiteNav.css';
 // <details> dropdown so the nav bar never exceeds the visible cap.
 // ---------------------------------------------------------------------------
 
-const MAX_VISIBLE = 5;
+const MAX_VISIBLE = 4;
 
 export interface SiteNavItem {
   href: string;
@@ -33,6 +36,22 @@ export function SiteNav({
   const visibleItems = items.slice(0, MAX_VISIBLE);
   const overflowItems = items.slice(MAX_VISIBLE);
 
+  const [moreOpen, setMoreOpen] = useState(false);
+  const detailsRef = useRef<HTMLDetailsElement>(null);
+
+  useEffect(() => {
+    function handleClickOutside(e: MouseEvent) {
+      if (
+        detailsRef.current &&
+        !detailsRef.current.contains(e.target as Node)
+      ) {
+        setMoreOpen(false);
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
   return (
     <nav className={cls} aria-label={ariaLabel}>
       {visibleItems.map((item) => (
@@ -42,7 +61,12 @@ export function SiteNav({
       ))}
 
       {overflowItems.length > 0 && (
-        <details className="site-nav__more">
+        <details
+          ref={detailsRef}
+          className="site-nav__more"
+          open={moreOpen}
+          onToggle={(e) => setMoreOpen((e.target as HTMLDetailsElement).open)}
+        >
           <summary className="site-nav__more-trigger">
             {otherLabel}
             <span

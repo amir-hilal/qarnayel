@@ -1,5 +1,6 @@
 import { ROUTES } from '@/config/constants';
 import { LocaleSwitcher } from '@/features/shared/components/LocaleSwitcher/LocaleSwitcher';
+import { MobileMenu } from '@/features/shared/components/MobileMenu/MobileMenu';
 import type { SiteNavItem } from '@/features/shared/components/SiteNav/SiteNav';
 import { SiteNav } from '@/features/shared/components/SiteNav/SiteNav';
 import { ThemeSwitcher } from '@/features/shared/components/ThemeSwitcher/ThemeSwitcher';
@@ -78,6 +79,12 @@ export function SiteHeader({
         >
           <LocaleSwitcher currentLocale={locale} />
           <ThemeSwitcher />
+          <MobileMenu
+            items={allNavItems}
+            ariaLabel={locale === 'ar' ? 'التنقل الرئيسي' : 'Main navigation'}
+            openLabel={locale === 'ar' ? 'فتح القائمة' : 'Open menu'}
+            closeLabel={locale === 'ar' ? 'إغلاق القائمة' : 'Close menu'}
+          />
         </div>
       </div>
     </header>
