@@ -171,7 +171,7 @@ export type SiteSettings = {
   updatedAt: string;
 };
 
-/** Form values for site settings — navItems excluded (managed via NavOrderManager). */
+/** Form values for site settings — navItems excluded (managed via NavManager). */
 export type SiteSettingsFormValues = Omit<
   SiteSettings,
   'id' | 'updatedAt' | 'navItems'

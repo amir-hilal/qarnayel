@@ -36,7 +36,7 @@ export const siteSettingsSchema = z.object({
   updatedAt: z.string(),
 });
 
-/** Form schema — navItems excluded; managed separately via NavOrderManager. */
+/** Form schema — navItems excluded; managed separately via NavManager. */
 export const siteSettingsFormSchema = siteSettingsSchema.omit({
   id: true,
   updatedAt: true,

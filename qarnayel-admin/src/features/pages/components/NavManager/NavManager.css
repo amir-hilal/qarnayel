@@ -1,0 +1,234 @@
+/* =============================================================================
+   UnifiedPagesManager — single drag-and-drop list for pages + nav order
+   ============================================================================= */
+
+.nav-manager {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+/* ── Section header ── */
+
+.nav-manager__section-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-2) var(--space-4);
+  background: color-mix(in srgb, var(--color-text) 5%, transparent);
+  border-radius: var(--radius-md);
+  margin-block-start: var(--space-2);
+}
+
+.nav-manager__section-header:first-child {
+  margin-block-start: 0;
+}
+
+.nav-manager__section-header--secondary {
+  background: transparent;
+  border-block-start: 1px solid var(--color-border);
+  border-radius: 0;
+  padding-inline: var(--space-2);
+  margin-block-start: var(--space-4);
+  padding-block-start: var(--space-3);
+}
+
+.nav-manager__section-label {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-text-muted);
+}
+
+.nav-manager__section-hint {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  opacity: 0.7;
+}
+
+/* ── Row ── */
+
+.nav-manager__row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  cursor: grab;
+  transition:
+    background var(--transition-fast),
+    border-color var(--transition-fast);
+  user-select: none;
+}
+
+.nav-manager__row:active {
+  cursor: grabbing;
+}
+
+.nav-manager__row--locked {
+  cursor: default;
+  background: color-mix(in srgb, var(--color-text) 3%, var(--color-surface));
+}
+
+/* ── Status-based row colours ── */
+
+.nav-manager__row--published {
+  border-inline-start: 3px solid var(--color-status-published-border);
+  background: color-mix(in srgb, var(--color-status-published-bg) 55%, var(--color-surface));
+}
+
+.nav-manager__row--draft {
+  border-inline-start: 3px solid var(--color-status-draft-border);
+  background: color-mix(in srgb, var(--color-status-draft-bg) 55%, var(--color-surface));
+}
+
+.nav-manager__row--archived {
+  border-inline-start: 3px solid var(--color-status-archived-border);
+  background: color-mix(in srgb, var(--color-status-archived-bg) 55%, var(--color-surface));
+}
+
+
+
+.nav-manager__row--drag-over {
+  border-color: var(--color-primary);
+  background: color-mix(in srgb, var(--color-primary) 8%, var(--color-surface));
+}
+
+/* ── Drag handle ── */
+
+.nav-manager__handle {
+  color: var(--color-text-muted);
+  font-size: 1.25rem;
+  line-height: 1;
+  flex-shrink: 0;
+  cursor: grab;
+}
+
+.nav-manager__handle--disabled {
+  opacity: 0.3;
+  cursor: default;
+  pointer-events: none;
+}
+
+/* ── Info (title + ar + path) ── */
+
+.nav-manager__info {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex: 1;
+  min-width: 0;
+  flex-wrap: wrap;
+}
+
+.nav-manager__label {
+  font-weight: 500;
+  font-size: var(--font-size-sm);
+  color: var(--color-text);
+}
+
+.nav-manager__label-ar {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}
+
+.nav-manager__path {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  background: color-mix(in srgb, var(--color-text) 6%, transparent);
+  padding: 0.1em 0.4em;
+  border-radius: var(--radius-sm);
+}
+
+/* ── Badges (Built-in / Pinned) ── */
+
+.nav-manager__badge {
+  font-size: var(--font-size-xs);
+  padding: 0.2em 0.6em;
+  border-radius: var(--radius-full, 999px);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.nav-manager__badge--pinned {
+  color: var(--color-text-muted);
+  border: 1px solid var(--color-border);
+}
+
+.nav-manager__badge--builtin {
+  color: var(--color-primary);
+  border: 1px solid color-mix(in srgb, var(--color-primary) 40%, transparent);
+  background: color-mix(in srgb, var(--color-primary) 8%, transparent);
+}
+
+/* ── Section drop zones ── */
+
+.nav-manager__section-zone {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-1);
+  border-radius: var(--radius-md);
+  border: 2px dashed transparent;
+  transition:
+    border-color var(--transition-fast),
+    background var(--transition-fast);
+}
+
+.nav-manager__section-zone--min {
+  min-height: 5rem;
+}
+
+.nav-manager__section-zone--over {
+  border-color: var(--color-primary);
+  background: color-mix(in srgb, var(--color-primary) 5%, transparent);
+}
+
+/* ── Drop hint (empty zone placeholder) ── */
+
+.nav-manager__drop-hint {
+  padding: var(--space-4);
+  text-align: center;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+  font-style: italic;
+}
+
+/* ── Status tag (static read-only badge) ── */
+
+.nav-manager__status-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2em 0.6em;
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  line-height: 1;
+  border-width: 1px;
+  border-style: solid;
+  white-space: nowrap;
+  flex-shrink: 0;
+  pointer-events: none;
+}
+
+.nav-manager__status-tag--published {
+  color: var(--color-status-published-text);
+  background-color: var(--color-status-published-bg);
+  border-color: var(--color-status-published-border);
+}
+
+.nav-manager__status-tag--draft {
+  color: var(--color-status-draft-text);
+  background-color: var(--color-status-draft-bg);
+  border-color: var(--color-status-draft-border);
+}
+
+.nav-manager__status-tag--archived {
+  color: var(--color-status-archived-text);
+  background-color: var(--color-status-archived-bg);
+  border-color: var(--color-status-archived-border);
+}
