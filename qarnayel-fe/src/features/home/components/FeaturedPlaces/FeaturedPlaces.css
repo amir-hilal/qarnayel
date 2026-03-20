@@ -1,11 +1,16 @@
 /* ==========================================================================
-   FeaturedPlaces section + FeaturedPlaceCard
-   The .featured-place-card styles live here because the card markup is
-   inlined inside FeaturedPlaces — it is not a shared component.
-   Shared list-card styles (same visual treatment) live in PlaceCard.css.
+   FeaturedPlaces — scroll-driven timeline layout
+   The section renders a growing vertical line (inline-start aligned) with
+   horizontally laid-out place cards that fade in on scroll.
+
+   Direction behaviour (automatic via CSS logical properties + dir="rtl"):
+   • LTR  → line on the LEFT,  image on LEFT side of card
+   • RTL  → line on the RIGHT, image on RIGHT side of card
    ========================================================================== */
 
-/* ── Section ─────────────────────────────────────────────────────────────── */
+/* ─────────────────────────────────────────────────────────────────────────
+   Section shell
+   ───────────────────────────────────────────────────────────────────────── */
 
 .featured-places {
   padding-block: var(--space-16);
@@ -19,75 +24,214 @@
 
 .featured-places__title {
   font-size: var(--font-size-2xl);
-  margin-block-end: var(--space-8);
+  font-weight: 700;
+  margin-block-end: var(--space-12);
   text-align: center;
-}
-
-.featured-places__grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
-  gap: var(--space-6);
 }
 
 .featured-places__footer {
   text-align: center;
-  margin-block-start: var(--space-8);
+  margin-block-start: var(--space-12);
 }
 
-/* ── Featured place card ─────────────────────────────────────────────────── */
+/* ─────────────────────────────────────────────────────────────────────────
+   Timeline layout
+   ───────────────────────────────────────────────────────────────────────── */
 
-.featured-place-card {
+/*
+  Variables (override per breakpoint or theme as needed):
+    --fp-gutter      : total inline-start space reserved for the line area
+    --fp-line-inset  : where the center of the line sits within that gutter
+    --fp-dot-size    : diameter of the connector dot
+    --fp-card-img-w  : fixed width of the image column inside each card
+*/
+.fp-timeline {
+  --fp-gutter:     3.5rem;
+  --fp-line-inset: 1.5rem;
+  --fp-dot-size:   0.75rem;
+  --fp-card-img-w: 220px;
+
+  position: relative;
+  /* Push cards away from the line (on inline-start side) */
+  padding-inline-start: var(--fp-gutter);
+}
+
+/* ── Rail (the vertical line) ─────────────────────────────────────────── */
+
+.fp-rail {
+  position: absolute;
+  /* Centre the 2 px bar at --fp-line-inset from the outer container edge */
+  inset-inline-start: calc(var(--fp-line-inset) - 1px);
+  inset-block: 0;
+  width: 2px;
+  /* Prevent rail from overflowing the section */
+  overflow: hidden;
+}
+
+/* Ghost track — always visible, shows the full potential height */
+.fp-rail__track {
+  position: absolute;
+  inset: 0;
+  background: color-mix(in srgb, var(--color-primary) 18%, transparent);
+  border-radius: 1px;
+}
+
+/* Animated fill — height is driven via JS scroll listener */
+.fp-rail__fill {
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  height: 0%; /* updated by JS */
+  background: linear-gradient(
+    to bottom,
+    var(--color-primary-light),
+    var(--color-primary),
+    var(--color-primary-dark)
+  );
+  border-radius: 1px;
+  transition: height 120ms linear;
+}
+
+/* ── Timeline list ────────────────────────────────────────────────────── */
+
+.fp-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
   display: flex;
   flex-direction: column;
-  height: 100%;
-  border-radius: var(--radius-lg);
+  gap: var(--space-8);
+}
+
+/* ── Individual item ──────────────────────────────────────────────────── */
+
+.fp-timeline-item {
+  position: relative;
+  /* Default state — fully visible for no-JS / reduced-motion users */
+  opacity: 1;
+  transform: none;
+}
+
+/* Dot anchored on the line */
+.fp-dot {
+  position: absolute;
+  /*
+    Reach back from inside the padding to the line centre:
+      -(gutter - line-inset) shifts to the line centre
+      -(dot-size / 2) centres the dot on the line
+  */
+  inset-inline-start: calc(
+    -1 * (var(--fp-gutter) - var(--fp-line-inset)) - var(--fp-dot-size) / 2
+  );
+  top: 50%;
+  transform: translateY(-50%);
+  width: var(--fp-dot-size);
+  height: var(--fp-dot-size);
+  border-radius: 50%;
+  background: var(--color-primary);
+  border: 2px solid var(--color-surface);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-primary) 30%, transparent);
+  /* Dot fades in together with the card */
+  transition: opacity var(--transition-base), transform var(--transition-base);
+  z-index: 1;
+}
+
+/* ── Animation states (applied when section adds data-animate="true") ── */
+
+[data-animate='true'] .fp-timeline-item {
+  opacity: 0;
+  /* Cards slide in from the inline-end side (away from the line) */
+  transform: translateX(1.5rem);
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}
+
+/* RTL: the inline-end direction is to the left, so invert translateX */
+[dir='rtl'] [data-animate='true'] .fp-timeline-item {
+  transform: translateX(-1.5rem);
+}
+
+[data-animate='true'] .fp-timeline-item[data-visible='true'] {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-animate='true'] .fp-timeline-item {
+    transform: none;
+    transition: opacity 0.3s ease;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+   Place card
+   Horizontal layout: [image] [content] in LTR, [content] [image] in RTL.
+   flex-direction: row mirrors automatically under dir="rtl".
+   Image has zero padding — it touches all four borders directly.
+   ───────────────────────────────────────────────────────────────────────── */
+
+.fp-card {
+  display: flex;
+  flex-direction: row;
+  min-height: 160px;
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-xl);
   overflow: hidden;
-  background-color: var(--color-surface);
-  border: var(--border-width) solid var(--color-border);
-  box-shadow: var(--shadow-sm);
+  background: var(--color-surface);
   text-decoration: none;
   color: var(--color-text);
-  transition: box-shadow var(--transition-base), transform var(--transition-base);
+  transition:
+    box-shadow var(--transition-base),
+    border-color var(--transition-base);
 }
 
-.featured-place-card:hover {
+.fp-card:hover {
   box-shadow: var(--shadow-md);
-  transform: translateY(-2px);
+  border-color: color-mix(in srgb, var(--color-primary) 60%, transparent);
 }
 
-.featured-place-card__image-wrap {
+/* Image column — no padding, touches the border */
+.fp-card__img-wrap {
   position: relative;
-  aspect-ratio: 4 / 3;
+  flex-shrink: 0;
+  width: var(--fp-card-img-w);
+  /* stretch to fill full card height */
+  align-self: stretch;
   overflow: hidden;
 }
 
-.featured-place-card__image {
+.fp-card__img {
   object-fit: cover;
   transition: transform var(--transition-base);
 }
 
-.featured-place-card:hover .featured-place-card__image {
+.fp-card:hover .fp-card__img {
   transform: scale(1.04);
 }
 
-.featured-place-card__image-placeholder {
-  aspect-ratio: 4 / 3;
-  background-color: var(--color-surface-alt);
+.fp-card__img-placeholder {
+  width: 100%;
+  height: 100%;
+  background: var(--color-surface-alt);
 }
 
-.featured-place-card__body {
-  padding: var(--space-4);
+/* Content column */
+.fp-card__body {
+  flex: 1;
+  min-width: 0; /* prevent flex blowout */
+  padding: var(--space-5) var(--space-6);
   display: flex;
   flex-direction: column;
   gap: var(--space-2);
+  justify-content: center;
 }
 
-.featured-place-card__title {
+.fp-card__title {
   font-size: var(--font-size-lg);
   font-weight: 600;
+  line-height: var(--line-height-tight);
 }
 
-.featured-place-card__desc {
+.fp-card__desc {
   font-size: var(--font-size-sm);
   color: var(--color-text-muted);
   display: -webkit-box;
@@ -97,8 +241,27 @@
   overflow: hidden;
 }
 
-@media (max-width: 768px) {
-  .featured-places__grid {
-    grid-template-columns: 1fr;
+/* ─────────────────────────────────────────────────────────────────────────
+   Responsive adjustments
+   ───────────────────────────────────────────────────────────────────────── */
+
+@media (max-width: 640px) {
+  .fp-timeline {
+    --fp-gutter:     2.5rem;
+    --fp-line-inset: 1rem;
+    --fp-card-img-w: 110px;
+  }
+
+  .fp-card {
+    min-height: 120px;
+  }
+
+  .fp-card__body {
+    padding: var(--space-3) var(--space-4);
+  }
+
+  .fp-card__desc {
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
   }
 }
