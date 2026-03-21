@@ -1,0 +1,53 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      // TODO: check custom claim when role system is active
+      return isAuthenticated();
+    }
+
+    function isPublished() {
+      return resource.data.status == 'published';
+    }
+
+    // Places — public can read published; admin has full access
+    match /places/{placeId} {
+      allow read: if isPublished() || isAdmin();
+      allow write: if isAdmin();
+    }
+
+    // History — public can read published; admin has full access
+    match /history/{entryId} {
+      allow read: if isPublished() || isAdmin();
+      allow write: if isAdmin();
+    }
+
+    // Page content — always public read; admin write
+    match /pageContent/{slug} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Site settings — always public read; admin write
+    match /siteSettings/{settingId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Media metadata — always public read; admin write
+    match /media/{mediaId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Catch-all — deny everything else
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

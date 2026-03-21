@@ -1,13 +1,16 @@
-﻿import type { Place } from '@/types';
-import type { Locale } from '@/lib/i18n/locales';
-import { localise } from '@/lib/i18n/helpers';
+﻿import { ROUTES } from '@/config/constants';
 import { env } from '@/lib/env';
-import { ROUTES } from '@/config/constants';
+import { localise } from '@/lib/i18n/helpers';
+import type { Locale } from '@/lib/i18n/locales';
+import type { Place } from '@/types';
 
 // ---------------------------------------------------------------------------
 // JSON-LD structured data for a TouristAttraction
 // ---------------------------------------------------------------------------
-export function buildTouristAttractionJsonLd(place: Place, locale: Locale): string {
+export function buildTouristAttractionJsonLd(
+  place: Place,
+  locale: Locale,
+): string {
   const siteUrl = env.NEXT_PUBLIC_SITE_URL.replace(/\/$/, '');
 
   const jsonLd = {
@@ -16,7 +19,7 @@ export function buildTouristAttractionJsonLd(place: Place, locale: Locale): stri
     name: localise(place.title, locale),
     description: localise(place.shortDescription, locale),
     url: `${siteUrl}${ROUTES.PLACE_DETAIL(locale, place.slug)}`,
-    ...(place.images[0] ? { image: place.images[0].url } : {}),
+    ...(place.images[0] ? { image: place.images[0].downloadUrl } : {}),
     ...(place.location.lat && place.location.lng
       ? {
           geo: {
@@ -51,7 +54,7 @@ export function buildLocalBusinessJsonLd(place: Place, locale: Locale): string {
     url: `${siteUrl}${ROUTES.PLACE_DETAIL(locale, place.slug)}`,
     ...(place.contact.phone ? { telephone: place.contact.phone } : {}),
     ...(place.contact.website ? { sameAs: [place.contact.website] } : {}),
-    ...(place.images[0] ? { image: place.images[0].url } : {}),
+    ...(place.images[0] ? { image: place.images[0].downloadUrl } : {}),
     address: {
       '@type': 'PostalAddress',
       addressLocality: locale === 'ar' ? 'قرنايل' : 'Qarnayel',

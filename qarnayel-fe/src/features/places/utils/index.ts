@@ -5,11 +5,12 @@ import type { Locale } from '@/lib/i18n/locales';
 // Place feature utility functions (pure — no Firebase, no side effects)
 // ---------------------------------------------------------------------------
 
-// Get the primary image URL from a place's images array
+// Get the primary image URL from a place's images array.
+// images[0] is always the hero image.
 export function getPrimaryImageUrl(
-  images: { url: string; isPrimary: boolean }[],
+  images: { downloadUrl: string }[],
 ): string | undefined {
-  return images.find(img => img.isPrimary)?.url ?? images[0]?.url;
+  return images[0]?.downloadUrl;
 }
 
 // Build the places listing URL with optional filter params
@@ -32,5 +33,10 @@ export function hasContactInfo(contact: {
   whatsapp?: string;
   website?: string;
 }): boolean {
-  return !!(contact.phone ?? contact.email ?? contact.whatsapp ?? contact.website);
+  return !!(
+    contact.phone ??
+    contact.email ??
+    contact.whatsapp ??
+    contact.website
+  );
 }

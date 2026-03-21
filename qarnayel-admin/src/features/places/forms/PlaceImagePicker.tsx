@@ -104,7 +104,8 @@ export function PlaceImagePicker({
   images,
   onChange,
 }: PlaceImagePickerProps) {
-  const [uploading, setUploading] = useState(false);
+  const [heroUploading, setHeroUploading] = useState(false);
+  const [galleryUploading, setGalleryUploading] = useState(false);
   const [uploadError, setUploadError] = useState<string | null>(null);
   const [heroHovered, setHeroHovered] = useState(false);
   const [deletingGalleryIndex, setDeletingGalleryIndex] = useState<
@@ -145,7 +146,7 @@ export function PlaceImagePicker({
     }
 
     setUploadError(null);
-    setUploading(true);
+    setHeroUploading(true);
     try {
       const newRef = await uploadPlaceImage(placeId, file);
 
@@ -167,7 +168,7 @@ export function PlaceImagePicker({
     } catch {
       setUploadError('Upload failed. Please try again.');
     } finally {
-      setUploading(false);
+      setHeroUploading(false);
     }
   }
 
@@ -185,14 +186,14 @@ export function PlaceImagePicker({
     }
 
     setUploadError(null);
-    setUploading(true);
+    setGalleryUploading(true);
     try {
       const newRef = await uploadPlaceImage(placeId, file);
       onChange([...images, newRef]);
     } catch {
       setUploadError('Upload failed. Please try again.');
     } finally {
-      setUploading(false);
+      setGalleryUploading(false);
     }
   }
 
@@ -255,7 +256,7 @@ export function PlaceImagePicker({
         <div style={{ flexShrink: 0 }}>
           <button
             type="button"
-            disabled={uploading}
+            disabled={heroUploading}
             onClick={() => heroInputRef.current?.click()}
             onMouseEnter={() => setHeroHovered(true)}
             onMouseLeave={() => setHeroHovered(false)}
@@ -272,7 +273,7 @@ export function PlaceImagePicker({
                 ? 'var(--color-surface)'
                 : 'var(--color-surface)',
               overflow: 'hidden',
-              cursor: uploading ? 'wait' : 'pointer',
+              cursor: heroUploading ? 'wait' : 'pointer',
               padding: 0,
               display: 'flex',
               flexDirection: 'column',
@@ -306,12 +307,12 @@ export function PlaceImagePicker({
                     alignItems: 'center',
                     justifyContent: 'center',
                     color: '#ffffff',
-                    opacity: heroHovered || uploading ? 1 : 0,
+                    opacity: heroHovered || heroUploading ? 1 : 0,
                     transition: 'opacity 0.18s ease',
                     pointerEvents: 'none',
                   }}
                 >
-                  {uploading ? (
+                  {heroUploading ? (
                     <span style={{ fontSize: 'var(--font-size-sm)' }}>
                       Uploading…
                     </span>
@@ -320,7 +321,7 @@ export function PlaceImagePicker({
                   )}
                 </div>
               </>
-            ) : uploading ? (
+            ) : heroUploading ? (
               <span style={{ fontSize: 'var(--font-size-sm)' }}>
                 Uploading…
               </span>
@@ -521,18 +522,38 @@ export function PlaceImagePicker({
               </div>
             ))}
 
+            {/* Gallery uploading placeholder tile */}
+            {galleryUploading && (
+              <div
+                style={{
+                  width: 96,
+                  height: 80,
+                  borderRadius: 'var(--radius-md)',
+                  border: '1px solid var(--color-border)',
+                  background: 'var(--color-surface-raised)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: 'var(--color-text-muted)',
+                  fontSize: 'var(--font-size-xs)',
+                }}
+              >
+                Uploading…
+              </div>
+            )}
+
             {/* Add gallery image button */}
             <button
               type="button"
               onClick={() => galleryInputRef.current?.click()}
-              disabled={uploading}
+              disabled={galleryUploading}
               style={{
                 width: 96,
                 height: 80,
                 borderRadius: 'var(--radius-md)',
                 border: '2px dashed var(--color-border)',
                 background: 'var(--color-surface)',
-                cursor: uploading ? 'wait' : 'pointer',
+                cursor: galleryUploading ? 'wait' : 'pointer',
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',

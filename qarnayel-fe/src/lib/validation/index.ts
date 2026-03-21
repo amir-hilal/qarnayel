@@ -31,10 +31,11 @@ export const localizedSeoSchema = z.object({
 
 // MediaReference
 export const mediaReferenceSchema = z.object({
-  path: z.string().min(1),
-  url: z.string().url(),
-  alt: localizedTextSchema,
-  isPrimary: z.boolean(),
+  storagePath: z.string().min(1),
+  downloadUrl: z.string().url(),
+  altText: localizedTextSchema.optional(),
+  width: z.number().optional(),
+  height: z.number().optional(),
 });
 
 // PublishStatus

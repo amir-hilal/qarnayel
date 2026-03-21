@@ -73,10 +73,11 @@ export type PlaceResource = {
 };
 
 export type MediaReference = {
-  path: string;
-  url: string;
-  alt: LocalizedText;
-  isPrimary: boolean;
+  storagePath: string;
+  downloadUrl: string;
+  altText?: LocalizedText;
+  width?: number;
+  height?: number;
 };
 
 export type Place = {

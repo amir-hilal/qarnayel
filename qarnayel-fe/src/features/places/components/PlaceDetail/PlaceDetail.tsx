@@ -36,10 +36,7 @@ export function PlaceDetail({
   const shortDescription =
     place.shortDescription[l] ?? place.shortDescription.ar;
 
-  const primaryImage =
-    (place.images ?? []).find((img) => img.isPrimary) ??
-    (place.images ?? [])[0] ??
-    null;
+  const primaryImage = (place.images ?? [])[0] ?? null;
 
   const mapUrl = place.location?.mapUrl;
 
@@ -48,8 +45,8 @@ export function PlaceDetail({
       {primaryImage && (
         <figure className="place-detail__hero">
           <Image
-            src={primaryImage.url}
-            alt={primaryImage.alt?.[l] ?? primaryImage.alt?.ar ?? title}
+            src={primaryImage.downloadUrl}
+            alt={primaryImage.altText?.[l] ?? primaryImage.altText?.ar ?? title}
             fill
             priority
             sizes="100vw"
@@ -79,8 +76,8 @@ export function PlaceDetail({
               {place.images.map((img, i) => (
                 <li key={i} className="place-detail__gallery-item">
                   <Image
-                    src={img.url}
-                    alt={img.alt?.[l] ?? img.alt?.ar ?? title}
+                    src={img.downloadUrl}
+                    alt={img.altText?.[l] ?? img.altText?.ar ?? title}
                     width={400}
                     height={300}
                     className="place-detail__gallery-image"
