@@ -6,7 +6,6 @@
 |---|---|---|
 | `places` | auto-generated ID | Place entries (all statuses) |
 | `pageContent` | slug (e.g. `history`) | Static page content |
-| `media` | auto-generated ID | Media asset metadata |
 | `siteSettings` | `global` | Global site configuration |
 
 ---
@@ -130,30 +129,11 @@ type PlaceResource = {
 
 ---
 
-## Media asset document shape (collection: `media`)
-
-```ts
-{
-  id: string;
-  storagePath: string;
-  downloadUrl: string;
-  altText?: LocalizedText;
-  mimeType: string;          // e.g. "image/jpeg"
-  sizeBytes: number;
-  width?: number;
-  height?: number;
-  uploadedAt: Timestamp;
-  uploadedBy?: string;       // Firebase UID
-}
-```
-
----
-
 ## PageContent document shape (collection: `pageContent`)
 
 Document ID equals the page slug. The document ID is the canonical identifier; the `slug` field mirrors it for convenience in mapped types.
 
-Active slugs: `history`, `contact` (built-in static pages), plus any number of admin-created custom pages.
+Active slugs: `history` (and any number of admin-created custom pages). `contact` is a hardcoded route — it is not stored in `pageContent`.
 
 ```ts
 {
