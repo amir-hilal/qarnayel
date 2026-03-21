@@ -21,7 +21,6 @@ All files follow a structured path convention:
 ```
 places/abc123/hero.jpg
 places/abc123/interior-1.jpg
-history/def456/period-photo.png
 media/uploads/site-logo.png
 ```
 

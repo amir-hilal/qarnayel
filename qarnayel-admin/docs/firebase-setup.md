@@ -88,7 +88,6 @@ Required indexes:
 - `places`: `status ASC, featured ASC` (for featured places query)
 - `places`: `status ASC, category ASC` (for filtered places)
 - `places`: `status ASC, slug ASC` (for slug lookup)
-- `history`: `status ASC, order ASC`
 
 ## Security rules
 

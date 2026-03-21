@@ -22,22 +22,12 @@ service cloud.firestore {
       allow write: if isAuthenticated();
     }
 
-    match /history/{id} {
-      allow read: if isPublished() || isAuthenticated();
-      allow write: if isAuthenticated();
-    }
-
     match /pageContent/{id} {
       allow read: if true;
       allow write: if isAuthenticated();
     }
 
     match /siteSettings/{id} {
-      allow read: if true;
-      allow write: if isAuthenticated();
-    }
-
-    match /media/{id} {
       allow read: if true;
       allow write: if isAuthenticated();
     }
@@ -92,7 +82,6 @@ When the `staging` named database is created, apply the same Firestore rules to 
 3. The public website (unauthenticated) can only read `published` documents
 4. Archived and draft documents are never exposed to unauthenticated clients
 5. The `siteSettings` collection is readable by anyone but writable by admins only
-6. The `media` collection is writable by authenticated admins only
 
 ### Planned rule structure (pseudocode)
 
@@ -121,12 +110,6 @@ service cloud.firestore {
       allow write: if isAdmin();
     }
 
-    // History
-    match /history/{entryId} {
-      allow read: if isPublished(resource) || isAdmin();
-      allow write: if isAdmin();
-    }
-
     // Page content
     match /pageContent/{slug} {
       allow read: if true;           // page content is always public
@@ -139,11 +122,6 @@ service cloud.firestore {
       allow write: if isAdmin();
     }
 
-    // Media metadata
-    match /media/{mediaId} {
-      allow read: if true;           // download URLs are public
-      allow write: if isAdmin();
-    }
   }
 }
 ```

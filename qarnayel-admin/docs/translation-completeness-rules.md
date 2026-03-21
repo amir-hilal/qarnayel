@@ -20,14 +20,7 @@ Every content document that serves the public website must have content in **bot
 | `resources[].label` | Optional | Optional |
 | `images[].altText` | Optional | Optional |
 
-### History entries
-
-| Field | Arabic required | English required |
-|---|---|---|
-| `title` | ✅ | ✅ |
-| `body` | ✅ | ✅ |
-
-### Page content (About, Contact)
+### Page content (History, About, Contact)
 
 | Field | Arabic required | English required |
 |---|---|---|

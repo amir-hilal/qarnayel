@@ -42,11 +42,10 @@ qarnayel-fe/
 │   │   │   │       ├── page.tsx
 │   │   │   │       ├── loading.tsx
 │   │   │   │       └── not-found.tsx
-│   │   │   ├── history/
-│   │   │   │   ├── page.tsx
-│   │   │   │   └── loading.tsx
-│   │   │   └── contact/
-│   │   │       └── page.tsx
+│   │   │   ├── contact/
+│   │   │   │   └── page.tsx             # Hardcoded contact page (siteSettings only)
+│   │   │   └── [slug]/
+│   │   │       └── page.tsx             # Dynamic renderer for admin-created pageContent pages (e.g. history)
 │   │   ├── layout.tsx                   # Root layout (lang/dir)
 │   │   ├── not-found.tsx
 │   │   ├── error.tsx
@@ -111,15 +110,10 @@ qarnayel-fe/
 │   │   │   │   └── index.ts
 │   │   │   └── utils/
 │   │   │       └── index.ts
-│   │   ├── history/
-│   │   │   └── components/
-│   │   │       └── HistoryIntro/
-│   │   │           ├── HistoryIntro.tsx         # renders pageContent/history body
-│   │   │           └── HistoryIntro.css
 │   │   ├── pages/
 │   │   │   ├── components/
 │   │   │   │   └── ContactSection/
-│   │   │   │       ├── ContactSection.tsx
+│   │   │   │       ├── ContactSection.tsx   # Hardcoded contact page UI (title from dict, details from siteSettings)
 │   │   │   │       └── ContactSection.css
 │   │   │   ├── repositories/
 │   │   │   │   └── pages.repository.ts

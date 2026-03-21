@@ -49,9 +49,9 @@ export function buildPreviewUrl(slug: string, locale: 'ar' | 'en' = 'en'): strin
 - Always links to the currently saved version (not the unsaved form state)
 - Available for all statuses — though draft previews will 404 until published
 
-## History and page content preview
+## Page content preview
 
-Same pattern applies:
-- History page: `{PUBLIC_SITE_URL}/{locale}/history`
-- About page: `{PUBLIC_SITE_URL}/{locale}/about`
-- Contact page: `{PUBLIC_SITE_URL}/{locale}/contact`
+Same pattern applies via `buildPagePreviewUrl(slug, locale)`:
+- History: `{PUBLIC_SITE_URL}/{locale}/history`
+- About: `{PUBLIC_SITE_URL}/{locale}/about`
+- Contact: `{PUBLIC_SITE_URL}/{locale}/contact`

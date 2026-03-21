@@ -80,26 +80,12 @@ Always fill in both before publishing.
 
 If you try to leave a page with unsaved changes, you will see a confirmation dialog. Click **Stay** to go back and save, or **Leave** to discard your changes.
 
-## Editing the History page
-
-The history page on the public website is a single piece of content — there are no individual entries to add or delete.
-
-1. Click **History** in the sidebar
-2. The editor loads the current history page content directly
-3. Fill in the **Title** and **Body** in both Arabic and English
-4. Fill in the **SEO Title** and **SEO Description** for both languages
-5. Click **Save Draft** to save without publishing, or **Publish** to make it live
-
-The history page content is stored as `pageContent/history` in Firestore. If it does not exist yet when you first open the editor, it is created automatically as a draft. You can also manage or delete it from the **Pages** section.
-
 ## Managing pages
 
 The **Pages** section lists all `pageContent` documents (e.g. History, Contact).
 
 - Click **Edit** next to any page to open its editor
 - Click **Delete** to permanently remove the document — a confirmation dialog will appear before deletion
-
-> **Note:** Deleting `pageContent/history` means the history page on the public website will render with no content. The History section in the sidebar will re-create it as a blank draft the next time it is opened.
 
 ## Previewing
 
