@@ -56,8 +56,10 @@ src/
 │   ├── places/
 │   │   ├── forms/
 │   │   │   ├── NewPlaceForm.tsx
-│   │   │   └── EditPlaceForm.tsx
+│   │   │   ├── EditPlaceForm.tsx
+│   │   │   └── PlaceImagePicker.tsx  # Hero + gallery image upload/management
 │   │   ├── repositories/
+│   │   │   └── place-images.repository.ts  # Storage upload/delete for place images
 │   │   ├── mappers/
 │   │   ├── schemas/
 │   │   ├── types/

@@ -1,6 +1,6 @@
 import { ROUTES } from '@/config/constants';
-import { FeaturedPlaces } from '@/features/home/components/FeaturedPlaces';
-import { HeroSection } from '@/features/home/components/HeroSection';
+import { FeaturedPlaces } from '@/features/home/components/FeaturedPlaces/FeaturedPlaces';
+import { HeroSection } from '@/features/home/components/HeroSection/HeroSection';
 import { TownIntroduction } from '@/features/home/components/TownIntroduction';
 import { buildHomeViewModel } from '@/features/home/view-models/home.view-model';
 import { fetchSiteSettings } from '@/features/pages/repositories/pages.repository';

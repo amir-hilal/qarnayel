@@ -6,6 +6,7 @@ import {
   ALL_PLACE_CATEGORIES,
   ALL_PLACE_TYPES,
 } from '@/features/places/constants';
+import { PlaceImagePicker } from '@/features/places/forms/PlaceImagePicker';
 import {
   setPlaceStatus,
   updatePlace,
@@ -113,6 +114,27 @@ export function EditPlaceForm({ place }: EditPlaceFormProps) {
     <>
       <form onSubmit={handleSubmit(onSubmit)} noValidate>
         <ValidationSummary errors={translationErrors} />
+
+        {/* Images */}
+        <div
+          className="admin-card"
+          style={{ marginBlockEnd: 'var(--space-6)' }}
+        >
+          <div className="admin-card__body">
+            <FormSection
+              title="Images"
+              description="Hero image appears on the place card and detail page. Alt text is required in both languages before publishing."
+            >
+              <PlaceImagePicker
+                placeId={place.id}
+                images={watch('images')}
+                onChange={(imgs) =>
+                  setValue('images', imgs, { shouldDirty: true })
+                }
+              />
+            </FormSection>
+          </div>
+        </div>
 
         {/* Identity */}
         <div

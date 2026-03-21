@@ -6,17 +6,13 @@ This checklist documents every task that **cannot be completed automatically** b
 
 ## Firebase setup
 
-- [ ] Create Firebase project `qarnayel-staging` in Firebase Console
-- [ ] Create Firebase project `qarnayel-production` in Firebase Console
-- [ ] Register a web app in `qarnayel-staging` — copy config to `.env.staging`
-- [ ] Register a web app in `qarnayel-production` — copy config to `.env.production`
-- [ ] Enable Firestore in `qarnayel-staging` (region: `europe-west1`)
-- [ ] Enable Firestore in `qarnayel-production` (region: `europe-west1`)
-- [ ] Enable Storage in `qarnayel-staging`
-- [ ] Enable Storage in `qarnayel-production`
-- [ ] Apply Firestore security rules to both projects (from [firebase-setup.md](./firebase-setup.md))
-- [ ] Apply Storage security rules to both projects (from [firebase-storage-guide.md](./firebase-storage-guide.md))
-- [ ] Create Firestore composite indexes in both projects (from [firebase-setup.md](./firebase-setup.md))
+- [ ] Create a single Firebase project (e.g. `qarnayel`) in Firebase Console
+- [ ] Register a web app `qarnayel-public-web` — copy config to `.env.local`
+- [ ] Enable Firestore (region: `me-central1`) in production mode
+- [ ] Enable Storage (region: `me-central1`) in production mode
+- [ ] Apply Firestore security rules (from [firebase-setup.md](./firebase-setup.md))
+- [ ] Apply Storage security rules (from [firebase-storage-guide.md](./firebase-storage-guide.md))
+- [ ] Create Firestore composite indexes (from [firebase-setup.md](./firebase-setup.md))
 - [ ] Configure Storage CORS if needed (from [media-management-guide.md](./media-management-guide.md))
 
 ---
@@ -45,8 +41,7 @@ This checklist documents every task that **cannot be completed automatically** b
 
 ## Firebase Storage configuration
 
-- [ ] Create folder structure in staging Storage: `places/`, `general/`
-- [ ] Create folder structure in production Storage: `places/`, `general/`
+- [ ] Create folder structure in Storage: `places/`, `general/`
 - [ ] Upload default OG image to `general/og-default.jpg`
 - [ ] Upload logo to `general/logo.svg`
 
@@ -54,7 +49,7 @@ This checklist documents every task that **cannot be completed automatically** b
 
 ## Content
 
-- [ ] Create at least one published place in staging Firestore for testing
+- [ ] Create at least one published place in Firestore for testing
 - [ ] Create `pageContent` documents for `history` and `contact` slugs
 - [ ] Create `siteSettings` document with ID `global`
 - [ ] Verify all required fields are populated in both Arabic and English

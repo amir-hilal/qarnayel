@@ -6,6 +6,7 @@ import {
   ALL_PLACE_CATEGORIES,
   ALL_PLACE_TYPES,
 } from '@/features/places/constants';
+import { PlaceImagePickerEmpty } from '@/features/places/forms/PlaceImagePicker';
 import { createPlace } from '@/features/places/repositories/places.repository';
 import { placeFormSchema } from '@/features/places/schemas/place.schema';
 import { useToast } from '@/features/shared/components/Toast/Toast';
@@ -90,6 +91,18 @@ export function NewPlaceForm() {
   return (
     <form onSubmit={handleSubmit(onSubmit)} noValidate>
       <ValidationSummary errors={translationErrors} />
+
+      {/* Images — static placeholder until the place is saved */}
+      <div className="admin-card" style={{ marginBlockEnd: 'var(--space-6)' }}>
+        <div className="admin-card__body">
+          <FormSection
+            title="Images"
+            description="Images can be added after the place is saved."
+          >
+            <PlaceImagePickerEmpty />
+          </FormSection>
+        </div>
+      </div>
 
       {/* Identity */}
       <div className="admin-card" style={{ marginBlockEnd: 'var(--space-6)' }}>
