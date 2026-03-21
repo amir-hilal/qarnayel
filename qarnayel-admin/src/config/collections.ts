@@ -7,7 +7,6 @@ export const COLLECTIONS = {
   PLACES: 'places',
   HISTORY: 'history',
   PAGE_CONTENT: 'pageContent',
-  MEDIA: 'media',
   SITE_SETTINGS: 'siteSettings',
 } as const;
 

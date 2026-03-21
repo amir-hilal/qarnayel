@@ -15,7 +15,5 @@ export const ADMIN_ROUTES = {
   PAGE_NEW: '/pages/new',
   PAGE_EDIT: (slug: string) => `/pages/${slug}/edit`,
 
-  MEDIA: '/media',
-
   SETTINGS: '/settings',
 } as const;

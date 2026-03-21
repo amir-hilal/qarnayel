@@ -14,8 +14,6 @@ export const historyCollection = () => collection(db, COLLECTIONS.HISTORY);
 export const pageContentCollection = () =>
   collection(db, COLLECTIONS.PAGE_CONTENT);
 
-export const mediaCollection = () => collection(db, COLLECTIONS.MEDIA);
-
 export const siteSettingsDoc = () =>
   doc(db, COLLECTIONS.SITE_SETTINGS, DOCUMENT_IDS.SITE_SETTINGS_GLOBAL);
 
@@ -25,5 +23,3 @@ export const historyDoc = (id: string) => doc(db, COLLECTIONS.HISTORY, id);
 
 export const pageContentDoc = (slug: string) =>
   doc(db, COLLECTIONS.PAGE_CONTENT, slug);
-
-export const mediaDoc = (id: string) => doc(db, COLLECTIONS.MEDIA, id);
