@@ -56,12 +56,6 @@ export const CONTACT_MODES = {
   NONE: 'none',
 } as const;
 
-// Page content slugs
-export const PAGE_SLUGS = {
-  HISTORY: 'history',
-  CONTACT: 'contact',
-} as const;
-
 // Navigation items (resolved by locale in dictionaries)
 export const NAV_ITEMS = [
   { key: 'home', route: ROUTES.HOME },

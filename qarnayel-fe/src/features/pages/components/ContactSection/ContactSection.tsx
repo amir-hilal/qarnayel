@@ -1,9 +1,8 @@
-import type { PageContent } from '@/features/pages/types';
 import type { SiteSettings } from '@/types';
 import './ContactSection.css';
 
 type ContactSectionProps = {
-  page: PageContent;
+  title: string;
   settings: SiteSettings | null;
   locale: string;
   emailLabel: string;
@@ -12,31 +11,20 @@ type ContactSectionProps = {
 };
 
 // ---------------------------------------------------------------------------
-// ContactSection — renders PageContent for the contact page with contact info
+// ContactSection — renders the hardcoded contact page with info from siteSettings
 // ---------------------------------------------------------------------------
 export function ContactSection({
-  page,
+  title,
   settings,
-  locale,
   emailLabel,
   phoneLabel,
   socialLabel,
 }: ContactSectionProps): React.ReactElement {
-  const l = locale as 'ar' | 'en';
-  const title = page.title[l] ?? page.title.ar;
-  const body = page.body[l] ?? page.body.ar;
-
   return (
     <article className="contact-section">
       <header className="contact-section__header">
         <h1 className="contact-section__title">{title}</h1>
       </header>
-
-      <div className="contact-section__body">
-        {body.split('\n\n').map((paragraph, i) => (
-          <p key={i}>{paragraph}</p>
-        ))}
-      </div>
 
       {settings &&
         (settings.contactEmail ??

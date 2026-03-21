@@ -139,29 +139,6 @@ async function seedPageContent() {
     },
     updatedAt: isoNow,
   });
-
-  await upsert('pageContent', 'contact', {
-    id: 'contact',
-    slug: 'contact',
-    status: 'published',
-    title: { ar: 'تواصل معنا', en: 'Contact Us' },
-    body: {
-      ar: 'يسعدنا تلقّي استفساراتكم وملاحظاتكم. يمكنكم التواصل معنا عبر البريد الإلكتروني أو وسائل التواصل الاجتماعي.',
-      en: 'We welcome your enquiries and feedback. You can reach us by email or through our social media channels.',
-    },
-    seo: {
-      ar: {
-        title: 'تواصل معنا — قرنايل',
-        description: 'تواصل مع فريق موقع قرنايل لأي استفسار أو اقتراح.',
-      },
-      en: {
-        title: 'Contact Us — Qarnayel',
-        description:
-          'Get in touch with the Qarnayel website team for any enquiry or suggestion.',
-      },
-    },
-    updatedAt: isoNow,
-  });
 }
 
 // ---------------------------------------------------------------------------
@@ -275,7 +252,7 @@ async function main() {
   console.log('🌱 Clearing existing data...');
 
   try {
-    for (const col of ['siteSettings', 'pageContent', 'places', 'media']) {
+    for (const col of ['siteSettings', 'pageContent', 'places']) {
       process.stdout.write(`  Clearing ${col}… `);
       await clearCollection(col);
     }

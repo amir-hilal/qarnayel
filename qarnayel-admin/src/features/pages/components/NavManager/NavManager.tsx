@@ -26,6 +26,7 @@ import './NavManager.css';
 
 const BUILT_IN_NAV_ROUTES: NavItem[] = [
   { label: { ar: 'الأماكن', en: 'Places' }, path: '/places' },
+  { label: { ar: 'تواصل معنا', en: 'Contact' }, path: '/contact' },
 ];
 
 type PageRow = { kind: 'page'; page: PageContent };

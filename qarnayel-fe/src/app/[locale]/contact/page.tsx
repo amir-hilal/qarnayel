@@ -1,9 +1,5 @@
-import { PAGE_SLUGS } from '@/config/constants';
 import { ContactSection } from '@/features/pages/components/ContactSection/ContactSection';
-import {
-  fetchPageContent,
-  fetchSiteSettings,
-} from '@/features/pages/repositories/pages.repository';
+import { fetchSiteSettings } from '@/features/pages/repositories/pages.repository';
 import { getDictionary } from '@/lib/i18n';
 import { isValidLocale } from '@/lib/i18n/locales';
 import { buildMetadata } from '@/lib/seo/metadata';
@@ -36,17 +32,14 @@ export default async function ContactPage({
   const { locale } = await params;
   if (!isValidLocale(locale)) notFound();
 
-  const [dict, page, settings] = await Promise.all([
+  const [dict, settings] = await Promise.all([
     getDictionary(locale),
-    fetchPageContent(PAGE_SLUGS.CONTACT),
     fetchSiteSettings(),
   ]);
 
-  if (!page) notFound();
-
   return (
     <ContactSection
-      page={page}
+      title={dict.contact.pageTitle}
       settings={settings}
       locale={locale}
       emailLabel={dict.contact.emailLabel}

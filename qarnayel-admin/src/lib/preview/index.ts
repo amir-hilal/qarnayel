@@ -22,13 +22,6 @@ export function buildPlacePreviewUrl(
 }
 
 /**
- * Build a preview URL for the history page.
- */
-export function buildHistoryPreviewUrl(locale: PreviewLocale = 'en'): string {
-  return `${getPublicBaseUrl()}/${locale}/history`;
-}
-
-/**
  * Build a preview URL for a static page by slug.
  */
 export function buildPagePreviewUrl(
