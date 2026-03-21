@@ -46,3 +46,4 @@ All detailed rules live in `.github/instructions/`. These files are active for e
 8. Always read the relevant instruction file before implementing a feature.
 9. Always keep route files thin — route files delegate to feature view-models or server fetch functions.
 10. Always use `LocalizedText` for any user-visible text that must appear in Arabic and English.
+11. Always update `docs/architecture.md` **and** `.github/instructions/architecture.instructions.md` in the same session whenever any file or folder is created, moved, renamed, or deleted.

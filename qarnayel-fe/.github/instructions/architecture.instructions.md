@@ -102,3 +102,18 @@ export default async function PlacesPage() {
 - Add `loading.tsx` in every route segment that fetches data
 - Add `error.tsx` in every route segment that can fail
 - Add `not-found.tsx` where a slug lookup can return null
+
+## Keeping documentation in sync with structure
+
+Every time a file or folder is **created, moved, renamed, or deleted**, the following must happen **in the same edit session**:
+
+1. **`docs/architecture.md`** — update the folder tree to reflect the change. Add a short inline comment when the file's purpose is not self-evident.
+2. **`.github/instructions/architecture.instructions.md`** — if the change affects a feature domain, shared layer, or lib folder, update the folder structure block in this file to match.
+
+This rule applies to all structural changes regardless of scope — single file addition, refactor, or wholesale domain creation.
+
+```
+// Example: adding a new repository file
+// ✅ DO — update both docs/architecture.md AND this file in the same session
+// ❌ DON'T — create the file and leave the docs stale
+```

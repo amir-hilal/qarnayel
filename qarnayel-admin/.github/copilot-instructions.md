@@ -54,3 +54,4 @@ All detailed rules live in `.github/instructions/`. These files are active for e
 12. Always use the named Firestore database from `NEXT_PUBLIC_FIRESTORE_DATABASE_ID` in non-production environments.
 13. Never duplicate bilingual content into separate Firestore collections per language.
 14. Always use the repository pattern for all Firestore and Storage operations.
+15. Always update `docs/admin-architecture.md` **and** `.github/instructions/admin-architecture.instructions.md` in the same session whenever any file or folder is created, moved, renamed, or deleted.

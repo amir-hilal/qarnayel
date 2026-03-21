@@ -152,3 +152,18 @@ types/         → (no imports — types only)
 - Always centralise collection names in `config/collections.ts`
 - Always centralise route strings in `config/routes.ts`
 - Always use feature-scoped types re-exports in `features/{domain}/types/index.ts`
+
+## Keeping documentation in sync with structure
+
+Every time a file or folder is **created, moved, renamed, or deleted**, the following must happen **in the same edit session**:
+
+1. **`docs/admin-architecture.md`** — update the folder tree to reflect the change. Add a short inline comment (` # ...`) when the file's purpose is not self-evident.
+2. **`.github/instructions/admin-architecture.instructions.md`** — if the change affects a feature domain, shared layer, or lib folder, update the folder structure block in this file to match.
+
+This rule applies to all structural changes regardless of scope — single file addition, refactor, or wholesale domain creation.
+
+```
+// Example: adding a new repository file
+// ✅ DO — update both docs/admin-architecture.md AND this file in the same PR/session
+// ❌ DON'T — create the file and leave the docs stale
+```
