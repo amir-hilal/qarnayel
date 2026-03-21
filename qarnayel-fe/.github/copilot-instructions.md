@@ -14,7 +14,7 @@ The admin dashboard is a **separate project**. Never generate admin or editing l
 - **Database**: Firebase Firestore (read-only from the public website)
 - **Media**: Firebase Storage (public read URLs, no upload logic here)
 - **i18n**: Arabic + English bilingual, RTL-ready
-- **Environments**: `staging` and `production` (separate Firebase projects)
+- **Environments**: `staging` and `production` share one Firebase project; they are isolated via a named Firestore database (`staging`) vs the default database (`production`)
 
 ---
 

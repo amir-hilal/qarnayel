@@ -75,22 +75,12 @@ service cloud.firestore {
       allow write: if isAuthenticated();
     }
 
-    match /history/{id} {
-      allow read: if isPublished() || isAuthenticated();
-      allow write: if isAuthenticated();
-    }
-
     match /pageContent/{id} {
       allow read: if true;
       allow write: if isAuthenticated();
     }
 
     match /siteSettings/{id} {
-      allow read: if true;
-      allow write: if isAuthenticated();
-    }
-
-    match /media/{id} {
       allow read: if true;
       allow write: if isAuthenticated();
     }
@@ -139,12 +129,6 @@ In **Firestore → Indexes → Composite**, add:
 | `status` ASC + `category` ASC | Category filter |
 | `status` ASC + `placeType` ASC | Type filter |
 
-### `history` collection
-
-| Fields | Order |
-|---|---|
-| `status` ASC + `order` ASC | History list |
-
 ---
 
 ## Step 8: Seed initial data
@@ -162,7 +146,7 @@ npm run seed
 2. Click **Generate new private key** → download the JSON file
 3. Save it as `scripts/serviceAccountKey.json` (this file is gitignored)
 
-The seed script populates: `siteSettings`, `pageContent` (about + contact), sample `places`, and sample `history` entries.
+The seed script populates: `siteSettings`, `pageContent` (history), and sample `places`.
 
 > **Delete or disable the seed script** after seeding production — it should only run once per environment.
 
@@ -173,8 +157,7 @@ The seed script populates: `siteSettings`, `pageContent` (about + contact), samp
 | Collection | Description |
 |---|---|
 | `places` | Place documents |
-| `history` | History entry documents |
-| `pageContent` | Static page content (about, contact) |
+| `pageContent` | Static page content (history + admin-created pages) |
 | `siteSettings` | Single document with ID `global` |
 
 ---

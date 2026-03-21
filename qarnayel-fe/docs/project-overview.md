@@ -69,7 +69,7 @@ Both locales are supported from day one. Arabic is the primary locale.
 2. **Published-only reads** — all public queries filter by `status == 'published'`
 3. **No admin code** — no authentication, no write operations, no edit UI
 4. **Bilingual data model** — content fields are `{ ar: string; en: string }` objects, not separate collections
-5. **Separate Firebase projects per environment** — staging and production never share data
+5. **One Firebase project, two environments** — staging uses a named Firestore database (`staging`); production uses the default database
 6. **Server Components by default** — `'use client'` is used sparingly
 
 ---

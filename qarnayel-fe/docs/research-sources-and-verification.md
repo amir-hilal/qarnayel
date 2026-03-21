@@ -2,17 +2,17 @@
 
 ## Overview
 
-The history section and resource lists on place pages must be based on verifiable, credible sources. This document defines the verification workflow for research content.
+Resource lists on place pages must be based on verifiable, credible sources. This document defines the verification workflow for place resource links.
+
+The history page content is a single free-text `pageContent` document edited by the admin. Inline source attribution within that content is the responsibility of the content author. In the future, Markdown support will be enabled in the admin dashboard so editors can embed inline links directly in the body text.
 
 ---
 
 ## ⚠️ Critical notice
 
-> **Historical and factual content must never be invented, assumed, or generated without human verification.**
+> **Factual content in place resources must never be invented or published without verification.**
 >
-> All history entries and place resource links must reference real, attributable sources. If a fact cannot be sourced, it must not be published.
->
-> In code, unverified placeholder facts are marked with `// TODO: verify` comments. These must be resolved before the content is published.
+> All place resource links must reference real, attributable sources. If a fact cannot be sourced, it must not be published.
 
 ---
 
@@ -29,18 +29,6 @@ The history section and resource lists on place pages must be based on verifiabl
 
 ---
 
-## Verification workflow for history entries
-
-1. **Draft** — Write the history entry with source links
-2. **Verify** — Each factual claim must be traceable to a primary or secondary source
-3. **Review** — A second person reviews sources and confirms accuracy
-4. **Approve** — Mark entry as `status: published` in the admin dashboard
-5. **Publish** — Entry appears on the public history page
-
-Do not publish history entries with unverified claims.
-
----
-
 ## Verification workflow for place resources
 
 1. Add resource links in the admin dashboard when creating a place
@@ -54,21 +42,7 @@ Do not publish history entries with unverified claims.
 
 ## TODO markers in code
 
-During development, placeholder content includes `// TODO: verify` markers:
-
-```ts
-// History entry title example
-const historyEntry = {
-  title: { ar: 'العصر البيزنطي', en: 'Byzantine Era' },
-  body: {
-    ar: '...',
-    en: '...',
-    // TODO: verify — Byzantine presence in Qarnayel region needs primary source confirmation
-  },
-};
-```
-
-**All TODO markers must be resolved before deploying to production.**
+During development, placeholder content includes `// TODO: verify` markers. **All TODO markers must be resolved before deploying to production.**
 
 ---
 
